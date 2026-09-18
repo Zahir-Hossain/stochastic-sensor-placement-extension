@@ -64,7 +64,6 @@ The simplified workflow is:
 The original June 2026 submission includes the generated trajectory plots, representation-space plots, intensity maps, greedy sensor-placement results, uncertainty case, normalized miss-score comparison, and the earlier linear-regression prediction attempt.
 
 - **[Open the complete simulation figures/results PDF](report/Simulation_Results_June_2026.pdf)**
-- **[Open the submitted research-extension report](report/Research_Extension_Report_June_2026.pdf)**
 
 The figures are results from **my toy simulation**, while the theoretical framework described above belongs to the cited source paper.
 
