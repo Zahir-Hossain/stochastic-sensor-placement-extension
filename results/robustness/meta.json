@@ -1,0 +1,42 @@
+{
+  "config": {
+    "seeds": 20,
+    "scenarios": [
+      "stationary",
+      "drift",
+      "lane_shift",
+      "emergence",
+      "reversal",
+      "seam_drift"
+    ],
+    "radii": [
+      0.0,
+      0.05,
+      0.15
+    ],
+    "horizon": 2,
+    "history_epochs": 8,
+    "grid_shape": [
+      72,
+      48
+    ],
+    "eval_grid_shape": [
+      216,
+      144
+    ],
+    "candidate_spacing": 2.5,
+    "n_sensors": 4
+  },
+  "source_sha256": "e8ff34cb65c4ebf7cda4cc0407623218abd24dbf6e99054a4f168ae87ca5ab4d",
+  "git_commit": "e6a18c2",
+  "python": "3.12.14",
+  "dependencies": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "pandas": "3.1.0",
+    "matplotlib": "3.10.8",
+    "pyyaml": "6.0.3"
+  },
+  "certificate_scope": "normalised cell masses on planning grid, only if truth lies in TV ball",
+  "outer_optimisation": "greedy plus exact one-sensor exchanges; no global guarantee"
+}

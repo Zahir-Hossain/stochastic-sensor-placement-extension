@@ -1,0 +1,7 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {"name": "Quickstart", "type": "debugpy", "request": "launch", "program": "${workspaceFolder}/examples/quickstart.py", "console": "integratedTerminal", "cwd": "${workspaceFolder}"},
+    {"name": "Small experiment", "type": "debugpy", "request": "launch", "module": "stochplace.cli", "args": ["run", "configs/suite_drift.yaml", "--seeds", "2", "--workers", "1", "--out", "output/smoke"], "console": "integratedTerminal", "cwd": "${workspaceFolder}"}
+  ]
+}

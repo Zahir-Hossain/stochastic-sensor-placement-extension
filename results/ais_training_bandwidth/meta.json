@@ -1,0 +1,61 @@
+{
+  "study_kind": "preregistered_research",
+  "source_sha256": "e8ff34cb65c4ebf7cda4cc0407623218abd24dbf6e99054a4f168ae87ca5ab4d",
+  "git_commit": "6cb89f4",
+  "config": {
+    "origins": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "methods": [
+      "pooled",
+      "recent",
+      "stacked"
+    ],
+    "scales": [
+      0.25,
+      0.5,
+      1.0,
+      2.0,
+      3.0
+    ],
+    "study_id": "C4",
+    "data_sha256": "038c98af738e29cdac5d91a1829eb88a4b7cf94fedbf6f6cf8e04982bd65e4e3",
+    "input_sha256": {
+      "results/ais_gothenburg/runs.csv": "7481c3ab51bfbcd848b309c4ed2ff1840a7e75dad9e19672750f563d6c628576"
+    },
+    "group_keys": [
+      "method",
+      "policy"
+    ],
+    "unique_keys": [
+      "origin",
+      "method",
+      "policy"
+    ],
+    "metrics": [
+      "detection_rate",
+      "paired_gain_pp"
+    ],
+    "unit_interval": [
+      "detection_rate"
+    ],
+    "expected_n": 12,
+    "scope": "Exploratory reanalysis of previously viewed one-day test data; selection uses training only."
+  },
+  "dependencies": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "pandas": "3.1.0",
+    "matplotlib": "3.10.8",
+    "pyyaml": "6.0.3"
+  },
+  "file_sha256": {
+    "scripts/ais_research.py": "55ddd8776a0d9fc7e1424f4c7c44a7895b5ec85205c595d37c6ba2d089759359",
+    "configs/research/ais_training_bandwidth.yaml": "037001240e3409f60badd89d7b15fb286db9f13ebc97af2cbc9a0813afa9838a",
+    "scripts/study_io.py": "dd04130e6f70da5cca5abad883d05dc473fe418bc547c3f0acfaab35fb56630b",
+    "docs/preregistration.md": "64c4fde637989c78785a7d821ab5e2b8e6cae3c99c8e1efd00d8a7645888c948"
+  }
+}

@@ -1,0 +1,422 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.92in]{geometry}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs,tabularx}
+\usepackage{graphicx,microtype}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=MidnightBlue,citecolor=MidnightBlue,urlcolor=MidnightBlue]{hyperref}
+\usepackage{caption,placeins,needspace}
+\hypersetup{pdftitle={Sensor Placement Under Traffic Shift},pdfauthor={A. S. M. Jahir Hossain},pdfsubject={Forecast comparison, risk sensitivity and failure cases}}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textsf{STOCHPLACE / RESEARCH SOFTWARE STUDY}}
+\fancyhead[R]{\small\textsf{REVISION 2.1}}
+\fancyfoot[C]{\small\thepage}
+\setlength{\headheight}{14pt}
+\setlength{\parskip}{4pt}
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\textfraction}{0.04}
+\renewcommand{\floatpagefraction}{0.9}
+\newtheorem{proposition}{Proposition}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\graphicspath{{../docs/figures/}}
+\input{numbers}
+\input{robust_numbers}
+\input{void_numbers}
+\input{ais_sensitivity_numbers}
+\title{\textbf{Sensor Placement Under Traffic Shift}\\[5pt]
+\large Forecast comparison, risk sensitivity and failure cases}
+\author{A.\,S.\,M. Jahir Hossain\\[4pt]
+\small Independent research software extension and comparative study\\
+\small\url{https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension}}
+\date{Technical report / November 2026 / Version 2.1}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+A fixed sensor network must detect future traffic that may differ from
+historical observations. We extend stochastic barrier coverage with
+strictly chronological Poisson intensity stacking, a separate pseudo-BMA
+baseline, and expected-miss, predictive-void and conditional value-at-risk
+objectives. Across 40 seeds in designed scenarios, intensity stacking
+reduces expected misses by \missRedDrift\% under drift,
+\missRedShift\% under lane shift and \missRedEmerg\% under lane emergence,
+relative to pooled historical planning. An unannounced drift reversal
+exposes the opposite outcome. An unstructured total-variation ambiguity experiment is a negative
+result: its penalty changes little across plans and its radius excludes
+several shifted futures. A post hoc bandwidth probe of the one-day AIS demonstration exposes
+estimator-resolution sensitivity and leaves history versus forecast unresolved. Independent numerical checks, raw results,
+source fingerprints and reproducible workflows make both the successful
+and unsuccessful cases auditable.
+\end{abstract}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\linewidth]{hero.png}
+\caption{A drifting-lane example. Sensor placements planned on historical
+and forecast intensities, and a true-future heuristic reference. The lower
+panels show their corresponding intensities in line space.}
+\end{figure}
+
+\section{Question and relationship to the base framework}
+Kim et al.~\cite{kim2025barrier} formulate two-dimensional barrier coverage
+for stochastic straight-line trajectories, using a line-space
+representation, a log-Gaussian Cox line process and greedy placement with
+numerical refinement. Their earlier work~\cite{kim2023toward} establishes
+the uncertain-intensity void-probability perspective. We ask how a network
+placed before a future traffic shift performs when it plans on forecasts,
+and what a declared intensity-ambiguity set can guarantee.
+
+The implementation adds chronological forecast comparison, distinct
+intensity-stacking and pseudo-BMA baselines, a tail-risk comparison, a
+finite-grid TV ambiguity experiment and a reproducible evaluation. The
+representation, LGCP family, submodular approximation principle, stacking,
+CVaR and robust observation-selection tools are established methods
+\cite{nemhauser1978,yao2018stacking,rockafellar2000,krause2008robust}.
+This report focuses on their integration, evaluation and failure modes for shifted line traffic.
+
+\Needspace{9\baselineskip}
+\section{Model and numerical representation}
+A line is represented by $(\alpha,p)$ through
+\[
+x\cos\alpha+y\sin\alpha=p,\qquad \alpha\in[0,\pi),\quad p\in\R.
+\]
+For $y=mx+b$, $\alpha=\pi/2+\arctan m$ and
+$p=b/\sqrt{1+m^2}$. The identification
+$(\alpha,p)\sim(\alpha+\pi,-p)$ must be respected at the representation
+seam. The perpendicular distance from sensor $s=(x_s,y_s)$ to a line is
+\[
+d_s=|x_s\cos\alpha+y_s\sin\alpha-p|.
+\]
+With conditionally independent sensor detections,
+$q_S(\ell)=\prod_{s\in S}(1-P_D(d_s(\ell)))$. Independent Poisson thinning
+gives, for fixed line intensity $\lambda$,
+\begin{equation}
+L(S;\lambda)=\int\lambda q_S,\qquad
+P(\text{no missed trajectory})=e^{-L(S;\lambda)}.
+\end{equation}
+Expected detection fraction is $1-L/\int\lambda$; it is not the probability
+of detecting every trajectory in an epoch.
+
+The grid spans the full angle range and a signed-offset range covering
+the deployment window. Gaussian kernels are integrated over cells, with
+seam images. Sensor detection is evaluated at cell centres and cells are
+masked using their central line. Thus numerical detection scores are
+quadrature approximations. Synthetic plans are evaluated on a three-times
+finer grid along each axis.
+
+Historical intensities are estimated by KDE or a lattice LGCP with
+Poisson cell counts and precision $Q=\tau(\kappa^2I+L_g)^2$, where $L_g$ is
+a graph Laplacian including the seam. The posterior uses a Laplace
+approximation with plug-in hyperparameters. This is a lattice,
+SPDE-inspired model~\cite{lindgren2011}, not R-INLA or a reproduction of
+the base paper's inference pipeline~\cite{rue2009inla}.
+
+\section{Forecasting and chronological combination}
+Epochs $0,\ldots,T-1$ are observed and the target is $T-1+h$. Forecasts
+include pooled history, the two most recent epochs, centroid drift,
+uncertainty-expanded drift and a clipped cellwise log-linear trend.
+Drift coordinates are lifted continuously across the representation seam.
+Gaussian shift uncertainty widens a Gaussian kernel by adding covariance;
+its estimated covariance and small-sample inflation are modelling choices,
+not a calibrated posterior for every traffic regime.
+
+For held-out target $u$, training uses only the prefix of length $u-h+1$.
+Bandwidth is refitted on that prefix. For component intensities
+$\lambda_{k,u}$, intensity stacking selects simplex weights to maximise
+\begin{equation}
+\sum_u\left[\sum_{\ell\in D_u}\log\left(\sum_k w_k\lambda_{k,u}(\ell)\right)
+-\sum_k w_k\int\lambda_{k,u}\right].
+\end{equation}
+The negative objective is convex in $w$, and is optimised with an analytic
+gradient and a common numerical log floor. Final component forecasts are
+then fitted to all available history. A Poisson process at the combined
+intensity differs from a mixture of full predictive point-process laws.
+The stacking literature~\cite{yao2018stacking} motivates combination but
+is not invoked to assert an equivalence between those models.
+
+The separate pseudo-BMA baseline uses the softmax of each component's
+held-out total score. Neither method's weights are asserted to be Bayesian
+posterior model probabilities. A fixed equal-weight mixture retains the
+original prototype's idea as another baseline.
+
+\section{Objectives and the limits of their guarantees}
+For predictive intensity $\Lambda$, the expected objective needs only its
+mean: $\E L(S;\Lambda)=L(S;\E\Lambda)$. This identity provides a sufficient
+posterior-mean interpretation when a posterior is specified; it does not
+imply that posterior weights are necessary for a particular optimal plan.
+
+We compare expected misses, predictive void loss
+$-\log\E e^{-L}$ and upper-tail CVaR. Predictive void loss is a soft minimum
+of sampled losses, emphasising favourable futures; it is not a worst-case
+penalty. For stacking, samples select one forecast component at a time
+using its fitted weight. This defines a probability law, but neither a
+posterior interpretation of the weights nor calibration is established.
+Favourable component draws can dominate the soft minimum.
+For equally weighted sampled losses $l_i$, CVaR at level $\beta$ is
+\[
+\min_\eta\left[\eta+\frac{1}{n(1-\beta)}\sum_i(l_i-\eta)_+\right].
+\]
+The implementation includes fractional mass at the tail boundary. For
+losses $0,1,\ldots,31$ at level $0.9$, the answer is $29.875$; rounding up
+to four equally weighted observations would instead give $29.5$.
+
+The predictive intensity samples for void and CVaR have not been validated
+for calibration. These comparisons are sensitivity analyses of the supplied
+law, not decisions under established uncertainty. Both stacking and
+pseudo-BMA use component selection. The weights are valid sampling
+probabilities, but neither their posterior interpretation nor uncertainty
+calibration is established. The fixed mixture carries no samples and uses
+only its mean field. Weighted-sum sampling would be a different modelling
+proposal; matching the mean would not by itself validate that proposal.
+
+For expected detected mass, the standard greedy guarantee is $1-1/e$
+relative to the best subset of the finite candidate set
+\cite{nemhauser1978}. It does not carry over to missed mass, continuous
+placement or nonlinear risk objectives. Continuous refinement and
+nonlinear-objective greedy search remain heuristics.
+
+\subsection{A sensitivity diagnostic}
+Let $\hat S$ be a plan made using $\hat\lambda$ and $S_{\rm ref}$ the
+same heuristic given true future intensity $\lambda$. Define
+$R=L(\hat S;\lambda)-L(S_{\rm ref};\lambda)$ and
+$\delta=L(\hat S;\hat\lambda)-L(S_{\rm ref};\hat\lambda)$. Then
+\begin{equation}
+R\le\max(\delta,0)+\int|\lambda-\hat\lambda|
+\max(1-q_{\hat S},1-q_{S_{\rm ref}})
+\le\max(\delta,0)+\|\lambda-\hat\lambda\|_1.
+\end{equation}
+This follows by linearity and $|a-b|\le\max(1-a,1-b)\le1$ for
+$a,b\in[0,1]$. It is an elementary sensitivity inequality. The reference
+is not a certified optimum, $\delta$ is a measured comparison term and
+neither truth nor the reference is observable at deployment. Simulation
+checks verify numerical consistency, not an independent generalisation
+guarantee. Equal-total Poisson score and Pinsker's inequality motivate
+log-score validation, but do not guarantee lower regret on every future.
+
+\subsection{Finite-grid TV ambiguity}
+For nominal active-cell masses $m\ge0$, total $N=\sum_i m_i$ and
+$\epsilon\in[0,1]$, define
+\[
+\mathcal M_\epsilon(m)=\{z\ge0:\mathbf1^Tz=N,\ \tfrac12\|z-m\|_1\le\epsilon N\},
+\qquad \rho_\epsilon(S;m)=\max_{z\in\mathcal M_\epsilon(m)}z^Tq_S.
+\]
+\begin{proposition}[Exact finite-grid inner adversary]
+A maximiser transfers up to $\epsilon N$ mass from cells in increasing
+order of miss probability to a maximum-miss cell, stopping once remaining
+donors have that maximum miss probability. Moreover,
+\[
+m^Tq_S\le\rho_\epsilon(S;m)\le
+\min\{Nq_{\max},m^Tq_S+\epsilon N(q_{\max}-q_{\min})\}.
+\]
+\end{proposition}
+\begin{proof}
+Every feasible change transfers at most $\epsilon N$ mass. A unit of
+recipient mass contributes most at $q_{\max}$. Given that recipient,
+removing mass from a higher-loss donor while a lower-loss donor has mass
+cannot improve the objective, so an exchange argument orders donors.
+No positive gain remains after nonmaximum donors are exhausted.
+\end{proof}
+If normalised grid truth $p$ satisfies
+$\tfrac12\|p-m/N\|_1\le\epsilon$, then its expected detection is at least
+$1-\rho_\epsilon/N$. This certificate is conditional on the declared grid
+and ambiguity set. The inner solution is checked against a separate LP;
+the outer sensor problem uses greedy initialisation and one-sensor
+exchanges, with no global approximation claim. Choosing a radius does not
+establish that future traffic lies inside the ball.
+
+\section{Evaluation and findings}
+\subsection{Main synthetic comparison}
+Four designed regimes use eight history epochs, four Gaussian sensors,
+a two-epoch horizon, 40 seeds and known future intensity. Comparisons are
+paired by seed, with percentile bootstrap intervals. Candidate spacing is
+one unit and the deployment window is $20\times10$ units. The configs and
+raw outputs are the authoritative experimental specification.
+
+\begin{table}[ht]
+\centering\small
+\caption{Gap to the true-intensity heuristic reference in percentage
+points, lower is better. Intervals are paired-study summaries over 40
+seeds. The reference is not a global optimum.}
+\resizebox{\linewidth}{!}{\begin{tabular}{lcccc}
+\toprule
+Planner & Stationary & Drift & Lane shift & Emergence\\\midrule
+\input{tables/suite}
+\end{tabular}}
+\end{table}
+
+Intensity stacking changes expected misses relative to pooled history by
+\missRedStat\% [\missRedLoStat, \missRedHiStat] in stationary traffic,
+\missRedDrift\% [\missRedLoDrift, \missRedHiDrift] under drift,
+\missRedShift\% [\missRedLoShift, \missRedHiShift] under lane shift and
+\missRedEmerg\% [\missRedLoEmerg, \missRedHiEmerg] under emergence.
+These are relative reductions, not percentage-point detection gains.
+The successful regimes closely match candidates: constant-velocity drift
+matches the drift model, logit-linear lane shares resemble cellwise
+log-linear trend, and stationarity matches pooled history. These gains
+show selection of a well-specified candidate, not generalisation to shifts
+outside every candidate family. The reversal is outside those families:
+history detects \reversalHistory\% versus stacking's \reversalStacked\%.
+This is an experimental-design limitation affecting the headline results,
+not an implementation bug. The generators do not establish how frequently
+these regimes arise operationally.
+
+Expected-void planning on the stacked forecast is a separate failure under
+ drift: its reference gap is \voidDriftGap{} [\voidDriftGapLo,
+\voidDriftGapHi] percentage points, with \voidDriftOverOne{} of
+\voidDriftSeeds{} seeds above one point. Its detection difference from
+history is \voidDriftHistory{} [\voidDriftHistoryLo,
+\voidDriftHistoryHi] points. The interval includes zero, so this is a lower
+mean in these runs, not an established loss across seeds. The gap's
+correlation with non-drift component weight is \voidDriftCorr. The
+component sampler and the soft minimum's preference for favourable draws
+are relevant mechanisms; correlation alone does not establish causation.
+
+\begin{figure}[ht]
+\centering\includegraphics[width=\linewidth]{scenario_suite.png}
+\caption{Main synthetic comparison, evaluated on the true future. The
+oracle label denotes the true-intensity heuristic reference.}
+\end{figure}
+\FloatBarrier
+
+\subsection{Stress tests and the cost of an unstructured ambiguity set}
+The robustness study uses 20 paired seeds in six scenarios, common
+finite-grid candidates, and radii $0$, $0.05$ and $0.15$. All planners use
+one-sensor exchange refinement. Unlike the main experiment, no continuous
+refinement is used, so absolute rates should not be compared across the
+two studies as if only the risk objective had changed.
+
+When drift reverses just after training, historical placement detects
+\reversalHistory\% of future trajectories while intensity stacking detects
+\reversalStacked\%. The turn is not revealed to forecasters. This is an
+explicit counterexample to a universal benefit from extrapolation.
+
+\begin{figure}[ht]
+\centering\includegraphics[width=\linewidth]{forecast_failure.png}
+\caption{Stress tests expose both forecast failure and the limited design
+leverage of unrestricted TV ambiguity. Right: change in future detection,
+TV radius $0.15$, with paired-seed bootstrap intervals.}
+\end{figure}
+
+\begin{table}[ht]
+\centering\small
+\caption{TV robust placement minus intensity stacking, radius $0.15$.
+Future change uses finer-grid truth; worst-case change uses the planning
+grid. The final column is the fraction of simulated truths inside the
+stated ambiguity ball, not an estimated operational coverage guarantee.}
+\begin{tabular}{lrrr}
+\toprule
+Scenario & Future change (pp) & Worst-case change (pp) & Inside ball\\\midrule
+\input{tables/robustness}
+\end{tabular}
+\end{table}
+
+The TV penalty can change little across plausible plans: many grids have
+almost-uncovered recipient cells and well-covered donor mass, making the
+adversarial surcharge close to $\epsilon N$ across different placements.
+The experiment therefore does not establish a substantial TV design gain.
+Across all saved strategies, nominal minus worst-case detection spans
+\tvPenaltyFiveMin{} to \tvPenaltyFiveMax{} points at radius $0.05$ and
+\tvPenaltyFifteenMin{} to \tvPenaltyFifteenMax{} points at $0.15$.
+At radius $0.05$, no scenario-strategy group has truth coverage above
+\tvSmallCoverageMax\%. At $0.15$, stacked-forecast coverage is
+\tvCoverageStationary\% for stationary, \tvCoverageDrift\% for drift and
+\tvCoverageSeamDrift\% for seam traffic; it is \tvCoverageLaneShift\%
+for lane shift, \tvCoverageEmergence\% for emergence and
+\tvCoverageReversal\% for reversal. These are grid-based simulated
+coverage fractions, not a calibration guarantee.
+A few small negative worst-case differences also expose the limits of the
+heuristic outer search. Geometry-constrained ambiguity and calibrated radii
+are useful next research questions, not completed results here.
+The maximum absolute coarse/fine detection difference in this study is
+\robustGridErrorMax{} percentage points, reinforcing why certificate and
+fine-grid score must be kept distinct.
+\FloatBarrier
+
+\subsection{AIS demonstration}
+A checksummed public sample contains \aisReports{} AIS reports near
+Gothenburg on 5 July 2017, yielding \aisLines{} straight pieces after
+filtering. Reports are split at time gaps, window exits, low-speed reports
+and three-hour epoch boundaries before line fitting. Four rolling origins
+plan on earlier epochs and score the next epoch's observed pieces.
+
+Historical KDE has mean expected detection \aisPooled\% and intensity
+stacking \aisStacked\%. At the default bandwidth, historical LGCP leads the KDE planners by
+\aisBandwidthGapMin{} to \aisBandwidthGapMax{} percentage points.
+A post hoc multiplier of $0.25$ gives historical KDE \aisFinePooled\%,
+stacking \aisFineStacked\% and LGCP \aisFineLgcp\%; recent epochs remain
+\aisFineRecentGap{} points behind LGCP. Historical and stacked KDE thus
+approach LGCP at finer resolution, but this does not establish equivalence.
+This probe was computed after viewing the test epochs and is sensitivity
+evidence only. No scale is adopted. It does not settle history versus forecast. The one-day sample is too small for a broad
+real-world claim. Table~\ref{tab:ais-origins} reports every origin and
+paired differences from historical KDE rather than bootstrap intervals.
+Origins overlap in training history and do not support population-level
+significance claims. Metrics use modelled detection per straight piece,
+not actual sensor measurements or necessarily distinct ships.
+
+\begin{table}[ht]
+\centering\small
+\caption{AIS expected detection (\%) at each origin, with the paired
+change from historical KDE in brackets (percentage points). These are
+individual test-origin results, not confidence intervals.}
+\label{tab:ais-origins}
+\begin{tabular}{lrrrr}
+\toprule
+\input{tables/ais_origins}
+\end{tabular}
+\end{table}
+
+\begin{figure}[ht]
+\centering\includegraphics[width=0.90\linewidth]{ais_case_study.png}
+\caption{AIS location and descriptive mean summaries. The bars in this
+retained visualisation resample the same overlapping origins and are not
+population-level confidence statements; use Table~\ref{tab:ais-origins}
+for the individual results. Hindsight fits the test epoch but uses a local
+heuristic; it is not a strict upper bound.}
+\end{figure}
+\FloatBarrier
+
+\section{Verification, reproducibility and remaining limits}
+Tests compare geometry with independent formulas, analytic gradients with
+finite differences, Poisson thinning with simulated detections, greedy
+selection with enumeration, fractional CVaR with an epigraph LP and the TV
+adversary with a separate LP. Regression fixtures enforce chronological
+bandwidth fitting, seam behaviour and AIS epoch boundaries. A parity test
+compares the Python legacy port with the unchanged MATLAB script through
+GNU Octave when that dependency is available.
+
+Each result set records a source SHA-256, configuration, dependency
+versions and Git revision. The artifact verifier recomputes synthetic
+summaries, checks run uniqueness and tests every in-scope TV certificate.
+A Python 3.12 dependency snapshot, VS Code workspace, task definitions,
+learning notebook and reproduction command are supplied. Hosted CI status
+must be distinguished from locally completed checks; the validation record
+in the repository states exactly what ran.
+
+The model assumes straight trajectories, conditionally independent
+isotropic sensors and distance-only detection. It omits propagation,
+bathymetry, installation constraints, correlated detection and physical
+calibration. Synthetic traffic is designed and AIS evidence is limited.
+
+\Needspace{8\baselineskip}
+A useful next evaluation would hold out multiple days and sites, include
+known route changes, calibrate uncertainty before scoring and compare
+strong domain-specific placement methods. The present result is an
+auditable study of when forecast-aware placement helps or fails, and why
+unstructured TV ambiguity adds little design benefit in these examples.
+Operational deployment remains outside the evidence.
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+\clearpage
+\appendix
+\input{extension_results}
+\end{document}

@@ -1,0 +1,9 @@
+{
+  "instances": 100,
+  "min_ratio": 0.9469737515312173,
+  "mean_ratio": 0.9909713335045833,
+  "frac_greedy_optimal": 0.25,
+  "bound": 0.6321205588285577,
+  "mean_refine_gain_over_grid_opt_pp": 1.7425437180440004,
+  "frac_refined_beats_grid_opt": 1.0
+}

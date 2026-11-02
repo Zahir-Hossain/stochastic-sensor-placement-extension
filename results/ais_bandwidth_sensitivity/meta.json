@@ -1,0 +1,61 @@
+{
+  "data_sha256": "038c98af738e29cdac5d91a1829eb88a4b7cf94fedbf6f6cf8e04982bd65e4e3",
+  "source_sha256": "e8ff34cb65c4ebf7cda4cc0407623218abd24dbf6e99054a4f168ae87ca5ab4d",
+  "script_sha256": "06062f0086a3d3636293fc3a66362a60f2723a33789b6a4cc97ca1ad150b1b71",
+  "scales": [
+    0.25,
+    0.5,
+    1.0,
+    2.0,
+    3.0
+  ],
+  "strategies": [
+    "pooled",
+    "recent",
+    "stacked",
+    "lgcp",
+    "hindsight",
+    "fence"
+  ],
+  "config": {
+    "window": {
+      "xmin": -2.5,
+      "xmax": 2.5,
+      "ymin": -1.0,
+      "ymax": 1.5
+    },
+    "epoch_hours": 3.0,
+    "first_origin": 4,
+    "n_sensors": 4,
+    "sensor_rho": 0.95,
+    "sensor_r_km": 0.15,
+    "candidate_spacing_km": 0.1,
+    "grid_shape": [
+      120,
+      64
+    ],
+    "lgcp_fit_shape": [
+      60,
+      32
+    ],
+    "strategies": [
+      "pooled",
+      "recent",
+      "stacked",
+      "lgcp",
+      "hindsight",
+      "fence"
+    ],
+    "n_random": 50
+  },
+  "disclosure": "Post hoc sensitivity computed after viewing the test epochs; not used to select a bandwidth.",
+  "git_commit": "086f4c3",
+  "dependencies": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "pandas": "3.1.0",
+    "matplotlib": "3.10.8",
+    "pyyaml": "6.0.3"
+  },
+  "bandwidth_scope": "multiply both bandwidths returned by stochplace.ais._bandwidth; other fitting unchanged"
+}

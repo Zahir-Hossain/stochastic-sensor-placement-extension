@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+coverage.xml
+htmlcov/
+
+# notebooks
+.ipynb_checkpoints/
+
+# data (fetched, not committed)
+data/raw/
+
+# LaTeX build files
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.bbl
+paper/*.blg
+paper/*.toc
+paper/*.fdb_latexmk
+paper/*.fls
+paper/*.synctex.gz
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/*.local.json
+*.asv
+octave-workspace
+
+# Local validation and generated distributions
+validation.local.json
+output/
+*.zip
+
+# Reassembled from checksummed, tracked history parts
+/archive/research-history.bundle
+/archive/research-history.bundle.tmp

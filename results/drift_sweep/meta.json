@@ -1,0 +1,81 @@
+{
+  "experiment": "drift_sweep",
+  "stochplace_version": "2.1.0",
+  "git_commit": "e6a18c2",
+  "config_sha256": "096ea114c7919f79",
+  "config": {
+    "name": "drift_sweep",
+    "scenario": "drift",
+    "sweep": {
+      "speed": [
+        0.0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5
+      ]
+    },
+    "scenario_params": {},
+    "history_epochs": 8,
+    "horizons": [
+      1,
+      3
+    ],
+    "seeds": 40,
+    "seed_offset": 0,
+    "vary_scenario_seed": false,
+    "n_sensors": 4,
+    "sensor": {
+      "type": "gaussian",
+      "rho": 0.95,
+      "r": 1.0
+    },
+    "grid": {
+      "n_alpha": 120,
+      "n_p": 64
+    },
+    "eval_grid": {
+      "n_alpha": 360,
+      "n_p": 192
+    },
+    "lgcp_fit_shape": [
+      60,
+      32
+    ],
+    "candidate_spacing": 1.0,
+    "refine": true,
+    "beta": 0.9,
+    "radius": 0.05,
+    "n_test_epochs": 1,
+    "strategies": [
+      "pooled",
+      "recent",
+      "drift",
+      "drift_u",
+      "drift_u:cvar",
+      "trend",
+      "mixture",
+      "pseudo_bma",
+      "stacked",
+      "oracle",
+      "fence"
+    ],
+    "forecast": {},
+    "description": "How much does forecasting help as the traffic lane drifts faster? Single lane, drift speed swept from 0 (stationary) to 0.5 offset units per epoch, forecast horizons of 1 and 3 epochs.\n"
+  },
+  "n_replicates": 480,
+  "wall_time_s": 640.9,
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "dependencies": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "pandas": "3.1.0",
+    "matplotlib": "3.10.8",
+    "pyyaml": "6.0.3"
+  },
+  "source_sha256": "e8ff34cb65c4ebf7cda4cc0407623218abd24dbf6e99054a4f168ae87ca5ab4d",
+  "validation": "rolling_origin_training_prefix_only",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.39"
+}

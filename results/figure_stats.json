@@ -1,0 +1,33 @@
+{
+  "hero_rates": {
+    "pooled": 0.9258138771715831,
+    "stacked": 0.9523922100387069,
+    "oracle": 0.9562010428331572
+  },
+  "legacy": {
+    "own_routes": {
+      "historical": 9.004318667262682e-05,
+      "prediction": 8.962144333078563e-05,
+      "uncertainty": 0.0005273393456704983
+    },
+    "on_future_routes": {
+      "historical": 0.0006524363509850634,
+      "prediction": 8.962144333078563e-05,
+      "uncertainty": 0.0002239762942967924
+    },
+    "binding_budget_on_future": {
+      "historical": 0.22268624647179225,
+      "prediction": 0.12145309042211423,
+      "uncertainty": 0.11130632232011613
+    }
+  },
+  "bound": {
+    "runs": 7360.0,
+    "l1_plan_bound_holds": 1.0,
+    "l1_plan_spearman": 0.8166920919079594,
+    "l1_plan_median_ratio": 0.011639306458403685,
+    "l1_cov_plan_bound_holds": 1.0,
+    "l1_cov_plan_spearman": 0.8027524887837214,
+    "l1_cov_plan_median_ratio": 0.012691680672978952
+  }
+}

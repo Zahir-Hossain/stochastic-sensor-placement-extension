@@ -1,0 +1,17 @@
+name: drift_sweep
+description: >
+  How much does forecasting help as the traffic lane drifts faster?
+  Single lane, drift speed swept from 0 (stationary) to 0.5 offset units
+  per epoch, forecast horizons of 1 and 3 epochs.
+scenario: drift
+sweep:
+  speed: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5]
+history_epochs: 8
+horizons: [1, 3]
+seeds: 40
+n_sensors: 4
+sensor: {type: gaussian, rho: 0.95, r: 1.0}
+grid: {n_alpha: 120, n_p: 64}
+eval_grid: {n_alpha: 360, n_p: 192}
+candidate_spacing: 1.0
+strategies: [pooled, recent, drift, drift_u, "drift_u:cvar", trend, mixture, pseudo_bma, stacked, oracle, fence]

@@ -1,0 +1,54 @@
+Looking in links: /workspace/scratch/01a50792c147/part-a-wheelhouse
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/ast_serialize-0.13.1-cp39-abi3-manylinux_2_17_x86_64.whl (from -r requirements/reproduce-py312.txt (line 5))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/contourpy-1.3.3-cp312-cp312-manylinux_2_27_x86_64.whl (from -r requirements/reproduce-py312.txt (line 6))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/coverage-7.17.0-cp312-cp312-manylinux_2_5_x86_64.whl (from -r requirements/reproduce-py312.txt (line 7))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/cycler-0.12.1-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 8))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/editables-0.6-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 9))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/fonttools-4.61.1-cp312-cp312-manylinux_2_5_x86_64.whl (from -r requirements/reproduce-py312.txt (line 10))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/hatchling-1.33.0-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 11))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/hypothesis-6.170.14-cp312-cp312-manylinux2014_x86_64.whl (from -r requirements/reproduce-py312.txt (line 12))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/iniconfig-2.3.1-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 13))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/kiwisolver-1.4.9-cp312-cp312-manylinux_2_17_x86_64.whl (from -r requirements/reproduce-py312.txt (line 14))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/librt-0.16.0-cp312-cp312-manylinux_2_17_x86_64.whl (from -r requirements/reproduce-py312.txt (line 15))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/matplotlib-3.10.8-cp312-cp312-manylinux_2_17_x86_64.whl (from -r requirements/reproduce-py312.txt (line 16))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/mypy-2.4.1-cp312-cp312-manylinux_2_17_x86_64.whl (from -r requirements/reproduce-py312.txt (line 17))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/mypy_extensions-1.1.0-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 18))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.whl (from -r requirements/reproduce-py312.txt (line 19))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/packaging-26.3-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 20))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/pandas-3.1.0-cp312-cp312-manylinux_2_24_x86_64.whl (from -r requirements/reproduce-py312.txt (line 21))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/pandas_stubs-3.1.0.261029-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 22))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/pathspec-1.1.1-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 23))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/pillow-12.3.0-cp312-cp312-manylinux_2_27_x86_64.whl (from -r requirements/reproduce-py312.txt (line 24))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/pluggy-1.7.0-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 25))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/Pygments-2.21.0-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 26))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/pyparsing-3.3.2-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 27))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/pytest-9.2.0-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 28))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/pytest_cov-7.1.0-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 29))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/python_dateutil-2.9.0.post0-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 30))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/pytz-2026.5-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 31))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/PyYAML-6.0.3-cp312-cp312-manylinux_2_17_x86_64.whl (from -r requirements/reproduce-py312.txt (line 32))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/ruff-0.17.3-py3-none-manylinux_2_17_x86_64.whl (from -r requirements/reproduce-py312.txt (line 33))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/scipy-1.17.0-cp312-cp312-manylinux_2_27_x86_64.whl (from -r requirements/reproduce-py312.txt (line 34))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/six-1.17.0-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 35))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/sortedcontainers-2.4.0-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 36))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/tomlkit-0.15.2-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 37))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/trove_classifiers-2026.9.21.13-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 38))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/types_PyYAML-6.0.12.20261030-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 39))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/typing_extensions-4.16.0-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 40))
+Processing /workspace/scratch/01a50792c147/part-a-wheelhouse/tzdata-2026.5-py3-none-any.whl (from -r requirements/reproduce-py312.txt (line 41))
+Installing collected packages: trove-classifiers, sortedcontainers, pytz, tzdata, typing-extensions, types-pyyaml, tomlkit, six, ruff, pyyaml, pyparsing, pygments, pluggy, pillow, pathspec, packaging, numpy, mypy-extensions, librt, kiwisolver, iniconfig, hypothesis, fonttools, editables, cycler, coverage, ast-serialize, scipy, python-dateutil, pytest, pandas-stubs, mypy, hatchling, contourpy, pytest-cov, pandas, matplotlib
+Successfully installed ast-serialize-0.13.1 contourpy-1.3.3 coverage-7.17.0 cycler-0.12.1 editables-0.6 fonttools-4.61.1 hatchling-1.33.0 hypothesis-6.170.14 iniconfig-2.3.1 kiwisolver-1.4.9 librt-0.16.0 matplotlib-3.10.8 mypy-2.4.1 mypy-extensions-1.1.0 numpy-2.3.5 packaging-26.3 pandas-3.1.0 pandas-stubs-3.1.0.261029 pathspec-1.1.1 pillow-12.3.0 pluggy-1.7.0 pygments-2.21.0 pyparsing-3.3.2 pytest-9.2.0 pytest-cov-7.1.0 python-dateutil-2.9.0.post0 pytz-2026.5 pyyaml-6.0.3 ruff-0.17.3 scipy-1.17.0 six-1.17.0 sortedcontainers-2.4.0 tomlkit-0.15.2 trove-classifiers-2026.9.21.13 types-pyyaml-6.0.12.20261030 typing-extensions-4.16.0 tzdata-2026.5
+Obtaining file:///workspace/scratch/01a50792c147/stochastic-sensor-placement-extension
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: stochplace
+  Building editable for stochplace (pyproject.toml): started
+  Building editable for stochplace (pyproject.toml): finished with status 'done'
+  Created wheel for stochplace: filename=stochplace-2.1.0-py3-none-any.whl size=9298 sha256=81b1205c2723e21625805798bd13b7d6ddefa5675544a454d01fb63f9eedbecb
+  Stored in directory: /tmp/pip-ephem-wheel-cache-2nopte52/wheels/f4/eb/af/f8d0b030a2048b748b322a72ec163f88a35477f804f37e1422
+Successfully built stochplace
+Installing collected packages: stochplace
+Successfully installed stochplace-2.1.0
+No broken requirements found.

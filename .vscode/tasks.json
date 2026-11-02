@@ -1,0 +1,34 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "1. Set up Python environment",
+      "type": "process", "command": "python3", "args": ["scripts/bootstrap.py"],
+      "windows": {"command": "python"},
+      "options": {"cwd": "${workspaceFolder}"}, "problemMatcher": []
+    },
+    {
+      "label": "2. Verify project",
+      "type": "process", "command": "${command:python.interpreterPath}",
+      "args": ["scripts/check.py"], "group": {"kind": "test", "isDefault": true},
+      "options": {"cwd": "${workspaceFolder}"}, "problemMatcher": []
+    },
+    {
+      "label": "3. Run quickstart",
+      "type": "process", "command": "${command:python.interpreterPath}",
+      "args": ["examples/quickstart.py"], "options": {"cwd": "${workspaceFolder}"}, "problemMatcher": []
+    },
+    {
+      "label": "4. Run small robustness study",
+      "type": "process", "command": "${command:python.interpreterPath}",
+      "args": ["-m", "stochplace.cli", "robustness", "--seeds", "2", "--workers", "2", "--out", "output/robustness", "--figures", "output/figures"],
+      "options": {"cwd": "${workspaceFolder}"}, "problemMatcher": []
+    },
+    {
+      "label": "5. Reproduce research results",
+      "type": "process", "command": "${command:python.interpreterPath}",
+      "args": ["scripts/reproduce.py", "--workers", "2"],
+      "options": {"cwd": "${workspaceFolder}"}, "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "experiment": "holdout_rotating_quadratic",
+  "stochplace_version": "2.1.0",
+  "git_commit": "086f4c3",
+  "config_sha256": "a52388dd8471e7b8",
+  "config": {
+    "name": "holdout_rotating_quadratic",
+    "scenario": "rotating_quadratic",
+    "sweep": {},
+    "scenario_params": {},
+    "history_epochs": 8,
+    "horizons": [
+      2
+    ],
+    "seeds": 40,
+    "seed_offset": 0,
+    "vary_scenario_seed": true,
+    "n_sensors": 4,
+    "sensor": {
+      "type": "gaussian",
+      "rho": 0.95,
+      "r": 1.0
+    },
+    "grid": {
+      "n_alpha": 120,
+      "n_p": 64
+    },
+    "eval_grid": {
+      "n_alpha": 360,
+      "n_p": 192
+    },
+    "lgcp_fit_shape": [
+      60,
+      32
+    ],
+    "candidate_spacing": 1.0,
+    "refine": true,
+    "beta": 0.9,
+    "radius": 0.05,
+    "n_test_epochs": 1,
+    "strategies": [
+      "pooled",
+      "recent",
+      "drift_u",
+      "trend",
+      "stacked",
+      "pseudo_bma",
+      "oracle"
+    ],
+    "forecast": {},
+    "description": "Preregistered out-of-family test; report all outcomes."
+  },
+  "n_replicates": 40,
+  "wall_time_s": 28.9,
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "dependencies": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "pandas": "3.1.0",
+    "matplotlib": "3.10.8",
+    "pyyaml": "6.0.3"
+  },
+  "source_sha256": "e8ff34cb65c4ebf7cda4cc0407623218abd24dbf6e99054a4f168ae87ca5ab4d",
+  "validation": "rolling_origin_training_prefix_only",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.39"
+}

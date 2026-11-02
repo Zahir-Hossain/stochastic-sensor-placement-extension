@@ -1,0 +1,77 @@
+{
+  "experiment": "suite_emergence",
+  "stochplace_version": "2.1.0",
+  "git_commit": "e6a18c2",
+  "config_sha256": "9d9cebbde76393ef",
+  "config": {
+    "name": "suite_emergence",
+    "scenario": "emergence",
+    "sweep": {},
+    "scenario_params": {},
+    "history_epochs": 8,
+    "horizons": [
+      2
+    ],
+    "seeds": 40,
+    "seed_offset": 0,
+    "vary_scenario_seed": false,
+    "n_sensors": 4,
+    "sensor": {
+      "type": "gaussian",
+      "rho": 0.95,
+      "r": 1.0
+    },
+    "grid": {
+      "n_alpha": 120,
+      "n_p": 64
+    },
+    "eval_grid": {
+      "n_alpha": 360,
+      "n_p": 192
+    },
+    "lgcp_fit_shape": [
+      60,
+      32
+    ],
+    "candidate_spacing": 1.0,
+    "refine": true,
+    "beta": 0.9,
+    "radius": 0.05,
+    "n_test_epochs": 1,
+    "strategies": [
+      "pooled",
+      "lgcp",
+      "recent",
+      "drift",
+      "drift_u",
+      "drift_u:void",
+      "drift_u:cvar",
+      "trend",
+      "trend:cvar",
+      "mixture",
+      "pseudo_bma",
+      "stacked",
+      "stacked:void",
+      "stacked:cvar",
+      "oracle",
+      "fence",
+      "random"
+    ],
+    "forecast": {},
+    "description": "Full strategy comparison on the emergence scenario (horizon 2)."
+  },
+  "n_replicates": 40,
+  "wall_time_s": 85.6,
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "dependencies": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "pandas": "3.1.0",
+    "matplotlib": "3.10.8",
+    "pyyaml": "6.0.3"
+  },
+  "source_sha256": "e8ff34cb65c4ebf7cda4cc0407623218abd24dbf6e99054a4f168ae87ca5ab4d",
+  "validation": "rolling_origin_training_prefix_only",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.39"
+}

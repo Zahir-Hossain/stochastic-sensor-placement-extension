@@ -1,0 +1,16 @@
+scenario,method,sample_rank,sample_covered_90,sample_mean_relative_l1,n
+accelerating,component,0.7140625,0.625,0.038204739599709776,40
+accelerating,residual_candidate,0.65390625,0.975,0.1261488449285392,40
+accelerating,weighted_candidate,0.75703125,0.425,0.04060890702698978,40
+lane_split,component,1.0,0.0,0.01537550558014678,40
+lane_split,residual_candidate,1.0,0.0,0.04134632091224269,40
+lane_split,weighted_candidate,1.0,0.0,0.007505625039229814,40
+random_switch,component,0.71953125,0.5,0.04599281007626084,40
+random_switch,residual_candidate,0.7703125,0.425,0.07203686238671957,40
+random_switch,weighted_candidate,0.70078125,0.225,0.030986326667030863,40
+random_walk,component,0.3125,0.1,0.02038493697511545,40
+random_walk,residual_candidate,0.38046875,0.425,0.05483418229059221,40
+random_walk,weighted_candidate,0.29296875,0.05,0.013853030704769084,40
+rotating_quadratic,component,0.915625,0.325,0.03907539932707112,40
+rotating_quadratic,residual_candidate,0.66171875,1.0,0.19009697885681082,40
+rotating_quadratic,weighted_candidate,0.921875,0.325,0.04338152262125968,40

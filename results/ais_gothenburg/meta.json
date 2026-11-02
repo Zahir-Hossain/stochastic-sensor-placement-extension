@@ -1,0 +1,68 @@
+{
+  "data": "Danish Maritime Authority AIS, 2017-07-05, Gothenburg (via movingpandas-examples/data/ais.gpkg)",
+  "n_reports": 84702,
+  "epoch_origin": "2017-07-05T00:00:00",
+  "n_lines": 265,
+  "lines_per_epoch": [
+    15,
+    36,
+    38,
+    42,
+    41,
+    54,
+    20,
+    19
+  ],
+  "window_km": [
+    -2.5,
+    2.5,
+    -1.0,
+    1.5
+  ],
+  "config": {
+    "window": "Window(xmin=-2.5, xmax=2.5, ymin=-1.0, ymax=1.5)",
+    "epoch_hours": 3.0,
+    "first_origin": 4,
+    "n_sensors": 4,
+    "sensor_rho": 0.95,
+    "sensor_r_km": 0.15,
+    "candidate_spacing_km": 0.1,
+    "grid_shape": [
+      120,
+      64
+    ],
+    "lgcp_fit_shape": [
+      60,
+      32
+    ],
+    "strategies": [
+      "pooled",
+      "lgcp",
+      "recent",
+      "drift_u",
+      "trend",
+      "mixture",
+      "stacked",
+      "pseudo_bma",
+      "stacked:void",
+      "stacked:cvar",
+      "hindsight",
+      "fence",
+      "random"
+    ],
+    "n_random": 50
+  },
+  "generated": "2026-11-02T05:35:10",
+  "preprocessing": "split at epoch boundaries, time gaps, exits and low-speed reports before line fitting",
+  "estimand": "expected detection probability per straight passage piece",
+  "data_sha256": "038c98af738e29cdac5d91a1829eb88a4b7cf94fedbf6f6cf8e04982bd65e4e3",
+  "source_sha256": "e8ff34cb65c4ebf7cda4cc0407623218abd24dbf6e99054a4f168ae87ca5ab4d",
+  "git_commit": "e6a18c2",
+  "dependencies": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "pandas": "3.1.0",
+    "matplotlib": "3.10.8",
+    "pyyaml": "6.0.3"
+  }
+}
