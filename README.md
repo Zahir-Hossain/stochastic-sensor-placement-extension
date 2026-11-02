@@ -1,9 +1,27 @@
+<div align="center">
+
 # When does forecast-aware sensor placement help?
 
+**Plan sensors on a forecast of tomorrow's traffic and you win when the forecast is right,<br>
+and lose when it is wrong. This repository measures both.**
+
 [![CI](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/actions/workflows/ci.yml?query=branch%3Amain)
+[![Report](https://img.shields.io/badge/Report-PDF-0b4f8a)](paper/main.pdf)
 ![Python](https://img.shields.io/badge/Python-3.10%E2%80%933.13-3776ab)
 ![License](https://img.shields.io/badge/License-MIT-green)
 [![Base paper](https://img.shields.io/badge/Framework-arXiv%3A2505.00825-b31b1b)](https://arxiv.org/abs/2505.00825)
+
+<img src="docs/figures/placement_story.gif" width="100%" alt="Two animated panels. Traffic lines arrive epoch by epoch, two methods each place four sensors, then the real future traffic appears and both plans are scored. Left, steady drift: the plan made on the forecast detects more. Right, drift that reverses after training: the plan made on history detects more.">
+
+<sub>Each method sees eight epochs of traffic, places four sensors, and is scored on the traffic two epochs later.
+Plans and scores come from the saved study runs; each panel shows the seed closest to its study mean.
+Rendered by <code>scripts/make_animation.py</code>.</sub>
+
+**[Read the report](paper/main.pdf)** &nbsp;·&nbsp; [All results](docs/research_results.md) &nbsp;·&nbsp; [Run it](START_HERE.md) &nbsp;·&nbsp; [How it was checked](docs/validation.md)
+
+</div>
+
+## Results at a glance
 
 `stochplace` is a Python package and reproducible stress test of fixed sensor
 placement under changing traffic, using synthetic line trajectories and
@@ -13,14 +31,6 @@ public AIS ship tracks.
 It loses to history under an unannounced reversal and on average in this
 one-day AIS reanalysis.** Combining forecasts also loses to individual
 components in the additional synthetic tests.
-
-![Where forecast stacking helps and where it fails](docs/figures/research_overview.png)
-
-*The reference method is named on every row. Synthetic intervals resample
-paired seeds; the lane-split component comparison is secondary and has no
-multiplicity adjustment. The AIS mean and all four overlapping origins are
-descriptive, with no population interval. These are modelled detection
-probabilities, not measurements from deployed sensors. [Source data](docs/figures/research_overview_data.csv).*
 
 <!-- at-a-glance:start -->
 | Evidence | Result |
@@ -37,9 +47,25 @@ Generated from saved runs by `python scripts/presentation_summary.py`.
 The best-component comparison is descriptive; [all methods and intervals](docs/tables/holdout_components.md)
 remain visible. The AIS bandwidth grid hits its lower edge at every selection.
 
-**Start here:** [run the package](START_HERE.md), read the
-[technical report](paper/main.pdf), inspect the [complete results](docs/research_results.md),
-or check the [current validation](docs/validation.md).
+![Where forecast stacking helps and where it fails](docs/figures/research_overview.png)
+
+*The reference method is named on every row. Synthetic intervals resample
+paired seeds; the lane-split component comparison is secondary and has no
+multiplicity adjustment. The AIS mean and all four overlapping origins are
+descriptive, with no population interval. These are modelled detection
+probabilities, not measurements from deployed sensors. [Source data](docs/figures/research_overview_data.csv).*
+
+## Try it
+
+```bash
+git clone https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension.git
+cd stochastic-sensor-placement-extension
+python3.12 scripts/bootstrap.py && source .venv/bin/activate
+python examples/quickstart.py
+```
+
+No GPU, Docker or credentials are needed. [START_HERE.md](START_HERE.md) covers
+VS Code, the tutorial notebook and full reproduction.
 
 ## What this repository adds
 
@@ -388,4 +414,19 @@ tests/           numerical, property, integration and parity checks
 .vscode/         tasks and debugger configurations
 ```
 
-MIT licence. Software citation metadata is in [CITATION.cff](CITATION.cff).
+## Cite
+
+If you use this software, please cite it and the framework it builds on.
+GitHub's "Cite this repository" button reads [CITATION.cff](CITATION.cff).
+
+```bibtex
+@software{hossain2026stochplace,
+  author  = {Hossain, A. S. M. Jahir},
+  title   = {stochplace: sensor placement for stochastic line trajectories under traffic shift},
+  version = {2.1.0},
+  year    = {2026},
+  url     = {https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension}
+}
+```
+
+MIT licence.
