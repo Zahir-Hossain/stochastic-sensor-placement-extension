@@ -131,6 +131,16 @@ def main() -> int:
     run(
         [
             sys.executable,
+            "scripts/make_animation.py",
+            "--results",
+            str(results),
+            "--out",
+            str(figures / "placement_story.gif"),
+        ]
+    )
+    run(
+        [
+            sys.executable,
             "scripts/make_tables.py",
             "--results",
             str(results),

@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.1.0 (unreleased)
+## 2.1.0 (2026-11-02)
 
 ### Added
 
@@ -10,6 +10,8 @@
   including study-scale primal/dual comparisons and concentrated masses.
 - Raw results, provenance checks, reproducible tables, a technical report,
   a tutorial and a VS Code setup workflow.
+- An animated README overview and a social preview card, rendered from the
+  saved plans and scores by `scripts/make_animation.py`.
 
 ### Corrected
 
