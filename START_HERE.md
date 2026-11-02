@@ -68,18 +68,17 @@ the original MATLAB parity test.
 
 ## Git and GitHub
 
-The current Python work is published on `research-hardening` in
-[PR #1](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/pull/1).
-The default `main` branch still contains the original MATLAB version until
-that PR is merged. The review branch has eight CI jobs, including a Python
-3.10-3.13 matrix and GNU Octave parity.
+The Python work was merged into `main` through
+[PR #1](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/pull/1)
+on 2 November 2026 (merge commit `308afae`). CI runs eight jobs, including a
+Python 3.10-3.13 matrix and GNU Octave parity. The original MATLAB version is
+kept in `legacy/` and in the history before that merge.
 
-To inspect the published work from a fresh clone:
+To work from a fresh clone:
 
 ```bash
 git clone https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension.git
 cd stochastic-sensor-placement-extension
-git switch research-hardening
 ```
 
 No version tags or release are claimed here. [Repository presentation notes](docs/repository_presentation.md)

@@ -1,6 +1,6 @@
 # When does forecast-aware sensor placement help?
 
-[![CI](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/actions/workflows/ci.yml/badge.svg?branch=research-hardening)](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/actions/workflows/ci.yml?query=branch%3Aresearch-hardening)
+[![CI](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/actions/workflows/ci.yml?query=branch%3Amain)
 ![Python](https://img.shields.io/badge/Python-3.10%E2%80%933.13-3776ab)
 ![License](https://img.shields.io/badge/License-MIT-green)
 [![Base paper](https://img.shields.io/badge/Framework-arXiv%3A2505.00825-b31b1b)](https://arxiv.org/abs/2505.00825)
@@ -188,7 +188,7 @@ paired difference from historical KDE rather than bootstrap intervals.
 The default estimator comparison does not settle history versus forecast.
 
 <!-- ais-sensitivity:start -->
-At the default bandwidth, historical LGCP leads the KDE planners by 7.5 to 8.6 percentage points. At multiplier 0.25, historical KDE detects 84.8%, stacking 85.0%, and LGCP 85.2%; that stacking number rescales final fits only, with default-bandwidth backtests. Rescaling every nested prefix in C4 gives stacking 82.5% on this reused day. recent epochs remain 2.4 points behind LGCP. This is estimator-resolution sensitivity, not evidence selecting a new setting or settling history versus forecast.
+At the default bandwidth, historical LGCP leads the KDE planners by 7.5 to 8.6 percentage points. At multiplier 0.25, historical KDE detects 84.8%, stacking 85.0%, and LGCP 85.2%; that stacking number rescales final fits only, with default-bandwidth backtests. Rescaling every nested prefix in C4 gives stacking 82.5% on this reused day. Recent epochs remain 2.4 points behind LGCP. This is estimator-resolution sensitivity, not evidence selecting a new setting or settling history versus forecast.
 <!-- ais-sensitivity:end -->
 
 The bandwidth probe was computed after viewing the test epochs. It is

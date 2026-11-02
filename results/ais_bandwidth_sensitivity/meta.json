@@ -1,7 +1,7 @@
 {
   "data_sha256": "038c98af738e29cdac5d91a1829eb88a4b7cf94fedbf6f6cf8e04982bd65e4e3",
   "source_sha256": "9012cb66318e67d58446a3a0ecb25267618dd3493cd7a26df0a8a7ea983bd9f7",
-  "script_sha256": "ae0b8d9181a328b7fb139a64530c10e458ee136868918a7e95cad089209dd36a",
+  "script_sha256": "0f5a74d46c0a89a1429ff344431fd60d661ed54424d7126238bfe0a9aca10c77",
   "scales": [
     0.25,
     0.5,
@@ -49,7 +49,7 @@
     "n_random": 50
   },
   "disclosure": "Post hoc sensitivity computed after viewing the test epochs; not used to select a bandwidth. Only final component fits are rescaled; stacking weights retain default-bandwidth backtests. This differs from the nested-prefix bandwidth reanalysis in C4.",
-  "git_commit": "7ca1f42",
+  "git_commit": "1ec65b4",
   "dependencies": {
     "numpy": "2.3.5",
     "scipy": "1.17.0",
