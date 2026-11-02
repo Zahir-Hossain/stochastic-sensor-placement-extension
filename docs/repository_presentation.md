@@ -2,42 +2,37 @@
 
 The Python study was merged into `main` through
 [PR #1](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/pull/1)
-on 2 November 2026 (merge commit `308afae`). The repository settings below
-are proposals; they have not been applied.
+on 2 November 2026 (merge commit `308afae`), followed by
+[PR #2](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/pull/2)
+and [PR #3](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/pull/3).
 
-## Proposed About text
+## Applied on 2 November 2026
 
-Reproducible Python study of sensor placement under shifting traffic:
-chronological intensity stacking, risk objectives and ambiguity sets,
-with synthetic stress tests, public AIS tracks and reported failures.
+About text:
 
-## Proposed topics
+> Where should fixed sensors go when traffic shifts? Python package and stress
+> tests of forecast-aware placement: wins when the forecast is right, losses
+> when it is not, on synthetic traffic and real AIS ship tracks.
 
-`sensor-placement`, `barrier-coverage`, `point-processes`, `forecasting`,
-`distributionally-robust-optimization`, `optimal-transport`, `ais`,
-`maritime`, `python`, `reproducible-research`.
+Topics: `ais`, `barrier-coverage`, `distributionally-robust-optimization`,
+`forecasting`, `maritime`, `optimal-transport`, `point-processes`,
+`probabilistic-modeling`, `python`, `reproducible-research`,
+`scientific-computing`, `sensor-networks`, `sensor-placement`,
+`stochastic-systems`, `trajectory-prediction`, `uncertainty`.
 
-The current overview figure is `docs/figures/research_overview.png`.
-It shows a successful designed case next to reversal, component and AIS losses.
+Social preview: `docs/figures/social_preview.png`, rendered with the README
+animation by `scripts/make_animation.py`.
 
-## Publication sequence
+Release: [v2.1.0](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/releases/tag/v2.1.0),
+tag at `1d32aa9`, with the technical report attached.
 
-1. Done: PR #1 was reviewed, passed all eight CI jobs on its exact head
-   `fffd5d0`, and was merged as `308afae`.
-2. Replace the About text, which still describes the June MATLAB toy, and
-   apply the topics above.
-3. Tag the June MATLAB version and the merged study, then publish a release
-   with `paper/main.pdf`:
+The June 2026 MATLAB version remains in `legacy/` and at commit `b67f3a5`;
+it has no tag.
 
-   ```bash
-   git tag v0.1.0 b67f3a5
-   git tag v2.1.0 308afae
-   git push origin v0.1.0 v2.1.0
-   ```
+## Not done
 
-   Until this is done, no version tag or release exists.
-4. Renaming the repository to `stochplace` is optional and does not improve
-   the scientific evidence.
+Renaming the repository to `stochplace` is optional and does not improve the
+scientific evidence.
 
 The existing bundles must remain until an alternative preserves the original
 baseline commits and a fresh clone passes the comparison commands. Deleting
