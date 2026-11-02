@@ -6,6 +6,7 @@ authors:
   - family-names: Hossain
     given-names: "A. S. M. Jahir"
 version: 2.1.0
+date-released: "2026-11-02"
 license: MIT
 repository-code: "https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension"
 keywords:

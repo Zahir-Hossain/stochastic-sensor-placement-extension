@@ -81,6 +81,7 @@ git clone https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension
 cd stochastic-sensor-placement-extension
 ```
 
-No version tags or release are claimed here. [Repository presentation notes](docs/repository_presentation.md)
-contain the proposed About text and publication steps. The archived scientific
+The current release is [v2.1.0](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/releases/tag/v2.1.0),
+with the report attached. [Repository presentation notes](docs/repository_presentation.md)
+record how the repository page is set up. The archived scientific
 history remains available in `archive/` for baseline verification.
