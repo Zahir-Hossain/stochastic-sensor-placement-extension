@@ -1,0 +1,8 @@
+{
+  "source_sha256": "9012cb66318e67d58446a3a0ecb25267618dd3493cd7a26df0a8a7ea983bd9f7",
+  "comparison_base": "2c5fe28f46f0b8e748784680f5fcc1517edcb92a",
+  "csv_summaries_compared": 18,
+  "result_sets_verified": 19,
+  "atol": 1e-09,
+  "rtol": 0
+}

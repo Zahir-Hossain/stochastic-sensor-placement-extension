@@ -43,7 +43,7 @@ No Docker, database, account credentials or GPU is required.
 | Distinguish inherited methods from this extension | `docs/research_boundary.md` |
 | See what was corrected | `docs/review_notes.md` |
 | Prepare to explain the work | `docs/project_walkthrough.md` |
-| Inspect recorded checks and reproduction | `docs/validation.md` |
+| Inspect recorded checks and reproduction | `docs/audit_followup.md` |
 | Read the learning notebook | `examples/tutorial.ipynb` |
 
 ## Reproduce results

@@ -27,8 +27,8 @@
     "candidate_spacing": 2.5,
     "n_sensors": 4
   },
-  "source_sha256": "e8ff34cb65c4ebf7cda4cc0407623218abd24dbf6e99054a4f168ae87ca5ab4d",
-  "git_commit": "e6a18c2",
+  "source_sha256": "9012cb66318e67d58446a3a0ecb25267618dd3493cd7a26df0a8a7ea983bd9f7",
+  "git_commit": "7ca1f42",
   "python": "3.12.14",
   "dependencies": {
     "numpy": "2.3.5",

@@ -352,8 +352,11 @@ stacking \aisStacked\%. At the default bandwidth, historical LGCP leads the KDE 
 \aisBandwidthGapMin{} to \aisBandwidthGapMax{} percentage points.
 A post hoc multiplier of $0.25$ gives historical KDE \aisFinePooled\%,
 stacking \aisFineStacked\% and LGCP \aisFineLgcp\%; recent epochs remain
-\aisFineRecentGap{} points behind LGCP. Historical and stacked KDE thus
-approach LGCP at finer resolution, but this does not establish equivalence.
+\aisFineRecentGap{} points behind LGCP. Only final component fits are rescaled
+in this probe; stacking weights come from default-bandwidth backtests.
+Historical KDE approaches LGCP at finer resolution, but this does not
+establish equivalence. Rescaling every nested prefix in C4 gives stacking
+\aisNestedStacked\% on this reused day (Appendix~A).
 This probe was computed after viewing the test epochs and is sensitivity
 evidence only. No scale is adopted. It does not settle history versus forecast. The one-day sample is too small for a broad
 real-world claim. Table~\ref{tab:ais-origins} reports every origin and
@@ -412,7 +415,10 @@ known route changes, calibrate uncertainty before scoring and compare
 strong domain-specific placement methods. The present result is an
 auditable study of when forecast-aware placement helps or fails, and why
 unstructured TV ambiguity adds little design benefit in these examples.
-Operational deployment remains outside the evidence.
+Operational deployment remains outside the evidence. Appendix~A includes
+the locally frozen extension studies: gains over pooled history do not
+establish superiority to individual components, and the component losses
+and calibration-prefix limitations are shown explicitly.
 
 \bibliographystyle{plainnat}
 \bibliography{refs}

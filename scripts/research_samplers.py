@@ -34,13 +34,21 @@ def weighted_candidate(
 def residual_candidate(
     history, grid, horizon: int, config: ForecastConfig, current: IntensityField, seed: int
 ) -> IntensityField:
-    factors = []
+    factors, backtests = [], []
     for target in range(max(0, len(history) - config.backtest_epochs), len(history)):
         length = target - horizon + 1
         if length < 3:
             continue
         prefix = history[:length]
         fitted = forecast(prefix, grid, horizon, "stacked", config)
+        backtests.append(
+            {
+                "target": target,
+                "history_epochs": length,
+                "weight_fit": fitted.meta.get("weight_fit", "not_recorded"),
+                "weight_fit_message": fitted.meta.get("weight_fit_message", ""),
+            }
+        )
         bandwidth = fm._bandwidth(prefix, config)
         observed = kde_intensity(*history[target], grid, bandwidth=bandwidth)
         floor = 1e-12 * max(float(fitted.density[grid.mask].mean()), 1.0)
@@ -51,4 +59,10 @@ def residual_candidate(
     errors /= errors.mean(axis=0)
     selected = np.random.default_rng([seed, 7331]).integers(0, len(errors), config.n_samples)
     draws = current.density[None] * errors[selected]
-    return IntensityField(grid, current.density.copy(), samples=draws, label="residual_candidate")
+    return IntensityField(
+        grid,
+        current.density.copy(),
+        samples=draws,
+        label="residual_candidate",
+        meta={"residual_backtests": backtests},
+    )

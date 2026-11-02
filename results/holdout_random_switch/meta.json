@@ -1,7 +1,7 @@
 {
   "experiment": "holdout_random_switch",
   "stochplace_version": "2.1.0",
-  "git_commit": "086f4c3",
+  "git_commit": "7ca1f42-dirty",
   "config_sha256": "0f4bd5d4c75b2263",
   "config": {
     "name": "holdout_random_switch",
@@ -51,7 +51,7 @@
     "description": "Preregistered out-of-family test; report all outcomes."
   },
   "n_replicates": 40,
-  "wall_time_s": 26.9,
+  "wall_time_s": 33.9,
   "python": "3.12.14",
   "numpy": "2.3.5",
   "dependencies": {
@@ -61,7 +61,7 @@
     "matplotlib": "3.10.8",
     "pyyaml": "6.0.3"
   },
-  "source_sha256": "e8ff34cb65c4ebf7cda4cc0407623218abd24dbf6e99054a4f168ae87ca5ab4d",
+  "source_sha256": "9012cb66318e67d58446a3a0ecb25267618dd3493cd7a26df0a8a7ea983bd9f7",
   "validation": "rolling_origin_training_prefix_only",
   "platform": "Linux-6.18.57-x86_64-with-glibc2.39"
 }

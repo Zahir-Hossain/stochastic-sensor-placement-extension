@@ -111,6 +111,14 @@ class Problem:
                     UserWarning,
                     stacklevel=2,
                 )
+            elif self.field.samples is not None:
+                warnings.warn(
+                    "This objective uses forecast samples whose calibration has not been "
+                    "validated by this package. Interpret it as a sensitivity analysis "
+                    "unless calibration is established separately.",
+                    UserWarning,
+                    stacklevel=2,
+                )
             elif self.field.label == "mixture" and self.field.samples is None:
                 warnings.warn(
                     "The fixed mixture contains no uncertainty samples; this objective uses only "

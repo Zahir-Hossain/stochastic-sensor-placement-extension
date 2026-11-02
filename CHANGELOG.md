@@ -1,5 +1,24 @@
 # Changelog
 
+## External audit follow-up (November 2026)
+
+- D3/D4/D12 [confirmed defect]: record solver status/reasons in the four
+  reviewed research runners, require an explicit AIS raw-report origin,
+  and warn for all sample-bearing void/CVaR fields. Numerical methods
+  and defaults are unchanged; all source-dependent studies are regenerated.
+- D1/D2/D5-D11/D13-D14 [disclosure]: distinguish final-fit AIS sensitivity
+  from nested fitting; show all component comparisons, per-origin and
+  boundary-selection limits, discrete-plan degeneracy and the immature
+  calibration prefix; qualify local preregistration evidence, cite prior
+  work and replace stale validation pointers. Preserve every negative result.
+- P3 [confirmed defect]: freeze an independently computed POT
+  network-simplex reference for the concentrated-mass fixture. Runtime
+  dependencies and the experimental optimization method are unchanged.
+- D14 [confirmed defect]: run summary comparisons, deterministic
+  table regeneration and research smoke checks in CI; retain commit-bound
+  run metadata and hashes of the captured logs.
+
+
 - C-close [disclosure]: preserve all preregistered C1-C6 outcomes and negative
   results, reject both sampler candidates under the frozen gate, regenerate
   and verify 19 result sets, record 152 passing tests and the local Octave

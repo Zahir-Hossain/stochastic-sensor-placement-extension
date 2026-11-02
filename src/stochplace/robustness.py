@@ -105,6 +105,8 @@ def _replicate(args: tuple[RobustnessConfig, str, int]) -> list[dict[str, Any]]:
                     "discretisation_error_pp": 100 * (fine_detection - coarse_detection),
                     "sensors": json.dumps(plan.sensors.tolist()),
                     "tv_start": robust_plan.meta["start_won"] if method == "stacked_tv" else "",
+                    "weight_fit": field.meta.get("weight_fit", "not_applicable"),
+                    "weight_fit_message": field.meta.get("weight_fit_message", ""),
                 }
             )
     return rows

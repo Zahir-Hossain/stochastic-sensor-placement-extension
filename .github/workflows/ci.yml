@@ -73,8 +73,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install -e ".[dev]"
       - run: python scripts/verify_artifacts.py
+      - run: python scripts/compare_summaries.py --base 3b8548d
+      - run: python scripts/compare_summaries.py --base 2c5fe28f46f0b8e748784680f5fcc1517edcb92a
+      - name: Regenerate reported tables without changing tracked outputs
+        run: |
+          python scripts/ais_bandwidth_sensitivity.py --render-only --readme README.md
+          python scripts/research_extensions_summary.py
+          git diff --exit-code -- README.md docs/tables docs/research_results.md paper/extension_results.tex paper/ais_sensitivity_numbers.tex results/calibration_diagnostics.csv
+      - name: Research runner smoke checks
+        run: |
+          stochplace run configs/holdout_random_walk.yaml --seeds 1 --workers 1 --out /tmp/research-smoke
+          python scripts/transport_study.py --config tests/fixtures/transport_smoke.yaml --workers 1 --out /tmp/research-smoke/transport

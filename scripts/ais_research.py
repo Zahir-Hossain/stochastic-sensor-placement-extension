@@ -205,6 +205,7 @@ def main() -> None:
                         "maximum_validation_target": target - 1,
                         "backtest_origins": field.meta["backtest_origins"],
                         "weight_fit": field.meta.get("weight_fit", "not_applicable"),
+                        "weight_fit_message": field.meta.get("weight_fit_message", ""),
                         "weights": json.dumps(field.meta["weights"]) if "weights" in field.meta else None,
                     }
                 )

@@ -27,12 +27,12 @@ and [research boundary](docs/research_boundary.md).
 The [research extension results](docs/research_results.md) report five
 additional shift regimes, latent-loss diagnostics, a frozen sampler gate,
 training-only AIS bandwidth selection, AIS policy ablations and a small-grid
-transport comparison. The [protocol](docs/preregistration.md) was committed
-before the new runs. Neither candidate sampler is adopted. The proposed
+transport comparison. The [protocol](docs/preregistration.md) precedes the outcome commits in the preserved local history;
+there is no external preregistration timestamp. Neither candidate sampler is adopted. The proposed
 multi-week AIS study remains [blocked by archive access](docs/data_access.md).
 
 <!-- extension-summary:start -->
-On the reused AIS day, training-selected historical KDE averages 84.78% detection versus 82.55% for training-selected stacking. This weakens the forecasting claim on this sample. The geometry-aware transport plan reduces mean future detection in 6/6 tested regimes despite improving its own worst-case objective. Both sampler candidates fail their frozen eligibility gate. No experimental method or bandwidth setting is adopted.
+C1 gains against pooled history do not establish superiority to individual components; the full paired comparisons include component wins. On the reused AIS day, training-selected historical KDE averages 84.78% detection versus 82.55% for training-selected stacking. Stacking exceeds history at 2/4 origins; the mean gap is driven by origin 7. The geometry-aware transport plan reduces mean future detection in 6/6 tested regimes under the fixed calibration rule, which can be driven by pooled-history backtests. This does not isolate the effect of geometry. Both sampler candidates fail their frozen eligibility gate. No experimental method or bandwidth setting is adopted.
 <!-- extension-summary:end -->
 
 Reproduce the extension with `python scripts/reproduce_extensions.py --workers 8`.
@@ -143,7 +143,7 @@ paired difference from historical KDE rather than bootstrap intervals.
 The default estimator comparison does not settle history versus forecast.
 
 <!-- ais-sensitivity:start -->
-At the default bandwidth, historical LGCP leads the KDE planners by 7.5 to 8.6 percentage points. At multiplier 0.25, historical KDE detects 84.8%, stacking 85.0%, and LGCP 85.2%; recent epochs remain 2.4 points behind LGCP. This is estimator-resolution sensitivity, not evidence selecting a new setting or settling history versus forecast.
+At the default bandwidth, historical LGCP leads the KDE planners by 7.5 to 8.6 percentage points. At multiplier 0.25, historical KDE detects 84.8%, stacking 85.0%, and LGCP 85.2%; that stacking number rescales final fits only, with default-bandwidth backtests. Rescaling every nested prefix in C4 gives stacking 82.5% on this reused day. recent epochs remain 2.4 points behind LGCP. This is estimator-resolution sensitivity, not evidence selecting a new setting or settling history versus forecast.
 <!-- ais-sensitivity:end -->
 
 The bandwidth probe was computed after viewing the test epochs. It is
@@ -298,7 +298,7 @@ The tests include independent numerical comparisons:
   when Octave is installed.
 
 Run `python scripts/check.py --full` for statistical tests and available
-Octave parity. [Recorded local validation](docs/validation.md) distinguishes
+Octave parity. [Current validation and external audit](docs/audit_followup.md) distinguishes
 completed checks from hosted CI, which runs after a push.
 
 [Part A audit corrections and complete validation record](docs/part_a_review.md).

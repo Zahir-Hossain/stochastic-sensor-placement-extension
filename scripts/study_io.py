@@ -46,6 +46,12 @@ def verify_study(folder: Path, meta: dict) -> None:
         assert hashlib.sha256(Path(name).read_bytes()).hexdigest() == digest, f"{folder}: {name} fingerprint"
     runs = pd.read_csv(folder / "runs.csv")
     config = meta["config"]
+    if config.get("study_id") in ("C3", "C4", "C5", "C6"):
+        assert {"weight_fit", "weight_fit_message"}.issubset(runs.columns), "missing fit provenance"
+        failed = runs.weight_fit.eq("fallback_pseudo_bma")
+        assert runs.loc[failed, "weight_fit_message"].astype("string").fillna("").str.len().gt(0).all(), (
+            "missing solver failure reason"
+        )
     for name, digest in config.get("input_sha256", {}).items():
         assert hashlib.sha256(Path(name).read_bytes()).hexdigest() == digest, f"{folder}: input {name}"
     expected = summarise_study(runs, config)

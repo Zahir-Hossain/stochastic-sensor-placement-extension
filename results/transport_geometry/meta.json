@@ -1,7 +1,7 @@
 {
   "study_kind": "preregistered_research",
-  "source_sha256": "e8ff34cb65c4ebf7cda4cc0407623218abd24dbf6e99054a4f168ae87ca5ab4d",
-  "git_commit": "a35a781",
+  "source_sha256": "9012cb66318e67d58446a3a0ecb25267618dd3493cd7a26df0a8a7ea983bd9f7",
+  "git_commit": "9510832-dirty",
   "config": {
     "scenarios": [
       "stationary",
@@ -59,10 +59,10 @@
     "pyyaml": "6.0.3"
   },
   "file_sha256": {
-    "scripts/transport_study.py": "b230e936593ef017e743a899cf5d83a7d3fa4c876471050657ea490d9a4e13d6",
+    "scripts/transport_study.py": "6835c1bef6a3e2980d626c662dc7f8cdcffa76cd358feec8896bab3043a69c92",
     "scripts/transport_objective.py": "ff273667b92c8d0922c773f089d75330b005812a0262df0afc2bd7e3460e13b9",
     "configs/research/transport_study.yaml": "31ee73dba454871daa2abf14e57512e7833ef16a1a5f8abfed07a36eaa045662",
-    "scripts/study_io.py": "dd04130e6f70da5cca5abad883d05dc473fe418bc547c3f0acfaab35fb56630b",
+    "scripts/study_io.py": "e22682629fb03dd4dada4808bb8eff8a7f3866fee1777645fe7de67089f8d8a7",
     "docs/preregistration.md": "64c4fde637989c78785a7d821ab5e2b8e6cae3c99c8e1efd00d8a7645888c948"
   }
 }

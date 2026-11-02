@@ -1,0 +1,6 @@
+{
+  "reference_solver": "POT network simplex emd2",
+  "version": "0.9.7.post1",
+  "reference_value": 1.0627953272459567,
+  "description": "Independent concentrated-mass fixture objective; test uses this frozen scalar without a POT runtime dependency."
+}

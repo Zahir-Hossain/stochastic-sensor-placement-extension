@@ -1,7 +1,7 @@
 {
   "study_kind": "preregistered_research",
-  "source_sha256": "e8ff34cb65c4ebf7cda4cc0407623218abd24dbf6e99054a4f168ae87ca5ab4d",
-  "git_commit": "6cb89f4",
+  "source_sha256": "9012cb66318e67d58446a3a0ecb25267618dd3493cd7a26df0a8a7ea983bd9f7",
+  "git_commit": "9510832-dirty",
   "config": {
     "origins": [
       4,
@@ -53,9 +53,9 @@
     "pyyaml": "6.0.3"
   },
   "file_sha256": {
-    "scripts/ais_research.py": "55ddd8776a0d9fc7e1424f4c7c44a7895b5ec85205c595d37c6ba2d089759359",
+    "scripts/ais_research.py": "a444b91694b1f9c06e4697ca9fbd292a391e9fcee373fce61108ed8ac9739ef1",
     "configs/research/ais_policy_ablation.yaml": "8fb9f29f58b3aa11605b970dbbd18e34506df41f17dda25b9976e4b6fd035295",
-    "scripts/study_io.py": "dd04130e6f70da5cca5abad883d05dc473fe418bc547c3f0acfaab35fb56630b",
+    "scripts/study_io.py": "e22682629fb03dd4dada4808bb8eff8a7f3866fee1777645fe7de67089f8d8a7",
     "docs/preregistration.md": "64c4fde637989c78785a7d821ab5e2b8e6cae3c99c8e1efd00d8a7645888c948"
   }
 }

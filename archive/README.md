@@ -25,3 +25,23 @@ self-referential archive. No history was rewritten.
 `history.json` records every part's size and SHA-256, plus the complete
 bundle digest. Parts keep each connected GitHub upload below its 16 MiB
 request limit. Reassembly verifies every digest before importing history.
+
+When independently hashing ZIP contents, use Git blob hashing without
+filters (`git hash-object --no-filters`). The preserved legacy MATLAB file
+has CRLF bytes; `git add` may normalize them through `.gitattributes` and
+produce a different tree. Do not renormalize or modify the legacy file.
+
+## Audit follow-up history
+
+`audit-followup.bundle` preserves the subsequent local audit-fix commits
+through the final result/report commit. It is incremental and requires
+base snapshot `2c5fe28f46f0b8e748784680f5fcc1517edcb92a`, already present
+in a normal clone of the published review branch. Its SHA-256 is recorded
+in `audit-followup.sha256`. Import without changing the working branch:
+
+```sh
+git bundle verify archive/audit-followup.bundle
+git fetch archive/audit-followup.bundle HEAD:refs/remotes/review-history/audit-followup
+```
+
+The final archive/documentation commits are outside this bundle to avoid self-reference.

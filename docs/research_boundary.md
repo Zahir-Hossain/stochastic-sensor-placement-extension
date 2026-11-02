@@ -69,3 +69,14 @@ See the [generated penalty and coverage analysis](tables/tv_scope.md).
 
 The unchanged MATLAB prototype and its original figures remain in
 `legacy/`; `v0.1.0` marks the original Git version.
+
+## Transport and coverage attribution
+
+Wasserstein distributionally robust optimization and its dual reformulation
+are established: [Gao and Kleywegt](https://doi.org/10.1287/moor.2022.1275)
+and [Mohajerin Esfahani and Kuhn](https://doi.org/10.1007/s10107-017-1172-1).
+Related [distributionally robust coverage control](https://doi.org/10.1109/CDC49753.2023.10384225)
+also predates this study. The exploratory line-space comparison is not a
+new general DRO theorem or an exhaustive comparison with this literature.
+Its negative result is conditional on the fixed calibration prefixes,
+including a first prefix that returns pooled history.

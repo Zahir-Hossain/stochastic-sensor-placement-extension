@@ -19,7 +19,11 @@ from stochplace.experiment import _dependency_versions, _git_commit, _source_has
 
 SCALES = (0.25, 0.5, 1.0, 2.0, 3.0)
 STRATEGIES = ("pooled", "recent", "stacked", "lgcp", "hindsight", "fence")
-DISCLOSURE = "Post hoc sensitivity computed after viewing the test epochs; not used to select a bandwidth."
+DISCLOSURE = (
+    "Post hoc sensitivity computed after viewing the test epochs; not used to select a bandwidth. "
+    "Only final component fits are rescaled; stacking weights retain default-bandwidth backtests. "
+    "This differs from the nested-prefix bandwidth reanalysis in C4."
+)
 
 
 def summarise_sensitivity(runs: pd.DataFrame) -> pd.DataFrame:
@@ -54,11 +58,20 @@ def render(results: Path, tables: Path, paper: Path, readme: Path | None = None)
     default = wide.loc[1.0]
     gaps = default.lgcp - default[["pooled", "recent", "stacked"]]
     fine = wide.loc[0.25]
+    nested_path = results / "ais_training_bandwidth" / "runs.csv"
+    nested = pd.read_csv(nested_path) if nested_path.exists() else pd.DataFrame()
+    nested_mean = (
+        float(nested.loc[nested.method == "stacked", "detection_rate"].mean() * 100)
+        if len(nested)
+        else float("nan")
+    )
     statement = (
         f"At the default bandwidth, historical LGCP leads the KDE planners by "
         f"{gaps.min():.1f} to {gaps.max():.1f} percentage points. "
         f"At multiplier 0.25, historical KDE detects {fine.pooled:.1f}%, "
         f"stacking {fine.stacked:.1f}%, and LGCP {fine.lgcp:.1f}%; "
+        "that stacking number rescales final fits only, with default-bandwidth backtests. "
+        f"Rescaling every nested prefix in C4 gives stacking {nested_mean:.1f}% on this reused day. "
         f"recent epochs remain {fine.lgcp - fine.recent:.1f} points behind LGCP. "
         "This is estimator-resolution sensitivity, not evidence selecting a new setting "
         "or settling history versus forecast.\n"
@@ -80,6 +93,7 @@ def render(results: Path, tables: Path, paper: Path, readme: Path | None = None)
         ("aisFineStacked", fine.stacked),
         ("aisFineLgcp", fine.lgcp),
         ("aisFineRecentGap", fine.lgcp - fine.recent),
+        ("aisNestedStacked", nested_mean),
     ):
         macros.append(f"\\newcommand{{\\{name}}}{{{value:.1f}}}")
     (paper / "ais_sensitivity_numbers.tex").write_text("\n".join(macros) + "\n")
@@ -147,7 +161,7 @@ def main() -> None:
             "disclosure": DISCLOSURE,
             "git_commit": _git_commit(),
             "dependencies": _dependency_versions(),
-            "bandwidth_scope": "multiply both bandwidths returned by stochplace.ais._bandwidth; other fitting unchanged",
+            "bandwidth_scope": "rescale final fits via stochplace.ais._bandwidth; stacking backtests retain default bandwidths; C4 rescales every nested prefix",
         }
         (out / "meta.json").write_text(json.dumps(meta, indent=2, default=str) + "\n")
     render(args.results, args.tables, args.paper, args.readme)

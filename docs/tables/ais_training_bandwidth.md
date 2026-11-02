@@ -14,3 +14,12 @@
 | 7 | stacked | 0.25 | 77.23% | +0.96 |
 
 Every origin is shown. Scale selection uses training targets only. This reuses the already viewed one-day sample and is exploratory; overlapping origins are not independent population replicates.
+
+12/12 choices select 0.25, the lower edge of the frozen grid; the grid does not bracket an interior optimum. It is not extended on this reused day. Stacking exceeds pooled history at 2/4 origins; its largest deficit, at origin 7, drives the mean comparison.
+
+| Origin | Training-selected stacking minus training-selected pooled, pp |
+|---:|---:|
+| 4 | +0.19 |
+| 5 | -0.17 |
+| 6 | +6.04 |
+| 7 | -15.01 |

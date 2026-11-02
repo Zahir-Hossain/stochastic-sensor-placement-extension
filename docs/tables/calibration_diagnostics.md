@@ -44,3 +44,4 @@
 These are empirical ranks and coverage of latent expected missed mass on the planning grid, not the PIT of realised Poisson counts.
 Only expected-objective plans are shown. The complete sweep diagnostics are in `results/calibration_diagnostics.csv`.
 No nominal coverage claim or sampler adoption follows from this table alone.
+The component sampler and component forecasters reuse fixed Monte Carlo streams across history seeds. These are conditional diagnostics with common random numbers, not 40 independent sampler-noise realizations. History and scenario seeds still vary.

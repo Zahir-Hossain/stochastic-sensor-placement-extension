@@ -1,4 +1,14 @@
-# Validation record for revision 2.1
+# Current validation
+
+The current record is [audit_followup.md](audit_followup.md). It separates
+local checks, the external Claude audit, and hosted CI on an explicit commit.
+Initial Part A/B/C records are historical checkpoints.
+
+## Archived revision 2.1 validation
+
+The following record predates the corrections and research extension; its
+118-test and nine-result counts are historical, not current.
+
 
 The reference run used Linux and Python 3.12.14. An isolated environment was
 installed from `requirements/reproduce-py312.txt`, then the project was

@@ -1,0 +1,6 @@
+scenarios: [stationary]
+seeds: 1
+grid: [20, 12]
+evaluation_grid: [120, 64]
+candidate_spacing: 5.0
+calibration_quantile: 0.9

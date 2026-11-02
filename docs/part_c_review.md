@@ -1,5 +1,8 @@
 # Part C validation and remaining dependencies
 
+> Archived validation checkpoint as of `5b1d3e9`. Current validation and
+> external audit resolution are in [audit_followup.md](audit_followup.md).
+
 C1-C6 are implemented and reproduced. The preregistration and candidate
 laws were committed before the new outcomes. All original configurations,
 seeds and defaults remain intact. Every one of the nine original CSV

@@ -1,7 +1,7 @@
 {
   "study_kind": "preregistered_research",
-  "source_sha256": "e8ff34cb65c4ebf7cda4cc0407623218abd24dbf6e99054a4f168ae87ca5ab4d",
-  "git_commit": "086f4c3",
+  "source_sha256": "9012cb66318e67d58446a3a0ecb25267618dd3493cd7a26df0a8a7ea983bd9f7",
+  "git_commit": "9510832-dirty",
   "config": {
     "scenarios": [
       "accelerating",
@@ -38,11 +38,11 @@
     ],
     "expected_n": 600,
     "input_sha256": {
-      "results/holdout_accelerating/runs.csv": "170a398efca1d543b74665de1d92b60aac2eb95ab363654193de57198b9146ef",
-      "results/holdout_rotating_quadratic/runs.csv": "226dd772f9aa2f3b129a25d55bc6738c2c2040b90bf58b53268b4560214e2478",
-      "results/holdout_random_walk/runs.csv": "241f62b53b7d18a09b1f7555bf7abcebbd9ba62b3f537a71ec47447a47af5c10",
-      "results/holdout_random_switch/runs.csv": "2ab8f138be69c625c8194f275e465b37aac26b835586d49d51155882be811639",
-      "results/holdout_lane_split/runs.csv": "eff322e0cd4bf1fa1fdb0816ed671d962b72cf970e4ef3daa0b909ee3cdf7e8e"
+      "results/holdout_accelerating/runs.csv": "f85c88d5053ef38ce1df45634002f4a34bd2275bd8fbd95af78cd6de20b9a19e",
+      "results/holdout_rotating_quadratic/runs.csv": "50c8482f5dc82df76ade8ff4d8b805273b9e0089981b82b3fc7f8826b97670d8",
+      "results/holdout_random_walk/runs.csv": "644a03df46b3a6b8b5e0d3a1badf11bee8202977d7444ee0179fe1975db1e4ed",
+      "results/holdout_random_switch/runs.csv": "b00c43628009752b0d9b7e0d21336cdf0c5dff9daa59cf11e3be96a72b0e596f",
+      "results/holdout_lane_split/runs.csv": "676ac8dc9293c80ab495ca264dee735b4fac442c6e21dd5a66b8fdef7e1f421b"
     }
   },
   "dependencies": {
@@ -53,10 +53,10 @@
     "pyyaml": "6.0.3"
   },
   "file_sha256": {
-    "scripts/sampler_study.py": "166e8da2bbef48468c7c68d5877bee28d216387a155a21b55ad80fcb348d84e3",
-    "scripts/research_samplers.py": "64288050011dad7fce0e19c879be885e9dc5ae4ddd8e41b827f0a9fdfb4002ec",
+    "scripts/sampler_study.py": "e0229cb4dbe2d5c679b0045fde14d05935a7fddb14c9c4793ede4a9cba379bea",
+    "scripts/research_samplers.py": "be35b6e7075e5dd103e8caba4a1257fd9fe3c14b0d9057b1d2ad90035bc72538",
     "configs/research/sampler_candidates.yaml": "c35b274fd984cb14112067db76d592aec2d1b6eac0aa680312e3027083d4d1b1",
-    "scripts/study_io.py": "dd04130e6f70da5cca5abad883d05dc473fe418bc547c3f0acfaab35fb56630b",
+    "scripts/study_io.py": "e22682629fb03dd4dada4808bb8eff8a7f3866fee1777645fe7de67089f8d8a7",
     "docs/preregistration.md": "64c4fde637989c78785a7d821ab5e2b8e6cae3c99c8e1efd00d8a7645888c948"
   }
 }

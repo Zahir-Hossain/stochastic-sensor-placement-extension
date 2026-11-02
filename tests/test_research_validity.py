@@ -218,13 +218,19 @@ def test_robustness_study_writes_honest_certificates(tmp_path):
     assert len(summary) == 8
 
 
-@pytest.mark.parametrize("label", ["stacked", "pseudo_bma", "mixture"])
+@pytest.mark.parametrize("label", ["stacked", "pseudo_bma", "mixture", "drift_u", "trend"])
 @pytest.mark.parametrize("objective", ["void", "cvar"])
 def test_uncalibrated_combiner_objectives_warn_without_refusing(small_grid, label, objective):
     density = np.ones(small_grid.shape)
     samples = None if label == "mixture" else np.stack([density, 2 * density])
     field = IntensityField(small_grid, density, samples=samples, label=label)
-    message = "single mean field" if label == "mixture" else "not been validated for calibration"
+    message = (
+        "single mean field"
+        if label == "mixture"
+        else "not been validated for calibration"
+        if label in ("stacked", "pseudo_bma")
+        else "not been validated by this package"
+    )
     with pytest.warns(UserWarning, match=message):
         problem = Problem(field, GaussianSensor(), objective)
     assert np.isfinite(problem.value(np.array([[0.0, 0.0]])))

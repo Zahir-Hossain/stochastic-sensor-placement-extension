@@ -1,0 +1,7 @@
+{
+  "review_url": "https://claude.ai/chat/a65f04f3-6e02-4551-9ecc-28115bc0beb0",
+  "reviewed_commit": "2c5fe28f46f0b8e748784680f5fcc1517edcb92a",
+  "reviewed_tree": "05188f0bea03231f4fa1df314842725160b3b369",
+  "capture": "Rendered Claude report DOM text; no unrelated chat/sidebar text included",
+  "sha256": "731e9e099ee42cec61f73740d50ce42bf475dfe9dc6f1b263bbb9c3598d65f7f"
+}

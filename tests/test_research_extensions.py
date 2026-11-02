@@ -1,8 +1,10 @@
 """Checks of proposed research machinery, independent of performance outcomes."""
 
+import json
 from pathlib import Path
 
 import numpy as np
+import pandas as pd
 import pytest
 
 from stochplace import make_scenario
@@ -152,3 +154,43 @@ def test_concentrated_transport_masses_remain_feasible():
     value = transport_distance(first, second, cost)
     independent_coupling = first[:, None] * second[None, :]
     assert 0 <= value <= float(np.sum(independent_coupling * cost)) + 1e-9
+    reference = json.loads(
+        (Path(__file__).parent / "fixtures" / "concentrated_transport_reference.json").read_text()
+    )
+    assert value == pytest.approx(reference["reference_value"], abs=1e-9)
+
+
+@pytest.mark.parametrize(
+    "status,missing_reason", [("intensity_stacking", False), ("fallback_pseudo_bma", True)]
+)
+def test_fit_provenance_handles_empty_csv_message_column(tmp_path, status, missing_reason):
+    from scripts.study_io import verify_study
+
+    runs = pd.DataFrame(
+        {
+            "origin": [4],
+            "method": ["stacked"],
+            "detection_rate": [0.5],
+            "weight_fit": [status],
+            "weight_fit_message": [""],
+        }
+    )
+    runs.to_csv(tmp_path / "runs.csv", index=False)
+    pd.DataFrame({"method": ["stacked"], "detection_rate": [0.5], "n": [1]}).to_csv(
+        tmp_path / "summary.csv", index=False
+    )
+    meta = {
+        "file_sha256": {},
+        "config": {
+            "study_id": "C4",
+            "group_keys": ["method"],
+            "unique_keys": ["origin", "method"],
+            "metrics": ["detection_rate"],
+            "expected_n": 1,
+        },
+    }
+    if missing_reason:
+        with pytest.raises(AssertionError, match="failure reason"):
+            verify_study(tmp_path, meta)
+    else:
+        verify_study(tmp_path, meta)

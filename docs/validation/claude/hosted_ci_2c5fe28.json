@@ -1,0 +1,53 @@
+{
+  "run": {
+    "id": 41368309735,
+    "head_sha": "2c5fe28f46f0b8e748784680f5fcc1517edcb92a",
+    "event": "pull_request",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/actions/runs/41368309735",
+    "run_attempt": 1
+  },
+  "job_logs": [
+    {
+      "job_id": 125033125735,
+      "log_sha256": "383d4c54090afb7898f712b6c437d97a2e574ac9d212fb5cfd10534a26206810",
+      "bytes": 104241
+    },
+    {
+      "job_id": 125033125959,
+      "log_sha256": "ee4b0ef03c4057e40b3b256a45c7cef58bcf4c7926d28c228b97547312973929",
+      "bytes": 26521
+    },
+    {
+      "job_id": 125033125973,
+      "log_sha256": "0e3053fa2486f750007e6e5b85fed2af919ed70718a0b5559fc3f9eee8a14ae6",
+      "bytes": 27483
+    },
+    {
+      "job_id": 125033126048,
+      "log_sha256": "c5065faee31ad9662597094a0a8e87f734fa34e6f96b7f00205d21762052c8e2",
+      "bytes": 32092
+    },
+    {
+      "job_id": 125033126106,
+      "log_sha256": "526280d1d6dcef380691951a9cf6ef2aad0675bc9773040b8f5fd238b0780636",
+      "bytes": 32177
+    },
+    {
+      "job_id": 125033126121,
+      "log_sha256": "2dc08a6ffc9b7c5fddc1c9b0f13271dc105d01bad06a58a804047a7eb2698172",
+      "bytes": 29859
+    },
+    {
+      "job_id": 125033126147,
+      "log_sha256": "9a53c5af3428abfccb4b51009d35d793016d89c10af8de3a4895091703798e2f",
+      "bytes": 26522
+    },
+    {
+      "job_id": 125033126291,
+      "log_sha256": "6f954641e30164b53bed29203b19d6509cbadac45ba8d30196e95452862570ff",
+      "bytes": 26526
+    }
+  ]
+}

@@ -1,22 +1,16 @@
-# Forecast-aware placement with corrected validation and explicit robustness
+# Forecast-risk corrections and audit follow-up
 
-The earlier rebuild reused future-informed bandwidths inside historical
-backtests, described pseudo-BMA as stacking and rounded CVaR tails to whole
-samples. This revision corrects those behaviours, splits AIS observations
-at epoch boundaries before fitting lines, and adds seam-aware drift handling.
+Four original defects are corrected, C1-C6 outcomes are retained, and the
+external Claude audit has been completed on snapshot 2c5fe28. The follow-up
+adds solver-fit provenance, requires the shared AIS origin, broadens sample
+calibration warnings, and corrects reporting scope.
 
-The project now separates intensity stacking and pseudo-BMA, includes a
-finite-grid TV ambiguity objective with an exact inner adversary, and
-reports reversal stress tests alongside successful forecasting cases.
-All studies, figures and the report are regenerated. VS Code tasks, an
-isolated setup, pinned reference dependencies and an artifact verifier
-make the repository runnable and reviewable.
+No forecast, placement, calibration rule, seed or default is changed. Both
+sampler candidates remain unadopted. The AIS probe's final-fit-only scope,
+losses to individual components, boundary bandwidth selection, per-origin
+variation, repeated plans and calibration-prefix limitations are explicit.
 
-Validation: 118 local tests passed; the Octave parity test was skipped
-because Octave is unavailable locally. Ruff, formatting and Mypy pass.
-All nine result sets match the source fingerprint and their recomputed
-checks. The executed tutorial and compiled report are included.
-
-The CI workflow still needs to run on GitHub. The one-day AIS study is a
-demonstration, and the TV certificate is conditional on its finite-grid
-ambiguity set; neither supports an operational deployment claim.
+See docs/audit_followup.md for every finding and its resolution, numerical
+comparisons, current checks and hosted CI evidence. The 118-test/nine-result
+record belongs to the historical revision. C7 remains blocked by archive
+access. Nothing in this document authorizes merging.

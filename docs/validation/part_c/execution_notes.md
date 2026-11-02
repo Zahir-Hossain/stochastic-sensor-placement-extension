@@ -19,3 +19,13 @@ initial failure log is retained.
 The original report figure population is explicitly scoped to its ten
 study folders to avoid mixing partially written research folders.
 Scientific comparison tolerance remains absolute 1e-9, relative zero.
+
+## Later audit clarification
+
+Before the first C1/C3 outcome run, commit a98aaad corrected the sampler
+runner to construct the sensor from the frozen config (r=1.0), instead of
+GaussianSensor() with default r=1.5. No frozen parameter changed. This
+implementation defect was bundled under a disclosure-labelled commit and
+was omitted from the initial execution notes; this paragraph records that
+omission after the external audit. Local commit order supports the stated
+sequence, but there was no external preregistration timestamp.

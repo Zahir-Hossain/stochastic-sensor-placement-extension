@@ -1,0 +1,249 @@
+Independent audit: stochplace research snapshot 2c5fe28
+
+Snapshot: PR #1 head 2c5fe28f46f0b8e748784680f5fcc1517edcb92a, root tree 05188f0bea03231f4fa1df314842725160b3b369. Audit date 2026-11-02. This audit does not rely on the earlier Claude audit. It is not approval to merge or publish, and passing tests are not evidence of publication readiness or calibration.
+
+1. Bottom line
+
+No implementation defect that changes any reported number was established. Every numerical claim I could regenerate from source reproduced exactly, and the raw-to-summary chain, the original-summary comparisons and the generated tables all check out. The two confirmed defects are a missing record of solver status in four runners (no fallback actually occurred) and a latent default in an unused code path.
+
+The real problems are in interpretation and disclosure:
+
+
+The report's main text says stacking reaches 85.0% at bandwidth multiplier 0.25 and "approaches LGCP". That figure comes from a probe that rescaled only the final fit while keeping stacking weights learned at the default bandwidth. With every nested prefix rescaled (the C4 rule, same 0.25 scale at every origin), stacking gets 82.5%, and at origin 7 it gets 77.2% instead of 92.1%.
+C1 reports only stacked versus pooled. In 3 of 5 regimes, a fixed single component (trend or recent) beats stacking with a paired interval that excludes zero, by up to 6.8 pp.
+In C5, the transport and TV radii are set in 20/20 seeds (4 of 6 regimes) by the first backtest. At that prefix, stacking has no validation data and silently becomes pooled history. W1 radii run 3 to 13 times the realized forecast-to-truth distance, so the negative W1 result depends on this calibration rule.
+A stale validation record (118 tests, 9 result sets) is still what README and START_HERE point readers to.
+
+
+Merge blockers: none in the code. Two documentation items (D1, D6) are factual inaccuracies in shipped text. I would fix them before merge. That decision is yours.
+
+2. What I ran versus what I only inspected
+
+Ran myself (Python 3.12.3, the pinned requirements/reproduce-py312.txt, GNU Octave 8.4.0):
+
+
+Integrity. Reassembled the bundle with my own checksum code (all three parts and the full digest 023fbdb7… match), ran git bundle verify, and fetched it into a separate ref in a fresh repository. Computed the Git tree of the ZIP contents: 05188f0b…, but only when legacy/matlab/sensor_placement_simulation.m is hashed with --no-filters. A plain git add gives 83658e0d…, because .gitattributes (* text=auto) normalises that file's CRLF line endings. Fetched PR #1 from GitHub over anonymous git: head 2c5fe28, tree 05188f0b…, parent b67f3a5, which equals the current main. The only commit beyond the bundle adds the archive parts, restore_history.py, the review request and a restore hook in compare_summaries.py.
+Checks. pytest: 153 passed, 0 skipped, including the Octave parity test. Without Octave this gives the recorded 152 passed and 1 skipped. Ruff check, ruff format check and mypy all pass.
+Verifiers. verify_artifacts.py: all 19 result sets OK at source e8ff34cb65c4. compare_summaries.py --base 3b8548d: 9/9 PASS with max absolute difference 0. Against the pre-B checkpoint c9e6688 with --allow-robustness-change, only TV rows change (max 0.4169), the 360/360 TV ≥ nominal assertion holds, and the regenerated tv_before_after.md is byte-identical. In the raw runs, exactly 9 TV plans changed (the 9 nominal_stacked wins); no other strategy changed.
+Generators. research_extensions_summary.py reproduces research_results.md, every table, extension_results.tex, the README block and calibration_diagnostics.csv byte for byte. Rebuilding paper/main.pdf with latexmk gives 12 pages, and its extracted text is identical to the committed PDF.
+Regeneration from source, compared to committed raw rows (timing columns excluded):
+
+AIS case study, C4 and C6, complete. I obtained the public sample by partial Git clone of movingpandas-examples; its SHA-256 038c98af… matches the study metadata. Lines, detections, weights, validation.csv and summaries are identical.
+C5: all 480 rows identical.
+C1: seeds 0 to 3 for all five regimes (140 rows), identical.
+C3: seeds 0 to 3 for all five regimes (60 rows), identical.
+suite_drift: seeds 0 to 1 (34 rows), identical.
+Robustness: reversal and drift, seeds 0 to 1 (48 rows), identical.
+
+
+
+Independent checks, my own code:
+
+Transport dual. For all 240 C5 W1 plans (nominal and robust, every seed and regime), I checked the dual bound against my own primal LP. Dual minus primal is between 2.4e-14 and 2.3e-9, never negative. Certificates match 1 minus the primal value to 2.3e-9.
+Transport distance. W1 truth distances agree with POT's exact network simplex to 1.2e-9, and every certificate_applies flag agrees.
+Concentrated LP fixture. It reproduces the HiGHS default-presolve "infeasible" status. The fixed LP matches POT to 1.3e-10. Its smallest masses are subnormal (about 1e-316).
+Sampling law. I rebuilt the component picks of both combiners: each draw is exactly the chosen component's j-th draw, and the density is the weighted component mean.
+Fallback scan. All 120 robustness and 480 transport stacked fits: 0 solver fallbacks (120 prefix fits were insufficient_history).
+Recomputed tables. C1 to C6 tables, the gate and the C4 selection rule recomputed from raw CSVs.
+
+
+
+
+
+Inspected only, not independently verified:
+
+
+Hosted CI. The GitHub API is not reachable from this session, so I only read hosted_ci.json. It lists 8 successful jobs, but has no head_sha per run or job and no logs, so the record itself does not tie run 41368309735 to 2c5fe28.
+C7 archive status. My environment cannot reach aisdata.ais.dk (proxy 403), so I could not recheck the HTTP 503.
+Preregistration timing. Only the order of commits with timestamps the author set themselves.
+Not regenerated: drift_sweep, data_scarcity, the other three suites, approximation, the full AIS bandwidth sensitivity study, and C1/C3 seeds 4 to 39.
+
+
+3. Verdicts on checks 1 to 7
+
+
+Combiners and sampling law: confirmed. _combine_forecasts (src/stochplace/forecast.py:440-451) draws a component index with probability w and takes that component's j-th sample (or its mean field), which is a valid mixture law. Stacking weights are projected onto the simplex. Pseudo-BMA weights are a softmax. Neither is presented as posterior probabilities (paper section 4, grid.py:216-219 stated as conditional). Void and CVaR are labelled sensitivity analyses. The weighted-sum candidate is described as a separate proposal, and it fails the gate.
+AIS anchoring, fallback, TV starts: confirmed.
+
+Extraction, study grouping, the C4/C6 runners and the verifier all use the raw-report calendar midnight. A five-hour fixture covers widths that do not divide 24 hours.
+The failed-solver path uses the held-out score totals and stores weight_fit_message; this is tested with a forced failure.
+TV search refines from both the greedy start and the nominal start on the same TV objective and keeps the better plan (robustness.py:68-79). C5 does the same (transport_study.py:63-71).
+Caveats: D3 (four runners do not record status) and the latent _epochs default (D4).
+
+
+
+Original summaries, TV before/after, fingerprints, raw-to-summary chain: confirmed by running them (section 2). The counts 152 local tests and 19 result sets are confirmed. All eight CI jobs being green is not independently verified.
+C1 to C6 protocol conformance: confirmed for settings, seeds, RNG streams, regimes, the C3 candidate laws and gate thresholds, and the C5 quantile rule. Both candidates fail (my recomputation matches gate.json). The component sampler, which is the control, also fails every regime. Latent ranks are clearly separated from realized-count PIT. Caveats: D5 (timing evidence), P2 (the radius calibration confound).
+C4/C6: confirmed training-only, nested-prefix scaling through the patched module-level _bandwidth, a cache keyed on identical (method, scale, target), the selection rule, and minimum-origin and relative-floor policies as specified. The "original" policy reproduces ais_gothenburg exactly. Every origin and its weights are shown, and the reused day is disclosed. Caveats: D1, D7, D9.
+Transport: confirmed. The metric matches the preregistration (taking the max at the window corners is exact for affine functions; the min over signs handles the seam). The dual is conservative and tight on study instances. There are no certificate violations among the 384 applicable rows. The search is described as heuristic, and the negative result is preserved: W1 lowers future detection in all six regimes. Caveats: D8, D10, P2.
+C7 and preservation: confirmed. There is no C7 result folder, raw_data_sha256: null, and no multi-week figures anywhere. Original configs are unchanged since a008582. Dataclass defaults are unchanged (the only new field, vary_scenario_seed, defaults to False). The legacy MATLAB file is byte-identical to src/sensor_placement_simulation.m on the original main.
+
+
+4. Findings
+
+Severity scale: High (a wrong headline or result), Medium (a misleading claim or a material interpretive gap), Low (housekeeping or hardening).
+
+Confirmed defects
+
+D3 (Low). Solver fallback status is not recorded in four runners.
+
+
+Where: src/stochplace/robustness.py:92-108, scripts/transport_study.py:79-98, scripts/sampler_study.py:51-57 (and the prefix fits at research_samplers.py:43), and scripts/ais_research.py:207 (records weight_fit but not weight_fit_message).
+Evidence: B3's "preserve the reason" holds only for experiment.py:231-232. compare_summaries.py:120-124 counts fallbacks only where the column exists, so "0 fallbacks" says nothing about these studies. My scan found 0 fallbacks in 600 robustness and transport fits, so no result is affected.
+Fix: add weight_fit and weight_fit_message columns to these rows (new columns only), and have the counter print "not recorded" for studies that lack them.
+
+
+D4 (Low, latent). _epochs defaults to the wrong origin.
+
+
+Where: src/stochplace/ais.py:278.
+Evidence: when origin is None, it falls back to the midnight of the first line's start time, not the first raw report's midnight. With 5-hour epochs and reports that begin before midnight, that shifts the lattice relative to extraction; I demonstrated the index shift. Every caller in the repository passes origin, so no result is affected.
+Fix: make origin required, or raise when it is None.
+
+
+Disclosure issues
+
+D1 (Medium). The AIS "stacking 85.0% at 0.25" claim mixes bandwidths.
+
+
+Where: paper/main.tex:353-356, README.md:146, docs/tables/ais_bandwidth_sensitivity.md:8,14, and the generator at scripts/ais_bandwidth_sensitivity.py:57-65.
+Evidence: the probe patches stochplace.ais._bandwidth (line 122), which rescales only the final fit. Stacking's inner backtests call the unpatched stochplace.forecast._bandwidth. I reproduced both versions:
+OriginProbe (final fit only)Nested (every prefix scaled)7weights pooled .982, trend .018; detection 92.08%weights pooled .593, recent .080, drift_u .296, trend .031; detection 77.23%675.86%81.07%Mean of four origins85.0%82.5%
+
+For comparison, LGCP gets 85.2%. Pooled and recent are unaffected. The table's sentence "All other settings are unchanged" is technically true but hides the mix, and the C4 preregistration itself rules out frozen validation bandwidths. The main-text sentence "Historical and stacked KDE thus approach LGCP at finer resolution" is not supported for stacking.
+Fix: keep the probe. Add one sentence saying the probe rescales only the final component fits, so stacking weights come from default-bandwidth backtests, and that with every prefix rescaled stacking gets 82.5% (C4 appendix). Drop "and stacked" from the sentence.
+
+
+D2 (Medium). C1 shows stacking only against pooled.
+
+
+Where: scripts/research_extensions_summary.py:38-56, docs/research_results.md:9-15, paper/extension_results.tex (C1 table).
+Evidence: my paired bootstrap (20,000 resamples) from the committed runs:
+RegimeStacked minus a fixed component, pp [95% CI]Oracle gaplane_splitminus trend −6.83 [−7.31, −6.35]; minus recent −3.77 [−4.21, −3.33]14.45 pprandom_switchminus trend −1.82 [−3.14, −0.64]; minus recent −1.33 [−2.17, −0.55]13.81 pprandom_walkminus recent −0.49 [−1.04, −0.01]acceleratingminus drift_u −0.15rotating_quadraticminus drift_u −0.01
+
+The preregistered primary metric is stacked minus pooled, so this is not a protocol breach. But the protocol also says "report all results, including losses", and the full comparison sits only in summary.csv.
+Fix: generate one table from the existing runs showing every strategy against pooled and stacked against each component. No new runs are needed.
+
+
+D5 (Low to Medium). "Committed before outcomes" is supported only by local commit order.
+
+
+Where: README.md:30-31, docs/research_results.md:3, paper/extension_results.tex:3, docs/part_c_review.md:4.
+Evidence: in the restored history, protocol commit 229ef40 and the C1 to C5 freeze commits come before the outcome commits (results produced at 086f4c3, 6cb89f4, a35a781; committed in 5b1d3e9), and the frozen files are hashed in each result's metadata. But the timestamps are set by the author, nothing was pushed before the outcomes, and the protocol text was amended at the C3 freeze (6768301: RNG and floor details). Changes made after the freeze (a98aaad provenance and the sampler sensor model, which was r=1.5 by default and is now taken from the config's r=1.0; 086f4c3 config move; b3c9eaa LP options after a run that crashed without output) do not change any preregistered value. The a98aaad sensor fix sits in a commit labelled [disclosure] and is not mentioned in execution_notes.md.
+Fix: say "precedes in the local commit history; no external timestamp", and add the sensor fix to the execution notes.
+
+
+D6 (Medium for documentation accuracy). The validation record readers are pointed to is stale.
+
+
+Where: docs/validation.md:12,23, linked from README.md:301 and START_HERE.md:46; also docs/pull_request.md:15-20.
+Evidence: these say 118 passed, 9 result sets, and "CI still needs to run". The current record is docs/validation/part_c/.
+Fix: label these files as revision 2.1 history and point the links at validation/part_c/ and hosted_ci.json.
+
+
+D7 (Low). C4 selected the boundary of the frozen grid in every cell.
+
+
+Where: configs/research/ais_training_bandwidth.yaml:3, docs/research_results.md:51-66.
+Evidence: 12/12 (origin, method) cells chose 0.25, and the validation miss rate never decreases as the scale grows in all 12, so the grid did not bracket a minimum.
+Fix: state this. Do not extend the grid on this already viewed day.
+
+
+D8 (Low). Degenerate C5 intervals look precise.
+
+
+Where: docs/research_results.md:118, scripts/research_extensions_summary.py:182-195.
+Evidence: with 15 candidate locations (spacing 5), nominal plans take only 1 to 3 distinct configurations across 20 seeds in every regime. Reversal has 1 nominal plan and 1 W1 plan, which is why the interval is [−16.070, −16.070]. TV intervals of [0, 0] come from unchanged plans.
+Fix: report distinct plan counts and mark intervals of zero width as degenerate.
+
+
+D9 (Low). The C4 headline rests on one origin.
+
+
+Where: scripts/research_extensions_summary.py:202-211, which feeds docs/research_results.md:5 and the README.md block.
+Evidence: training-selected stacking minus pooled is +0.19, −0.17, +6.04 and −15.01 pp at origins 4 to 7. Origin 7 alone accounts for the 2.2 pp mean deficit; without it, stacking is ahead on average.
+Fix: add "stacking is ahead at 2 of 4 origins; the mean gap is driven by origin 7".
+
+
+D10 (Low). The primal/dual check is described more broadly than the test covers.
+
+
+Where: paper/extension_results.tex:106; the test is at tests/test_research_extensions.py:103-129.
+Evidence: the test uses 4 cells. My study-scale check supports the claim (section 2).
+Fix: either say "on unit fixtures" or add a test at study scale.
+
+
+D11 (Low). Common random numbers across replicates.
+
+
+Where: src/stochplace/forecast.py:441 (default_rng(1) for component picks) and lines 250 and 288 (default_rng(0) for drift_u and trend whenever they are called through FORECASTERS).
+Evidence: the sampler noise is shared across all seeds and backtest prefixes. Each forecast's law is still valid, but C2/C3 coverage across 40 seeds is not 40 independent Monte Carlo draws of the sampler.
+Fix: disclose. Optionally see P4.
+
+
+D12 (Low). The calibration warning covers only the combiners.
+
+
+Where: src/stochplace/objective.py:106.
+Evidence: drift_u and trend void/CVaR rows (paper Table 1) get no warning, although C2 shows poor latent coverage for them (for example, suite_drift drift_u has 0% coverage).
+Fix: warn for any field that carries samples. Behaviour stays the same.
+
+
+D13 (Low). Missing attribution for the transport ambiguity.
+
+
+Where: paper/refs.bib, paper appendix.
+Evidence: no Wasserstein DRO duality citation (Gao and Kleywegt, Mathematics of Operations Research 2023; Mohajerin Esfahani and Kuhn), and no prior work on DRO sensor placement or coverage (for example Boskos, Cortés and Martínez, CDC 2023; Zi et al., IEEE Sensors J. 2022). docs/transport_geometry.md does cite Gao and Kleywegt.
+Fix: add the citations.
+
+
+D14 (Low). The CI record cannot be tied to a commit.
+
+
+Where: hosted_ci.json, .github/workflows/ci.yml:72-80.
+Evidence: there is no head_sha or logs. CI does not run compare_summaries.py --base 3b8548d, the regeneration of the research tables, or any research runner. The ZIP tree also reproduces only with --no-filters on the CRLF MATLAB file.
+Fix: store head_sha and log digests. Add a job that runs the comparison and research_extensions_summary.py followed by git diff --exit-code. Note the CRLF point in archive/README.md.
+
+
+Proposed method changes (new preregistered work, not replacements)
+
+P1 (Low). Stacking fallback.
+
+
+Where: forecast.py:508-517.
+Proposal: when SLSQP fails, compare the held-out objective at the projected SLSQP iterate and at the pseudo-BMA weights, or retry with a second simplex solver, and record both. Exit mode 8 often stops near the optimum.
+
+
+P2 (Medium). C5 radius calibration confound.
+
+
+Where: scripts/transport_study.py:45-54.
+Evidence: in drift, lane_shift, reversal and seam_drift, the target 5 error sets the radius in 20/20 seeds. Its mean W1 error is 1.64, 4.98, 2.01 and 0.75, against roughly 0.15 to 0.79 at targets 6 and 7; TV shows the same pattern. Target 5 uses a prefix of 4 epochs, where stacking has no backtest and returns pooled (insufficient_history, 120/120). So the radius measures the error of pooled history, not of the 8-epoch stacked plan it protects. Median ratios of W1 radius to the realized truth distance: lane_shift 13.2, drift 6.4, seam_drift 4.2, stationary 3.0, emergence 1.05, reversal 0.97. A spot check on 3 seeds showed KDE observation noise is not the driver in drift or lane_shift (it matters in stationary).
+Consequence: "geometric structure alone did not improve these placements" goes beyond the evidence. Disclose now. Any change belongs in a new preregistered variant (for example, use only backtests where stacking fits weights). The C3 residual candidate has the same pooled factor at target 5.
+
+
+P3 (Low). Concentrated-mass test.
+
+
+Where: tests/test_research_extensions.py:147-154.
+Proposal: the test checks only the bound from the independent coupling. Assert agreement with an exact OT solver (I measured 1.3e-10).
+
+
+P4 (Low). Sampler RNG.
+
+
+Proposal: add an opt-in RNG for the component sampler seeded per replicate, and keep the current default.
+
+
+5. The four areas, kept separate
+
+
+Implementation correctness. Strong for what was asked. The sampling laws, chronological fitting, AIS anchoring, fallback path, TV and W1 starts, LP and dual, gate code and summary chain are all correct, and everything I regenerated was bit-identical. The only defects are D3 (recording) and D4 (latent).
+Experimental evidence. C1 is synthetic and supports "better than pooled history, not better than the best simple component". C4/C6 rest on one reused day: 4 overlapping origins, 19 to 54 test pieces each, and a scale at the edge of the grid. C5 is a small grid with 15 candidates, few distinct plans, and radii driven by a pooled fallback. None of this supports any claim about operational or population performance, and the repository mostly says so.
+Calibration. None is established. The control sampler and both candidates fail the frozen gate. The diagnostics measure latent expected loss on the planning grid, not realized-count PIT or the full predictive law, and they share common random numbers across seeds.
+Novelty. The repository makes no novelty claim, and the evidence does not support one. Most components are established methods. The transport ambiguity needs citations (D13). The specific line-space metric and Poisson intensity stacking for line processes may be new combinations, but I did not run a literature search thorough enough to say so.
+
+
+6. Merge recommendation
+
+No code blocker. Before merging I would fix D1 (main text and README AIS claim) and D6 (stale validation record that readers are pointed to). Both are text-only changes and need no reruns. I would also fix D2 and disclose P2, since they change how the C1 and C5 results should be read. Both can be done from existing runs. Nothing was merged, pushed or published during this audit.

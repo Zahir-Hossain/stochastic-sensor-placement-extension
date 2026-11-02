@@ -1,7 +1,7 @@
 {
   "experiment": "drift_sweep",
   "stochplace_version": "2.1.0",
-  "git_commit": "e6a18c2",
+  "git_commit": "7ca1f42",
   "config_sha256": "096ea114c7919f79",
   "config": {
     "name": "drift_sweep",
@@ -65,7 +65,7 @@
     "description": "How much does forecasting help as the traffic lane drifts faster? Single lane, drift speed swept from 0 (stationary) to 0.5 offset units per epoch, forecast horizons of 1 and 3 epochs.\n"
   },
   "n_replicates": 480,
-  "wall_time_s": 640.9,
+  "wall_time_s": 449.1,
   "python": "3.12.14",
   "numpy": "2.3.5",
   "dependencies": {
@@ -75,7 +75,7 @@
     "matplotlib": "3.10.8",
     "pyyaml": "6.0.3"
   },
-  "source_sha256": "e8ff34cb65c4ebf7cda4cc0407623218abd24dbf6e99054a4f168ae87ca5ab4d",
+  "source_sha256": "9012cb66318e67d58446a3a0ecb25267618dd3493cd7a26df0a8a7ea983bd9f7",
   "validation": "rolling_origin_training_prefix_only",
   "platform": "Linux-6.18.57-x86_64-with-glibc2.39"
 }

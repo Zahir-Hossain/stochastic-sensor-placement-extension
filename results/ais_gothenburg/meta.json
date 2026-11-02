@@ -52,12 +52,12 @@
     ],
     "n_random": 50
   },
-  "generated": "2026-11-02T05:35:10",
+  "generated": "2026-11-01T23:56:55",
   "preprocessing": "split at epoch boundaries, time gaps, exits and low-speed reports before line fitting",
   "estimand": "expected detection probability per straight passage piece",
   "data_sha256": "038c98af738e29cdac5d91a1829eb88a4b7cf94fedbf6f6cf8e04982bd65e4e3",
-  "source_sha256": "e8ff34cb65c4ebf7cda4cc0407623218abd24dbf6e99054a4f168ae87ca5ab4d",
-  "git_commit": "e6a18c2",
+  "source_sha256": "9012cb66318e67d58446a3a0ecb25267618dd3493cd7a26df0a8a7ea983bd9f7",
+  "git_commit": "7ca1f42",
   "dependencies": {
     "numpy": "2.3.5",
     "scipy": "1.17.0",

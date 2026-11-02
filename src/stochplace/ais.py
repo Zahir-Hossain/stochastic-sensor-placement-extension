@@ -272,11 +272,9 @@ class AISStudyConfig:
     n_random: int = 50
 
 
-def _epochs(
-    lines: pd.DataFrame, hours: float, origin: pd.Timestamp | None = None
-) -> list[tuple[FloatArray, FloatArray]]:
-    day0 = origin if origin is not None else pd.Timestamp(lines["start_time"].min()).normalize()
-    e = _epoch_ids(lines["t_mid"], hours, day0)
+def _epochs(lines: pd.DataFrame, hours: float, origin: pd.Timestamp) -> list[tuple[FloatArray, FloatArray]]:
+    """Group lines on the explicitly supplied raw-report epoch lattice."""
+    e = _epoch_ids(lines["t_mid"], hours, origin)
     n = int(e.max()) + 1
     return [(lines.loc[e == k, "alpha"].to_numpy(), lines.loc[e == k, "p"].to_numpy()) for k in range(n)]
 

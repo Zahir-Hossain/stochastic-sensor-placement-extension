@@ -29,7 +29,14 @@ def main() -> None:
         subprocess.run(command, env=env, check=True)
 
     if not args.skip_baseline:
-        run(sys.executable, "scripts/reproduce.py", "--workers", str(args.workers), "--in-place", "--paper")
+        run(
+            sys.executable,
+            "scripts/reproduce.py",
+            "--workers",
+            str(args.workers),
+            "--in-place",
+            "--defer-verification",
+        )
     run(sys.executable, "scripts/compare_summaries.py", "--base", baseline)
     run(
         sys.executable,
@@ -47,6 +54,7 @@ def main() -> None:
     run(sys.executable, "scripts/ais_research.py", "--mode", "policies")
     run(sys.executable, "scripts/transport_study.py", "--workers", str(args.workers))
     run(sys.executable, "scripts/research_extensions_summary.py")
+    run("latexmk", "-pdf", "-interaction=nonstopmode", "-halt-on-error", "-cd", "paper/main.tex")
     run(sys.executable, "scripts/verify_artifacts.py")
     run(sys.executable, "scripts/check.py", "--full")
     print("\nResearch reproduction complete. C7 remains blocked by raw archive access.", flush=True)

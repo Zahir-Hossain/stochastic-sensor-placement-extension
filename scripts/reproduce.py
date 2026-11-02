@@ -20,6 +20,11 @@ def main() -> int:
     parser.add_argument("--seeds", type=int)
     parser.add_argument("--skip-ais", action="store_true")
     parser.add_argument("--in-place", action="store_true")
+    parser.add_argument(
+        "--defer-verification",
+        action="store_true",
+        help="extension driver verifies all folders after the full regeneration",
+    )
     parser.add_argument("--paper", action="store_true", help="also compile the report with latexmk")
     args = parser.parse_args()
     if args.workers < 1 or (args.seeds is not None and args.seeds < 1):
@@ -150,7 +155,8 @@ def main() -> int:
             *(["--readme", str(root / "README.md")] if args.in_place else []),
         ]
     )
-    run([sys.executable, "scripts/verify_artifacts.py", "--results", str(results)])
+    if not args.defer_verification:
+        run([sys.executable, "scripts/verify_artifacts.py", "--results", str(results)])
     if args.paper:
         run(["latexmk", "-pdf", "-interaction=nonstopmode", "-halt-on-error", "main.tex"], cwd=paper)
     print(f"\nFinished. Outputs: {dest}")

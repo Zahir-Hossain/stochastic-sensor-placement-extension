@@ -40,6 +40,7 @@ Separate implementation validity, experimental evidence, calibration and
 novelty. Report strengths only when directly supported. Do not describe the
 project as publication-ready or calibrated merely because tests pass.
 
-External Claude review has not yet been completed. The sign-in flow was
-not completed in this session. Local checks and hosted CI are separate
-records and must not be represented as Claude approval.
+This was the request used for the completed external Claude audit of
+snapshot 2c5fe28. The captured audit and its limits are under
+`docs/validation/claude/`; resolutions are in `docs/audit_followup.md`.
+Local checks, hosted CI and external review remain separate evidence.

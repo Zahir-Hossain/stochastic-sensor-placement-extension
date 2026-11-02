@@ -41,10 +41,18 @@ def replicate(job):
     nominal = swap_refine(nominal_problem, candidates, greedy(nominal_problem, candidates, 4))
     alpha, p = grid.mesh()
     cost = line_cost(alpha[grid.mask], p[grid.mask], scenario.window)
-    tv_errors, transport_errors = [], []
+    tv_errors, transport_errors, backtests = [], [], []
     for target in (5, 6, 7):
         prefix = history[: target - 1]
         predicted = forecast(prefix, grid, 2, "stacked", config)
+        backtests.append(
+            {
+                "target": target,
+                "history_epochs": len(prefix),
+                "weight_fit": predicted.meta.get("weight_fit", "not_recorded"),
+                "weight_fit_message": predicted.meta.get("weight_fit_message", ""),
+            }
+        )
         observed = kde_intensity(*history[target], grid, bandwidth=fm._bandwidth(prefix, config))
         first = predicted.mass[grid.mask] / predicted.total()
         second = observed.mass[grid.mask] / observed.total()
@@ -87,6 +95,11 @@ def replicate(job):
                     "certificate_applies": applies,
                     "radius": bound_radius,
                     "calibration_errors": json.dumps(tv_errors if kind == "tv" else transport_errors),
+                    "calibration_backtests": json.dumps(backtests),
+                    "truth_distance": distances[kind],
+                    "weight_fit": field.meta.get("weight_fit", "not_recorded"),
+                    "weight_fit_message": field.meta.get("weight_fit_message", ""),
+                    "sensors_full": json.dumps(plan.sensors.tolist()),
                     "gain_vs_nominal_pp": 100
                     * (
                         score_on_truth(plan.sensors, true_fine, model).detection_rate

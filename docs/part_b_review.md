@@ -1,5 +1,8 @@
 # Part B validation
 
+> Archived validation checkpoint as of `3b8548d`. Current validation and
+> external audit resolution are in [audit_followup.md](audit_followup.md).
+
 All four confirmed defects are corrected in separate commits. The frozen
 pre-B checkpoint is recorded in `docs/part_b_baseline.json`.
 

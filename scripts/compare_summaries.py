@@ -61,7 +61,8 @@ def main() -> None:
         keys = [
             c
             for c in old
-            if c.startswith("param_") or c in ("scenario", "horizon", "radius", "scale", "strategy")
+            if c.startswith("param_")
+            or c in ("scenario", "horizon", "radius", "scale", "strategy", "method", "policy")
         ]
         old = old.set_index(keys).sort_index()
         new = new.set_index(keys).sort_index()
@@ -121,7 +122,20 @@ def main() -> None:
         runs = pd.read_csv(path)
         if "weight_fit" in runs:
             count = int(runs.weight_fit.eq("fallback_pseudo_bma").sum())
-            print(f"Weight-fit fallbacks {path.parent.name}: {count}")
+            print(f"Main-forecast fallback rows {path.parent.name}: {count}")
+        else:
+            print(f"Main-forecast fallback rows {path.parent.name}: not recorded")
+        for column in ("calibration_backtests", "residual_backtests"):
+            if column not in runs:
+                continue
+            prefix_fits = {}
+            for _, row in runs.iterrows():
+                for fit in json.loads(row[column]) if isinstance(row[column], str) else []:
+                    prefix_fits[(row.get("scenario"), row.get("seed"), fit["target"])] = fit
+            failures = sum(fit["weight_fit"] == "fallback_pseudo_bma" for fit in prefix_fits.values())
+            print(
+                f"Recorded calibration-prefix fits {path.parent.name}: {len(prefix_fits)}; fallbacks {failures}"
+            )
     print(f"All {len(paths)} saved CSV summaries passed the comparison policy (absolute tolerance 1e-9).")
 
 

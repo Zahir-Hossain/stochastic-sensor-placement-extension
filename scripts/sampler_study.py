@@ -52,6 +52,9 @@ def replicate(job: tuple[str, int]) -> list[dict]:
         row["sample_mean_relative_l1"] = float(
             np.abs(field.sample_mass.mean(axis=0) - field.mass).sum() / field.total()
         )
+        row["weight_fit"] = current.meta.get("weight_fit", "not_recorded")
+        row["weight_fit_message"] = current.meta.get("weight_fit_message", "")
+        row["residual_backtests"] = json.dumps(field.meta.get("residual_backtests", []))
         if method == "component":
             np.testing.assert_allclose(row["sample_rank"], saved.sample_rank, rtol=0, atol=1e-12)
         rows.append(row)
