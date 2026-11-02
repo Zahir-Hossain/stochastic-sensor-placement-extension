@@ -72,7 +72,7 @@ def render(results: Path, tables: Path, paper: Path, readme: Path | None = None)
         f"stacking {fine.stacked:.1f}%, and LGCP {fine.lgcp:.1f}%; "
         "that stacking number rescales final fits only, with default-bandwidth backtests. "
         f"Rescaling every nested prefix in C4 gives stacking {nested_mean:.1f}% on this reused day. "
-        f"recent epochs remain {fine.lgcp - fine.recent:.1f} points behind LGCP. "
+        f"Recent epochs remain {fine.lgcp - fine.recent:.1f} points behind LGCP. "
         "This is estimator-resolution sensitivity, not evidence selecting a new setting "
         "or settling history versus forecast.\n"
     )

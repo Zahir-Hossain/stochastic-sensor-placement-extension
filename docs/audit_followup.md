@@ -64,5 +64,6 @@ are hashes of decoded UTF-8 logs captured from the connector. Updated
 head CI is reported separately in the PR and delivery record.
 
 C7 remains an external-data dependency; no multi-week outcome or checksum
-is claimed. The draft PR has not been merged. Green tests and the external
+is claimed. When this record was written the PR had not been merged; it was
+merged as `308afae` on 2 November 2026. Green tests and the external
 audit establish neither calibrated uncertainty nor publication-level novelty.

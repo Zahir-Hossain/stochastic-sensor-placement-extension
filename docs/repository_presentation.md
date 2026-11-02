@@ -1,9 +1,9 @@
 # Repository presentation and publication
 
-The Python study is currently on `research-hardening` in
-[draft PR #1](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/pull/1).
-The default `main` branch still shows the original June MATLAB version.
-The following settings are proposals; they have not been applied.
+The Python study was merged into `main` through
+[PR #1](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/pull/1)
+on 2 November 2026 (merge commit `308afae`). The repository settings below
+are proposals; they have not been applied.
 
 ## Proposed About text
 
@@ -22,12 +22,22 @@ It shows a successful designed case next to reversal, component and AIS losses.
 
 ## Publication sequence
 
-1. Review the final diff and the CI results on the exact PR head.
-2. Decide whether to mark the draft ready and merge it into `main`.
-3. If merged, tag the actual merged commit and publish a release with the
-   report. Version 2.1 is a working report version; no release tag is claimed.
-4. Apply the About text/topics if desired. Renaming the repository to
-   `stochplace` is optional and does not improve the scientific evidence.
+1. Done: PR #1 was reviewed, passed all eight CI jobs on its exact head
+   `fffd5d0`, and was merged as `308afae`.
+2. Replace the About text, which still describes the June MATLAB toy, and
+   apply the topics above.
+3. Tag the June MATLAB version and the merged study, then publish a release
+   with `paper/main.pdf`:
+
+   ```bash
+   git tag v0.1.0 b67f3a5
+   git tag v2.1.0 308afae
+   git push origin v0.1.0 v2.1.0
+   ```
+
+   Until this is done, no version tag or release exists.
+4. Renaming the repository to `stochplace` is optional and does not improve
+   the scientific evidence.
 
 The existing bundles must remain until an alternative preserves the original
 baseline commits and a fresh clone passes the comparison commands. Deleting
