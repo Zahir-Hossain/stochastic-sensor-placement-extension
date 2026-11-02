@@ -194,3 +194,74 @@ def test_fit_provenance_handles_empty_csv_message_column(tmp_path, status, missi
             verify_study(tmp_path, meta)
     else:
         verify_study(tmp_path, meta)
+
+
+@pytest.mark.parametrize("radius", [0.3, 1.5])
+def test_transport_dual_matches_primal_lp_at_study_grid_size(radius):
+    from scipy import sparse
+    from scipy.optimize import linprog
+    from scripts.transport_objective import line_cost, transport_bound
+
+    from stochplace import GaussianSensor, Problem, RepGrid, make_scenario
+
+    scenario = make_scenario("drift", speed=0.3)
+    grid = RepGrid(scenario.window, 20, 12)
+    alpha, offsets = grid.mesh()
+    cost = line_cost(alpha[grid.mask], offsets[grid.mask], scenario.window)
+    n = len(cost)
+    rng = np.random.default_rng(11)
+    mass = rng.dirichlet(np.full(n, 0.3))
+    truth = scenario.truth(grid, 9)
+    sensors = np.array([[-5.0, 0.0], [0.0, 0.0], [5.0, 0.0], [0.0, 5.0]])
+    loss = Problem(truth, GaussianSensor(0.95, 1.0)).miss(sensors)
+    rows = sparse.kron(sparse.eye(n), np.ones((1, n)), format="csr")
+    primal = linprog(
+        -np.tile(loss, n),
+        A_eq=rows,
+        b_eq=mass,
+        A_ub=sparse.csr_matrix(cost.ravel()[None]),
+        b_ub=[radius],
+        bounds=(0, None),
+        method="highs",
+        options={
+            "presolve": False,
+            "primal_feasibility_tolerance": 1e-10,
+            "dual_feasibility_tolerance": 1e-10,
+        },
+    )
+    assert primal.success
+    bound = transport_bound(mass, loss, cost, radius)
+    assert bound >= -primal.fun - 1e-9
+    assert bound == pytest.approx(-primal.fun, abs=1e-7)
+
+
+def test_concentrated_transport_value_matches_an_independent_dual_lp():
+    from scipy import sparse
+    from scipy.optimize import linprog
+    from scripts.transport_objective import transport_distance
+
+    data = np.load(Path(__file__).parent / "fixtures" / "concentrated_transport.npz")
+    first, second, cost = data["first"], data["second"], data["cost"]
+    n = len(first)
+    # Kantorovich dual: maximise first.u + second.v subject to u_i + v_j <= cost_ij.
+    # Fixing v_0 = 0 removes the constant shift between u and v, which would make
+    # the dual unbounded when the two total masses differ in the last bit.
+    constraints = sparse.hstack(
+        [sparse.kron(sparse.eye(n), np.ones((n, 1))), sparse.kron(np.ones((n, 1)), sparse.eye(n))],
+        format="csr",
+    )
+    dual = linprog(
+        -np.r_[first, second],
+        A_ub=constraints,
+        b_ub=cost.ravel(),
+        bounds=[(None, None)] * n + [(0, 0)] + [(None, None)] * (n - 1),
+        method="highs",
+        # HiGHS presolve also misclassifies this dual (as unbounded) on these masses.
+        options={
+            "presolve": False,
+            "primal_feasibility_tolerance": 1e-10,
+            "dual_feasibility_tolerance": 1e-10,
+        },
+    )
+    assert dual.success
+    assert transport_distance(first, second, cost) == pytest.approx(-dual.fun, abs=1e-8)

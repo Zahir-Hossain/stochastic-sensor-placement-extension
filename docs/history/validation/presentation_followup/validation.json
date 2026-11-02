@@ -1,0 +1,62 @@
+{
+  "generated_utc": "2026-11-02T05:50:34.514001+00:00",
+  "python": "3.12.14",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.39",
+  "full": true,
+  "octave_available": false,
+  "checks": [
+    {
+      "command": [
+        "-m",
+        "ruff",
+        "check",
+        "src",
+        "tests",
+        "scripts",
+        "examples"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.06
+    },
+    {
+      "command": [
+        "-m",
+        "ruff",
+        "format",
+        "--check",
+        "src",
+        "tests",
+        "scripts",
+        "examples"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.05
+    },
+    {
+      "command": [
+        "-m",
+        "mypy"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.19
+    },
+    {
+      "command": [
+        "-m",
+        "pytest",
+        "--cov=stochplace",
+        "--cov-report=term-missing"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 30.41
+    },
+    {
+      "command": [
+        "examples/quickstart.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 2.97
+    }
+  ],
+  "passed": true
+}

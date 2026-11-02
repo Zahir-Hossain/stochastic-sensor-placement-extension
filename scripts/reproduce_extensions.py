@@ -22,7 +22,7 @@ def main() -> None:
     root = Path(__file__).resolve().parents[1]
     os.chdir(root)
     env = {**os.environ, "OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MPLBACKEND": "Agg"}
-    baseline = json.loads(Path("docs/part_c_baseline.json").read_text())["pre_c_commit"]
+    baseline = json.loads(Path("docs/history/part_c_baseline.json").read_text())["pre_c_commit"]
 
     def run(*command: str) -> None:
         print("\nRunning:", " ".join(command), flush=True)
@@ -54,6 +54,7 @@ def main() -> None:
     run(sys.executable, "scripts/ais_research.py", "--mode", "policies")
     run(sys.executable, "scripts/transport_study.py", "--workers", str(args.workers))
     run(sys.executable, "scripts/research_extensions_summary.py")
+    run(sys.executable, "scripts/presentation_summary.py")
     run("latexmk", "-pdf", "-interaction=nonstopmode", "-halt-on-error", "-cd", "paper/main.tex")
     run(sys.executable, "scripts/verify_artifacts.py")
     run(sys.executable, "scripts/check.py", "--full")

@@ -44,7 +44,7 @@ def ensure_baseline(base: str) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--base", default=json.loads(Path("docs/part_b_baseline.json").read_text())["pre_b_commit"]
+        "--base", default=json.loads(Path("docs/history/part_b_baseline.json").read_text())["pre_b_commit"]
     )
     parser.add_argument("--allow-robustness-change", action="store_true")
     parser.add_argument("--results", type=Path, default=Path("results"))

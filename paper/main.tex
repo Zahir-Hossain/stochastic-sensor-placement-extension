@@ -9,7 +9,7 @@
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage[colorlinks=true,linkcolor=MidnightBlue,citecolor=MidnightBlue,urlcolor=MidnightBlue]{hyperref}
 \usepackage{caption,placeins,needspace}
-\hypersetup{pdftitle={Sensor Placement Under Traffic Shift},pdfauthor={A. S. M. Jahir Hossain},pdfsubject={Forecast comparison, risk sensitivity and failure cases}}
+\hypersetup{pdftitle={When Does Forecast-Aware Sensor Placement Help?},pdfauthor={A. S. M. Jahir Hossain},pdfsubject={A reproducible stress test of shifting line traffic}}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
@@ -29,8 +29,9 @@
 \input{robust_numbers}
 \input{void_numbers}
 \input{ais_sensitivity_numbers}
-\title{\textbf{Sensor Placement Under Traffic Shift}\\[5pt]
-\large Forecast comparison, risk sensitivity and failure cases}
+\input{presentation_numbers}
+\title{\textbf{When Does Forecast-Aware\\Sensor Placement Help?}\\[5pt]
+\large A reproducible stress test of shifting line traffic}
 \author{A.\,S.\,M. Jahir Hossain\\[4pt]
 \small Independent research software extension and comparative study\\
 \small\url{https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension}}
@@ -41,28 +42,35 @@
 \thispagestyle{empty}
 
 \begin{abstract}
-A fixed sensor network must detect future traffic that may differ from
-historical observations. We extend stochastic barrier coverage with
-strictly chronological Poisson intensity stacking, a separate pseudo-BMA
-baseline, and expected-miss, predictive-void and conditional value-at-risk
-objectives. Across 40 seeds in designed scenarios, intensity stacking
-reduces expected misses by \missRedDrift\% under drift,
-\missRedShift\% under lane shift and \missRedEmerg\% under lane emergence,
-relative to pooled historical planning. An unannounced drift reversal
-exposes the opposite outcome. An unstructured total-variation ambiguity experiment is a negative
-result: its penalty changes little across plans and its radius excludes
-several shifted futures. A post hoc bandwidth probe of the one-day AIS demonstration exposes
-estimator-resolution sensitivity and leaves history versus forecast unresolved. Independent numerical checks, raw results,
-source fingerprints and reproducible workflows make both the successful
-and unsuccessful cases auditable.
+A fixed sensor network must detect traffic that may change after placement.
+We compare chronological Poisson intensity stacking, historical planning,
+individual forecasters, nonlinear risk objectives and ambiguity sets.
+In three designed shifts that match a candidate, stacking reduces expected
+misses by \missRedEmerg--\missRedDrift\% over history across 40 paired seeds.
+It loses under an unannounced reversal. In five additional shift regimes,
+it improves on pooled history but has lower mean detection than the best
+single component, by up to \overviewComponentGap{} percentage points.
+On one reused AIS day, training-selected historical KDE averages
+\overviewAISHistory\% modelled detection versus \overviewAISStacked\% for
+stacking over four overlapping origins; the bandwidth grid is exhausted
+at its lower edge. TV ambiguity barely changes future detection, while
+transport ambiguity lowers its mean in \overviewWFailures/\overviewWRegimes{}
+regimes under the fixed radius-calibration rule. The current forecast
+sampler and both alternatives fail the frozen diagnostic gate.
+These results establish neither calibrated uncertainty nor operational
+performance. The extension design was frozen locally before its outcomes,
+without an external preregistration timestamp. Raw runs, numerical checks
+and source fingerprints make both successes and failures reproducible.
 \end{abstract}
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=\linewidth]{hero.png}
-\caption{A drifting-lane example. Sensor placements planned on historical
-and forecast intensities, and a true-future heuristic reference. The lower
-panels show their corresponding intensities in line space.}
+\includegraphics[width=\linewidth]{research_overview.png}
+\caption{Successes and failures with each reference named. Synthetic
+intervals use the existing paired-seed bootstrap; the lane-split component
+contrast is secondary and has no multiplicity adjustment. AIS points show
+all four overlapping origins and their descriptive mean, not a population
+interval. Outcomes are modelled detection probabilities.}
 \end{figure}
 
 \section{Question and relationship to the base framework}

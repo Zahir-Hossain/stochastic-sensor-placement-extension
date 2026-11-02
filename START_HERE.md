@@ -2,7 +2,7 @@
 
 This folder is the complete Git repository. It includes source, tests,
 experiment configurations, generated results, figures and the technical report.
-The original MATLAB version remains in `legacy/` and at tag `v0.1.0`.
+The original MATLAB version remains in `legacy/` and at published commit `b67f3a5`.
 
 ## VS Code on macOS
 
@@ -41,9 +41,9 @@ No Docker, database, account credentials or GPU is required.
 | Read the technical report | `paper/main.pdf` |
 | Check the derivations | `docs/theory.md` |
 | Distinguish inherited methods from this extension | `docs/research_boundary.md` |
-| See what was corrected | `docs/review_notes.md` |
+| See what was corrected | `CHANGELOG.md` |
 | Prepare to explain the work | `docs/project_walkthrough.md` |
-| Inspect recorded checks and reproduction | `docs/audit_followup.md` |
+| Inspect recorded checks and reproduction | `docs/validation.md` |
 | Read the learning notebook | `examples/tutorial.ipynb` |
 
 ## Reproduce results
@@ -68,20 +68,20 @@ the original MATLAB parity test.
 
 ## Git and GitHub
 
-The working branch is `research-hardening`. The remote points to:
+The current Python work is published on `research-hardening` in
+[PR #1](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/pull/1).
+The default `main` branch still contains the original MATLAB version until
+that PR is merged. The review branch has eight CI jobs, including a Python
+3.10-3.13 matrix and GNU Octave parity.
 
-`https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension.git`
-
-Check the files, run the checks and review the commit history in VS Code's
-Source Control panel. When ready to publish:
+To inspect the published work from a fresh clone:
 
 ```bash
-git status
-git log --oneline --decorate -8
-git push -u origin research-hardening
-git push origin v0.1.0 v2.1.0
+git clone https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension.git
+cd stochastic-sensor-placement-extension
+git switch research-hardening
 ```
 
-Open a pull request from `research-hardening` into `main` and let GitHub run
-the CI workflow before merging. The archive contains local verification;
-hosted CI results exist only after a push. No force push is needed.
+No version tags or release are claimed here. [Repository presentation notes](docs/repository_presentation.md)
+contain the proposed About text and publication steps. The archived scientific
+history remains available in `archive/` for baseline verification.

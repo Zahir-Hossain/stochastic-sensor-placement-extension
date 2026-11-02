@@ -36,3 +36,11 @@ forecast-to-observed-KDE errors. A short empirical calibration history does
 not provide a nominal coverage guarantee. Geometry alone does not impose
 bathymetry, shipping rules or feasible routes. Report every regime and
 whether any plan changes, including any negative result.
+
+## Additional numerical checks
+
+The presentation follow-up adds independent primal LP comparisons at the
+study grid size for radii 0.3 and 1.5, and a separate Kantorovich dual LP
+for the concentrated-mass fixture. The original four-cell checks and frozen
+POT reference remain. This changes validation coverage, not the study's
+transport method, calibration rule or outcomes.

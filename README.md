@@ -1,35 +1,75 @@
-# Planning sensors for shifting traffic
+# When does forecast-aware sensor placement help?
 
-[![CI](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/actions/workflows/ci.yml/badge.svg)](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/actions/workflows/ci.yml)
+[![CI](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/actions/workflows/ci.yml/badge.svg?branch=research-hardening)](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/actions/workflows/ci.yml?query=branch%3Aresearch-hardening)
 ![Python](https://img.shields.io/badge/Python-3.10%E2%80%933.13-3776ab)
 ![License](https://img.shields.io/badge/License-MIT-green)
 [![Base paper](https://img.shields.io/badge/Framework-arXiv%3A2505.00825-b31b1b)](https://arxiv.org/abs/2505.00825)
 
-**Where should a fixed sensor network go when tomorrow's traffic may differ from yesterday's?**
+`stochplace` is a Python package and reproducible stress test of fixed sensor
+placement under changing traffic, using synthetic line trajectories and
+public AIS ship tracks.
 
-`stochplace` is a research software extension of stochastic barrier coverage.
-It forecasts trajectory intensities, combines forecasts using chronological
-validation, and compares expected-loss and tail-risk placements. A TV
-ambiguity study is reported as a negative result with little design benefit.
-Experiments include known future truth, independent numerical checks,
-explicit failure cases, and a small real AIS demonstration.
+**Forecast-aware placement helps when a candidate captures the shift.
+It loses to history under an unannounced reversal and on average in this
+one-day AIS reanalysis.** Combining forecasts also loses to individual
+components in the additional synthetic tests.
 
-![Historical and forecast-aware sensor placement](docs/figures/hero.png)
+![Where forecast stacking helps and where it fails](docs/figures/research_overview.png)
 
-*One drifting-lane example: observed trajectories, future trajectories and
-sensor plans in physical space, with their corresponding line-space maps.*
+*The reference method is named on every row. Synthetic intervals resample
+paired seeds; the lane-split component comparison is secondary and has no
+multiplicity adjustment. The AIS mean and all four overlapping origins are
+descriptive, with no population interval. These are modelled detection
+probabilities, not measurements from deployed sensors. [Source data](docs/figures/research_overview_data.csv).*
 
-**New to the project?** Open [START_HERE.md](START_HERE.md), or open
-[`stochplace.code-workspace`](stochplace.code-workspace) directly in VS Code.
-Read the [technical report](paper/main.pdf), [derivations](docs/theory.md)
-and [research boundary](docs/research_boundary.md).
+<!-- at-a-glance:start -->
+| Evidence | Result |
+|---|---|
+| Three designed shifts matching a candidate (40 seeds each) | 32.8-37.6% fewer expected misses than historical planning |
+| Five shifts outside the candidate families (40 seeds each) | Higher mean detection than history in 5/5; lower mean than the best single component in 5/5, by up to 6.83 pp |
+| Unannounced drift reversal (20 seeds) | Stacking minus history: -4.50 pp detection |
+| One AIS day, four overlapping origins | Training-selected history 84.78%; stacking 82.55%. Stacking is ahead at 2/4 origins |
+| Transport ambiguity (20 seeds per regime) | Lower mean future detection in 6/6 regimes under the fixed radius-calibration rule |
+| Frozen sampler gate | 0/2 alternative samplers eligible; current component sampler also fails |
+<!-- at-a-glance:end -->
 
-The [research extension results](docs/research_results.md) report five
-additional shift regimes, latent-loss diagnostics, a frozen sampler gate,
-training-only AIS bandwidth selection, AIS policy ablations and a small-grid
-transport comparison. The [protocol](docs/preregistration.md) precedes the outcome commits in the preserved local history;
-there is no external preregistration timestamp. Neither candidate sampler is adopted. The proposed
-multi-week AIS study remains [blocked by archive access](docs/data_access.md).
+Generated from saved runs by `python scripts/presentation_summary.py`.
+The best-component comparison is descriptive; [all methods and intervals](docs/tables/holdout_components.md)
+remain visible. The AIS bandwidth grid hits its lower edge at every selection.
+
+**Start here:** [run the package](START_HERE.md), read the
+[technical report](paper/main.pdf), inspect the [complete results](docs/research_results.md),
+or check the [current validation](docs/validation.md).
+
+## What this repository adds
+
+- Chronological combination of line-intensity forecasts by held-out Poisson
+  score, followed by sensor placement against the combined intensity.
+- Stress tests with known future truth, a frozen sampler gate, AIS controls,
+  and both TV and line-space transport ambiguity studies.
+- Raw runs, source fingerprints, independent numerical checks and a workflow
+  that reproduces the successful and unsuccessful cases.
+
+The extension design was frozen before its outcomes in the preserved local
+history; there is no external preregistration timestamp. The line
+representation, LGCP, stacking, CVaR and Wasserstein duality are established
+methods. [Attribution and research boundary](docs/research_boundary.md).
+
+## What did not work
+
+- Combining forecasts does not beat the strongest individual component in
+  mean detection in any of the five additional shift regimes.
+- Expected-void planning on the stacked forecast is worse than expected-miss
+  planning under drift. Its lower mean than historical planning has a paired
+  interval that includes zero.
+- TV ambiguity barely changes future detection. Transport ambiguity lowers
+  it under the fixed calibration rule, whose first prefix uses pooled history.
+- The current sampler and both alternatives fail the frozen calibration gate;
+  sample-based void and CVaR comparisons remain sensitivity analyses.
+- Real-data evidence covers one previously viewed AIS day. The multi-week
+  study remains [blocked by archive access](docs/data_access.md).
+
+## Detailed extension findings
 
 <!-- extension-summary:start -->
 C1 gains against pooled history do not establish superiority to individual components; the full paired comparisons include component wins. On the reused AIS day, training-selected historical KDE averages 84.78% detection versus 82.55% for training-selected stacking. Stacking exceeds history at 2/4 origins; the mean gap is driven by origin 7. The geometry-aware transport plan reduces mean future detection in 6/6 tested regimes under the fixed calibration rule, which can be driven by pooled-history backtests. This does not isolate the effect of geometry. Both sampler candidates fail their frozen eligibility gate. No experimental method or bandwidth setting is adopted.
@@ -113,6 +153,11 @@ Coverage describes the normalised grid truth in the declared forecast ball. It i
 [Generated TV scope analysis](docs/tables/tv_scope.md).
 
 ![Detection and worst-case certificates as the TV radius grows](docs/figures/robustness_frontier.png)
+
+![Historical and forecast-aware sensor placement in physical and line space](docs/figures/hero.png)
+
+*One designed drifting-lane example. This illustrates the physical setup;
+the overview and complete results also show where forecast placement loses.*
 
 ## Real AIS demonstration
 
@@ -298,10 +343,9 @@ The tests include independent numerical comparisons:
   when Octave is installed.
 
 Run `python scripts/check.py --full` for statistical tests and available
-Octave parity. [Current validation and external audit](docs/audit_followup.md) distinguishes
-completed checks from hosted CI, which runs after a push.
-
-[Part A audit corrections and complete validation record](docs/part_a_review.md).
+Octave parity. [Current validation](docs/validation.md) distinguishes local checks,
+commit-specific hosted CI and the completed external audit. Historical
+review records are indexed in [docs/history](docs/history/README.md).
 
 ## Attribution and limits
 
@@ -324,7 +368,7 @@ are outside the model. A larger multi-site evaluation is needed before
 making deployment claims.
 
 The original June 2026 MATLAB version is unchanged in `legacy/` and
-available at Git tag `v0.1.0`. [Revision review notes](docs/review_notes.md)
+identified by published commit `b67f3a5`. [Revision review notes](docs/history/review_notes.md)
 document the corrections. [Project walkthrough](docs/project_walkthrough.md)
 helps explain the assumptions, experiments and limitations.
 
@@ -337,7 +381,8 @@ results/         raw runs, summaries and provenance
 scripts/         setup, checking, reproduction and report generation
 examples/        quickstarts and executed tutorial
 paper/           LaTeX report and compiled PDF
-docs/            derivations, figures, tables and research review
+docs/            derivations, figures, tables and current findings
+docs/history/    archived reviews and raw validation records
 legacy/          unchanged original MATLAB code and figures
 tests/           numerical, property, integration and parity checks
 .vscode/         tasks and debugger configurations

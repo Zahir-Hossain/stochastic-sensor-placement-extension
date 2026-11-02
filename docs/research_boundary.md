@@ -68,7 +68,7 @@ See the [generated penalty and coverage analysis](tables/tv_scope.md).
   physical sensor performance or operational validation.
 
 The unchanged MATLAB prototype and its original figures remain in
-`legacy/`; `v0.1.0` marks the original Git version.
+`legacy/`; published commit `b67f3a5` identifies the original Git version.
 
 ## Transport and coverage attribution
 

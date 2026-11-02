@@ -1,8 +1,8 @@
 # v0.1: the original MATLAB toy (June 2026)
 
 This folder keeps the first version of the project exactly as it was,
-so the history of the idea stays visible. The git tag `v0.1.0` points at
-the repository state before the rebuild.
+so the history of the idea stays visible. Published commit `b67f3a5` is
+the repository state before the rebuild; no `v0.1.0` tag is published.
 
 | File | What it is |
 |---|---|

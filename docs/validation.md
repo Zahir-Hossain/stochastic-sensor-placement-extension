@@ -1,81 +1,59 @@
 # Current validation
 
-The current record is [audit_followup.md](audit_followup.md). It separates
-local checks, the external Claude audit, and hosted CI on an explicit commit.
-Initial Part A/B/C records are historical checkpoints.
+The presentation follow-up builds on published audit-fix commit `235bc59`.
+Package source, study runners, configurations and saved results are unchanged.
+The [full audit resolutions](audit_followup.md) and
+[presentation changes](presentation_followup.md) describe the two stages.
 
-## Archived revision 2.1 validation
-
-The following record predates the corrections and research extension; its
-118-test and nine-result counts are historical, not current.
-
-
-The reference run used Linux and Python 3.12.14. An isolated environment was
-installed from `requirements/reproduce-py312.txt`, then the project was
-installed in editable mode with its development and lint extras.
-
-| Check | Completed result |
+| Check | Latest local result |
 |---|---|
-| Ruff lint | Pass for `src`, `tests`, `scripts` and `examples` |
-| Ruff formatting | Pass |
-| Mypy | Pass for 18 package source files |
-| Full pytest suite | **118 passed, 1 skipped** |
-| Reported coverage, including branches | **85%** |
-| Octave parity | Skipped locally: GNU Octave is unavailable |
-| Quickstart | Executed successfully in the isolated environment |
-| Robust-placement example | Executed; prints certificate scope and future TV distance |
-| Learning notebook | All 9 code cells executed, 2 rendered figures, no error outputs |
-| Small reproduction pipeline | Two seeds per setting; all generated result sets verified |
-| Full synthetic studies | All configured 40-seed studies regenerated |
-| Robustness study | Six scenarios, 20 seeds, three radii, four strategies |
-| AIS demonstration | Raw 14.3 MB download checksummed; 84,702 reports, 265 retained pieces |
-| Greedy approximation study | 100 instances, exact finite-subset comparison |
-| Result provenance | All 9 result sets match the runtime source fingerprint |
-| Raw-run consistency | Unique keys, recomputed synthetic summaries and in-scope certificates verified |
-| Technical report | Compiled from regenerated tables and figures; visually reviewed |
-| Hosted GitHub CI | Configured; requires pushing the branch to run |
+| Full pytest suite | **161 passed, 1 skipped**; includes three added transport checks |
+| Octave parity | Unavailable locally; runs in the dedicated hosted CI job |
+| Ruff lint, Ruff format, mypy | Pass |
+| Quickstart | Pass |
+| Result provenance and raw-to-summary checks | All 19 result sets verify against unchanged package source `9012cb66318e` |
+| Original pre-extension summaries | All 9 CSV summaries match `3b8548d`, maximum difference zero |
+| Published audit-fix summaries | All 18 CSV summaries match `235bc59`, maximum difference zero |
+| Overview table, figure data and report macros | Generated from saved runs; checked by `presentation_summary.py --check` |
+| Technical report | Rebuilt, 14 pages; rendered and visually inspected |
 
-The machine-readable local check record is [validation.json](validation.json).
-It records the commands, execution times, environment and overall result.
-The notebook was executed through IPython in-process because this execution
-environment restricts local kernel sockets; the standard notebook kernel
-mode remains available for local authoring.
+The [machine check record](history/validation/presentation_followup/validation.json)
+and [complete local log](history/validation/presentation_followup/checks.log)
+record the commands, environment and outcomes. Summary comparisons enforce
+absolute tolerance 1e-9 and relative tolerance zero. No scientific study
+needed regeneration for these presentation, navigation and test changes.
 
-## Interpret the checks correctly
+## Hosted CI and external review
 
-The 118 passing tests include the longer statistical tests. The one skipped
-test compares the original MATLAB script with its Python port through
-Octave. The GitHub workflow installs Octave for a dedicated parity job.
-Only Python 3.12 was executed locally; the workflow defines additional
-Python 3.10, 3.11 and 3.13 jobs.
+[PR #1](https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension/pull/1)
+shows checks on the current published head. The immediately preceding head
+`235bc59db19a39bd69ca9e18a1c6fbec8e4408fd` passed all eight CI jobs, including
+Python 3.10-3.13, Octave parity, result provenance and smoke experiments:
+[exact run record](history/validation/presentation_followup/hosted_ci_235bc59.json).
+That record is evidence for that commit, not a claim about later commits.
 
-The artifact verifier preserves binary64 values with round-trip CSV parsing.
-Default CSV parsing can change the sign of machine-precision ties and thus
-change strict win counts, even when means are numerically identical.
+Claude's completed external audit concerns the older snapshot `2c5fe28`.
+Its [captured report](history/validation/claude/audit_2c5fe28.txt) found no
+result-changing implementation defect, but identified verified logging,
+default and disclosure issues addressed in the audit follow-up. It is not
+an approval of this later presentation change.
 
-A source fingerprint is independent of documentation-only Git commits.
-The result metadata records the repository state observed during each
-study, including a dirty suffix where authoring files were being edited.
-The package-source fingerprint is checked exactly against this release.
-Cross-platform bitwise reproducibility is not claimed.
+## Scope and reproduction
 
-Green software checks do not establish calibrated forecast uncertainty,
-operational sensor performance, universal superiority or a publication-level
-novelty claim. The report and research boundary state the relevant scope.
-
-## Repeat the checks
+The additional transport checks compare the bound with a separate primal LP
+at the study grid size for two radii, and the concentrated-mass distance with
+a separately written Kantorovich dual LP. These improve numerical coverage;
+they do not establish forecast calibration or optimal outer placement.
 
 ```bash
 python scripts/check.py --full
 python scripts/verify_artifacts.py
-python examples/robust_placement.py
+python scripts/compare_summaries.py --base 3b8548d
+python scripts/compare_summaries.py --base 235bc59
+python scripts/presentation_summary.py --check
 ```
 
-To regenerate the notebook:
-
-```bash
-python -m pip install -e ".[notebook]"
-python scripts/build_tutorial.py
-```
-
-Use `--in-process` for environments without local kernel sockets.
+Earlier counts and raw records are indexed in [history](history/README.md).
+Green checks establish software consistency, not operational performance,
+calibrated uncertainty or publication-level novelty. C7 remains blocked by
+raw archive access; no multi-week outcome is claimed.

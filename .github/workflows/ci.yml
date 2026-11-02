@@ -86,6 +86,7 @@ jobs:
         run: |
           python scripts/ais_bandwidth_sensitivity.py --render-only --readme README.md
           python scripts/research_extensions_summary.py
+          python scripts/presentation_summary.py --check
           git diff --exit-code -- README.md docs/tables docs/research_results.md paper/extension_results.tex paper/ais_sensitivity_numbers.tex results/calibration_diagnostics.csv
       - name: Research runner smoke checks
         run: |

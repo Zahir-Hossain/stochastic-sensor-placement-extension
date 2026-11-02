@@ -2,7 +2,7 @@
 
 Claude Opus 5.5 Extra audited published snapshot
 `2c5fe28f46f0b8e748784680f5fcc1517edcb92a`. The full captured report and
-its provenance are under [validation/claude](validation/claude/). It found
+its provenance are under [archived Claude audit](history/validation/claude/). It found
 no result-changing implementation defect. Its claims about tests and
 regeneration are external-review evidence, distinct from the checks below.
 
@@ -47,19 +47,19 @@ The follow-up changes package-source bytes, so all 19 source-dependent
 result sets are regenerated. Comparison with the audited snapshot enforces
 absolute tolerance 1e-9 and relative tolerance zero for every saved CSV
 summary; the historical pre-C check is also retained. A final execution
-record and comparison logs are saved under validation/audit_followup.
+record and comparison logs are saved under docs/history/validation/audit_followup.
 
 Final local result: **158 tests passed, one Octave test skipped locally**;
 lint, formatting, mypy, example, nineteen-set verification, eighteen-summary
 comparison, deterministic generators and both research smoke commands pass.
 All eighteen CSV summaries have maximum absolute difference zero. The
 rebuilt fourteen-page report has been rendered and visually checked.
-The machine record is [validation.json](validation/audit_followup/validation.json).
+The machine record is [validation.json](history/validation/audit_followup/validation.json).
 
 The original hosted CI record is now tied explicitly to head
 `2c5fe28f46f0b8e748784680f5fcc1517edcb92a`, event pull_request, run
 41368309735, conclusion success. Eight job-log hashes are retained in
-[hosted_ci_2c5fe28.json](validation/claude/hosted_ci_2c5fe28.json). These
+[hosted_ci_2c5fe28.json](history/validation/claude/hosted_ci_2c5fe28.json). These
 are hashes of decoded UTF-8 logs captured from the connector. Updated
 head CI is reported separately in the PR and delivery record.
 
