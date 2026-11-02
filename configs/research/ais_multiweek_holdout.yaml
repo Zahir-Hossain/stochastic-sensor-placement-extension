@@ -1,0 +1,15 @@
+study_id: C7
+status: blocked_data_access
+archive_index: https://aisdata.ais.dk/
+source_page: https://www.dma.dk/safety-at-sea/navigational-information/ais-data
+event_date: 2020-07-01
+period_start: 2020-06-17
+period_end: 2020-07-14
+epoch_hours: 24
+history_days: 8
+horizon_days: 1
+origin_lon_lat: [10.65, 57.75]
+window_km: [-10, 10, -5, 5]
+sensors: 4
+sensor_radius_km: 1.0
+raw_data_sha256: null

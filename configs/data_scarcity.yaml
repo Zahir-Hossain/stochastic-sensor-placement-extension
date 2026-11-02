@@ -1,0 +1,17 @@
+name: data_scarcity
+description: >
+  Stationary traffic, little data. Does modelling estimation uncertainty
+  (LGCP posterior) help when only a few dozen trajectories are observed?
+scenario: stationary
+sweep:
+  rate: [10, 20, 40, 80, 160]
+history_epochs: 4
+horizons: [1]
+seeds: 40
+n_sensors: 4
+sensor: {type: gaussian, rho: 0.95, r: 1.0}
+grid: {n_alpha: 120, n_p: 64}
+eval_grid: {n_alpha: 360, n_p: 192}
+lgcp_fit_shape: [60, 32]
+candidate_spacing: 1.0
+strategies: [pooled, lgcp, "lgcp:void", "lgcp:cvar", oracle, fence]

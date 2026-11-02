@@ -1,0 +1,12 @@
+{
+  "reason": "Use eight available CPU cores for unfinished studies.",
+  "old_job_exit_code": 130,
+  "new_workers": 8,
+  "completed_suites": [
+    "suite_stationary",
+    "suite_drift",
+    "suite_lane_shift",
+    "suite_emergence"
+  ],
+  "settings_and_seeds_changed": false
+}

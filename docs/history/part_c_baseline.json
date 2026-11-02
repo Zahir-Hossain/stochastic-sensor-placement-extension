@@ -1,0 +1,4 @@
+{
+  "pre_c_commit": "3b8548d",
+  "comparison": "All nine original CSV summaries must match with absolute tolerance 1e-9 and relative tolerance zero, including corrected TV rows."
+}

@@ -1,0 +1,20 @@
+OK ais_bandwidth_sensitivity: 120 runs; default scale matches published AIS
+OK ais_gothenburg: 52 runs
+OK ais_policy_ablation: 32 preregistered research runs
+OK ais_training_bandwidth: 12 preregistered research runs
+OK approximation: 100 runs
+OK data_scarcity: 1200 runs
+OK drift_sweep: 5280 runs
+OK holdout_accelerating: 280 runs
+OK holdout_lane_split: 280 runs
+OK holdout_random_switch: 280 runs
+OK holdout_random_walk: 280 runs
+OK holdout_rotating_quadratic: 280 runs
+OK robustness: 1440 runs
+OK sampler_calibration: 600 preregistered research runs
+OK suite_drift: 680 runs
+OK suite_emergence: 680 runs
+OK suite_lane_shift: 680 runs
+OK suite_stationary: 680 runs
+OK transport_geometry: 480 preregistered research runs
+All 19 result sets match source e8ff34cb65c4.

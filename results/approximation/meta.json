@@ -1,0 +1,19 @@
+{
+  "instances": 100,
+  "source_sha256": "9012cb66318e67d58446a3a0ecb25267618dd3493cd7a26df0a8a7ea983bd9f7",
+  "script_sha256": "cf8011ea46605425bb17520767d25da8dfb04e511248c283e356b790bf210eb4",
+  "git_commit": "7ca1f42",
+  "dependencies": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "pandas": "3.1.0",
+    "matplotlib": "3.10.8",
+    "pyyaml": "6.0.3"
+  },
+  "candidate_count": 45,
+  "n_sensors": 3,
+  "grid_shape": [
+    90,
+    48
+  ]
+}

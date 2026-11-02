@@ -1,0 +1,17 @@
+Historical, KDE & 0.24 {\scriptsize[0.19, 0.31]} & 2.98 {\scriptsize[2.82, 3.17]} & 1.40 {\scriptsize[1.37, 1.43]} & 1.98 {\scriptsize[1.44, 2.52]} \\
+Historical, LGCP & 0.23 {\scriptsize[0.18, 0.29]} & 3.45 {\scriptsize[3.23, 3.69]} & 1.45 {\scriptsize[1.42, 1.48]} & 2.22 {\scriptsize[1.70, 2.73]} \\
+Recent epochs only & 0.30 {\scriptsize[0.25, 0.36]} & 1.98 {\scriptsize[1.75, 2.23]} & 0.29 {\scriptsize[0.24, 0.34]} & 0.33 {\scriptsize[0.20, 0.48]} \\
+Drift extrapolation & 0.26 {\scriptsize[0.21, 0.31]} & \textbf{0.18 {\scriptsize[0.15, 0.21]}} & 1.53 {\scriptsize[1.46, 1.59]} & 1.87 {\scriptsize[1.51, 2.26]} \\
+Drift + uncertainty & 0.37 {\scriptsize[0.31, 0.44]} & 0.19 {\scriptsize[0.16, 0.23]} & 1.92 {\scriptsize[1.85, 1.98]} & 2.39 {\scriptsize[2.06, 2.69]} \\
+Log-linear trend & 0.71 {\scriptsize[0.63, 0.79]} & 2.22 {\scriptsize[1.99, 2.47]} & 0.30 {\scriptsize[0.25, 0.36]} & \textbf{0.08 {\scriptsize[0.02, 0.14]}} \\
+$\lambda_E$ with fixed weights (v0.1 idea) & 0.29 {\scriptsize[0.23, 0.34]} & 0.85 {\scriptsize[0.81, 0.90]} & 1.47 {\scriptsize[1.42, 1.51]} & 2.43 {\scriptsize[2.05, 2.79]} \\
+Pseudo-BMA (score-weighted baseline) & 0.22 {\scriptsize[0.17, 0.28]} & 0.19 {\scriptsize[0.16, 0.23]} & 0.30 {\scriptsize[0.25, 0.36]} & 0.44 {\scriptsize[0.23, 0.70]} \\
+Stacked $\lambda_E$ (ours) & 0.23 {\scriptsize[0.18, 0.28]} & 0.20 {\scriptsize[0.16, 0.24]} & \textbf{0.23 {\scriptsize[0.19, 0.29]}} & 0.29 {\scriptsize[0.15, 0.46]} \\
+Stacked $\lambda_E$, expected void objective & 0.25 {\scriptsize[0.19, 0.31]} & 3.67 {\scriptsize[2.90, 4.44]} & 0.24 {\scriptsize[0.19, 0.29]} & 0.32 {\scriptsize[0.22, 0.42]} \\
+Stacked $\lambda_E$, CVaR objective & 0.31 {\scriptsize[0.24, 0.38]} & 0.36 {\scriptsize[0.29, 0.45]} & 0.61 {\scriptsize[0.47, 0.77]} & 1.05 {\scriptsize[0.79, 1.32]} \\
+Drift + uncertainty, expected void objective & \textbf{0.22 {\scriptsize[0.19, 0.24]}} & 0.19 {\scriptsize[0.16, 0.23]} & 1.84 {\scriptsize[1.70, 2.01]} & 1.91 {\scriptsize[1.60, 2.22]} \\
+Drift + uncertainty, CVaR objective & 0.97 {\scriptsize[0.84, 1.12]} & 0.25 {\scriptsize[0.21, 0.30]} & 3.43 {\scriptsize[3.21, 3.67]} & 1.60 {\scriptsize[1.37, 1.82]} \\
+Log-linear trend, CVaR objective & 1.65 {\scriptsize[1.42, 1.88]} & 1.62 {\scriptsize[1.40, 1.88]} & 0.69 {\scriptsize[0.56, 0.83]} & 0.60 {\scriptsize[0.42, 0.82]} \\
+Evenly spaced fence & 12.2 & 17.1 & 27.6 & 25.2 \\
+Random & 29.1 & 41.8 & 28.8 & 30.6 \\
+\bottomrule

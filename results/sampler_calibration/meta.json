@@ -1,0 +1,62 @@
+{
+  "study_kind": "preregistered_research",
+  "source_sha256": "9012cb66318e67d58446a3a0ecb25267618dd3493cd7a26df0a8a7ea983bd9f7",
+  "git_commit": "9510832-dirty",
+  "config": {
+    "scenarios": [
+      "accelerating",
+      "rotating_quadratic",
+      "random_walk",
+      "random_switch",
+      "lane_split"
+    ],
+    "seeds": 40,
+    "gate": {
+      "min_coverage": 0.8,
+      "min_mean_rank": 0.35,
+      "max_mean_rank": 0.65,
+      "max_mean_mismatch": 0.1
+    },
+    "study_id": "C3",
+    "group_keys": [
+      "scenario",
+      "method"
+    ],
+    "unique_keys": [
+      "scenario",
+      "seed",
+      "method"
+    ],
+    "metrics": [
+      "sample_rank",
+      "sample_covered_90",
+      "sample_mean_relative_l1"
+    ],
+    "unit_interval": [
+      "sample_rank",
+      "sample_covered_90"
+    ],
+    "expected_n": 600,
+    "input_sha256": {
+      "results/holdout_accelerating/runs.csv": "f85c88d5053ef38ce1df45634002f4a34bd2275bd8fbd95af78cd6de20b9a19e",
+      "results/holdout_rotating_quadratic/runs.csv": "50c8482f5dc82df76ade8ff4d8b805273b9e0089981b82b3fc7f8826b97670d8",
+      "results/holdout_random_walk/runs.csv": "644a03df46b3a6b8b5e0d3a1badf11bee8202977d7444ee0179fe1975db1e4ed",
+      "results/holdout_random_switch/runs.csv": "b00c43628009752b0d9b7e0d21336cdf0c5dff9daa59cf11e3be96a72b0e596f",
+      "results/holdout_lane_split/runs.csv": "676ac8dc9293c80ab495ca264dee735b4fac442c6e21dd5a66b8fdef7e1f421b"
+    }
+  },
+  "dependencies": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "pandas": "3.1.0",
+    "matplotlib": "3.10.8",
+    "pyyaml": "6.0.3"
+  },
+  "file_sha256": {
+    "scripts/sampler_study.py": "e0229cb4dbe2d5c679b0045fde14d05935a7fddb14c9c4793ede4a9cba379bea",
+    "scripts/research_samplers.py": "be35b6e7075e5dd103e8caba4a1257fd9fe3c14b0d9057b1d2ad90035bc72538",
+    "configs/research/sampler_candidates.yaml": "c35b274fd984cb14112067db76d592aec2d1b6eac0aa680312e3027083d4d1b1",
+    "scripts/study_io.py": "e22682629fb03dd4dada4808bb8eff8a7f3866fee1777645fe7de67089f8d8a7",
+    "docs/preregistration.md": "64c4fde637989c78785a7d821ab5e2b8e6cae3c99c8e1efd00d8a7645888c948"
+  }
+}

@@ -1,0 +1,182 @@
+\section{Locally frozen extension studies}
+
+Protocol and candidate commits precede the outcomes in the preserved local history; no external preregistration timestamp exists. All original study summaries are unchanged relative to the corrected pre-extension checkpoint. New methods remain experimental; no sampler or AIS policy replaces a default.
+
+\Needspace{12\baselineskip}
+\paragraph{Shifts outside the candidate families (40 paired seeds)}
+\begin{center}\small\begin{tabular}{lll}
+\toprule
+Regime & Stacked minus history, pp [95\% CI] & Positive seeds\\\midrule
+accelerating & +10.74 [+10.25, +11.27] & 40/40\\
+lane\_split & +1.00 [+0.63, +1.42] & 36/40\\
+random\_switch & +2.57 [+1.80, +3.42] & 32/40\\
+random\_walk & +1.14 [+0.36, +2.07] & 26/40\\
+rotating\_quadratic & +3.77 [+3.47, +4.10] & 40/40\\
+\bottomrule\end{tabular}\end{center}
+
+Intervals resample paired seeds. These are specified synthetic generators, not operational traffic.
+
+\Needspace{12\baselineskip}
+\paragraph{Secondary component comparisons}
+\begin{center}\small\begin{tabular}{lll}
+\toprule
+Regime & Component & Stacked minus component, pp [95\% CI]\\\midrule
+accelerating & drift\_u & -0.15 [-0.21, -0.09]\\
+accelerating & recent & +4.94 [+4.44, +5.52]\\
+accelerating & trend & +3.88 [+3.46, +4.33]\\
+lane\_split & drift\_u & +0.83 [+0.46, +1.24]\\
+lane\_split & recent & -3.77 [-4.19, -3.36]\\
+lane\_split & trend & -6.83 [-7.30, -6.34]\\
+random\_switch & drift\_u & -0.32 [-1.27, +0.57]\\
+random\_switch & recent & -1.33 [-2.18, -0.54]\\
+random\_switch & trend & -1.82 [-3.12, -0.62]\\
+random\_walk & drift\_u & -0.30 [-1.11, +0.41]\\
+random\_walk & recent & -0.49 [-1.04, +0.01]\\
+random\_walk & trend & -0.38 [-1.15, +0.29]\\
+rotating\_quadratic & drift\_u & -0.01 [-0.01, -0.00]\\
+rotating\_quadratic & recent & +3.96 [+3.11, +4.98]\\
+rotating\_quadratic & trend & +5.36 [+4.51, +6.33]\\
+\bottomrule\end{tabular}\end{center}
+
+These descriptive comparisons were added after the audit. The primary contrast remains stacked minus pooled; complete comparisons with every strategy are in the generated holdout component table. Intervals are not adjusted for multiple comparisons.
+
+\clearpage
+
+\Needspace{12\baselineskip}
+\paragraph{Sampler diagnostics on the same expected-loss plans}
+\begin{center}\small\begin{tabular}{lllll}
+\toprule
+Regime & Sampler & Rank & Coverage & Mismatch\\\midrule
+accelerating & component & 0.714 & 62.5\% & 0.038\\
+accelerating & residual\_candidate & 0.654 & 97.5\% & 0.126\\
+accelerating & weighted\_candidate & 0.757 & 42.5\% & 0.041\\
+lane\_split & component & 1.000 & 0.0\% & 0.015\\
+lane\_split & residual\_candidate & 1.000 & 0.0\% & 0.041\\
+lane\_split & weighted\_candidate & 1.000 & 0.0\% & 0.008\\
+random\_switch & component & 0.720 & 50.0\% & 0.046\\
+random\_switch & residual\_candidate & 0.770 & 42.5\% & 0.072\\
+random\_switch & weighted\_candidate & 0.701 & 22.5\% & 0.031\\
+random\_walk & component & 0.312 & 10.0\% & 0.020\\
+random\_walk & residual\_candidate & 0.380 & 42.5\% & 0.055\\
+random\_walk & weighted\_candidate & 0.293 & 5.0\% & 0.014\\
+rotating\_quadratic & component & 0.916 & 32.5\% & 0.039\\
+rotating\_quadratic & residual\_candidate & 0.662 & 100.0\% & 0.190\\
+rotating\_quadratic & weighted\_candidate & 0.922 & 32.5\% & 0.043\\
+\bottomrule\end{tabular}\end{center}
+
+The gate requires every regime to have at least 80\% coverage, mean rank in $[.35,.65]$ and mean relative sample-mean mismatch at most $.10$. Eligibility for further study: weighted\_candidate fails; residual\_candidate fails. No sampler is adopted. These are latent-loss ensemble diagnostics, not realized-count PIT or validation of the full point-process law. Fixed Monte Carlo streams are reused across history seeds: these are conditional diagnostics with common random numbers, not independent sampler-noise realizations.
+
+\clearpage
+
+\Needspace{12\baselineskip}
+\paragraph{Training-only AIS bandwidth selection}
+\begin{center}\small\begin{tabular}{lllll}
+\toprule
+Origin & Method & Scale & Detection & Paired change, pp\\\midrule
+4 & pooled & 0.25 & 87.35\% & +6.04\\
+4 & recent & 0.25 & 88.22\% & +6.91\\
+4 & stacked & 0.25 & 87.53\% & +6.23\\
+5 & pooled & 0.25 & 84.53\% & +5.30\\
+5 & recent & 0.25 & 83.65\% & +4.42\\
+5 & stacked & 0.25 & 84.36\% & +5.13\\
+6 & pooled & 0.25 & 75.02\% & +5.44\\
+6 & recent & 0.25 & 80.54\% & +10.95\\
+6 & stacked & 0.25 & 81.07\% & +11.48\\
+7 & pooled & 0.25 & 92.24\% & +15.96\\
+7 & recent & 0.25 & 78.80\% & +2.53\\
+7 & stacked & 0.25 & 77.23\% & +0.96\\
+\bottomrule\end{tabular}\end{center}
+
+Changes use the default historical KDE reference. Selection uses targets strictly before each test origin. The previously viewed one-day sample is reused: this is exploratory reanalysis, with no population significance claim.
+
+12/12 choices select 0.25, the lower edge of the frozen grid; the grid does not bracket an interior optimum. It is not extended on this reused day. Stacking exceeds pooled history at 2/4 origins; its largest deficit, at origin 7, drives the mean comparison.
+
+\Needspace{12\baselineskip}
+\paragraph{AIS policy ablations (mean over four origins)}
+\begin{center}\small\begin{tabular}{llll}
+\toprule
+Method & Policy & Detection & Paired change, pp\\\midrule
+pseudo\_bma & both & 76.60\% & +0.00\\
+pseudo\_bma & minimum\_origins & 76.60\% & -0.00\\
+pseudo\_bma & original & 76.04\% & -0.56\\
+pseudo\_bma & relative\_floor & 76.04\% & -0.56\\
+stacked & both & 78.44\% & +1.84\\
+stacked & minimum\_origins & 78.44\% & +1.84\\
+stacked & original & 77.66\% & +1.06\\
+stacked & relative\_floor & 77.66\% & +1.06\\
+\bottomrule\end{tabular}\end{center}
+
+Origin-level weights, solver status and all individual detections are retained in the raw CSV and the generated AIS policy table. Minimum-origin and relative-floor rules are ablations only; the original policy remains the default.
+
+\clearpage
+
+\Needspace{12\baselineskip}
+\paragraph{Geometry-aware ambiguity (20 paired seeds)}
+\begin{center}\small\begin{tabular}{llllll}
+\toprule
+Regime & Ball & Future gain, pp [95\% CI] & Inside & Changed & WC gain\\\midrule
+drift & tv & -0.476 [-0.858, -0.095] & 100\% & 5/20 & +0.045\\
+drift & w1 & -10.378 [-12.405, -7.865] & 100\% & 20/20 & +6.548\\
+emergence & tv & +0.000 [+0.000, +0.000] (D) & 65\% & 0/20 & +0.000\\
+emergence & w1 & -5.274 [-5.738, -4.757] & 50\% & 20/20 & +3.763\\
+lane\_shift & tv & -1.085 [-1.640, -0.586] & 100\% & 10/20 & +0.134\\
+lane\_shift & w1 & -18.263 [-20.759, -16.684] & 100\% & 20/20 & +10.293\\
+reversal & tv & -0.519 [-1.618, +0.428] & 20\% & 3/20 & +0.041\\
+reversal & w1 & -16.070 [-16.070, -16.070] (D) & 30\% & 20/20 & +10.735\\
+seam\_drift & tv & -2.816 [-3.840, -1.792] & 100\% & 11/20 & +0.129\\
+seam\_drift & w1 & -2.114 [-3.423, -1.052] & 100\% & 8/20 & +0.121\\
+stationary & tv & +0.000 [+0.000, +0.000] (D) & 100\% & 0/20 & +0.000\\
+stationary & w1 & -0.835 [-0.982, -0.688] & 95\% & 17/20 & +0.786\\
+\bottomrule\end{tabular}\end{center}
+
+The transport plan lowers mean future detection in 6/6 tested regimes under this fixed calibration rule. This negative result does not isolate geometry as the cause.
+
+The finite-grid transport dual was checked against an independently formulated primal LP on four-cell unit fixtures. Every certificate is conditional on normalized grid truth lying in its ball. Three chronological training errors do not establish nominal coverage. Search is discrete and heuristic; no global placement or operational guarantee is claimed. The Wasserstein construction is established \citep{gao2023wasserstein,esfahani2018wasserstein}; distributionally robust coverage control also predates this study \citep{boskos2023coverage}.
+
+The first calibration target (5) uses four history epochs: stacking has no usable weight-validation backtest and returns pooled history. Thus radii can be driven by an immature pooled forecast rather than the eight-epoch stacked plan. This also affects the first residual-bootstrap factor in C3. These negative results are conditional on the fixed calibration rule; they do not isolate geometry as the cause. The rule and all original outcomes are retained.
+
+\clearpage
+
+\Needspace{12\baselineskip}
+\paragraph{Distinct discrete plans across 20 history seeds}
+\begin{center}\small\begin{tabular}{llll}
+\toprule
+Regime & Ball & Nominal & Robust\\\midrule
+drift & tv & 2 & 2\\
+drift & w1 & 2 & 2\\
+emergence & tv & 2 & 2\\
+emergence & w1 & 2 & 7\\
+lane\_shift & tv & 3 & 2\\
+lane\_shift & w1 & 3 & 4\\
+reversal & tv & 1 & 3\\
+reversal & w1 & 1 & 1\\
+seam\_drift & tv & 1 & 2\\
+seam\_drift & w1 & 1 & 3\\
+stationary & tv & 2 & 2\\
+stationary & w1 & 2 & 2\\
+\bottomrule\end{tabular}\end{center}
+
+Intervals marked (D) have zero width and are degenerate; they reflect repeated discrete plans, not population precision.
+
+\Needspace{12\baselineskip}
+\paragraph{Calibration-rule diagnostic}
+\begin{center}\small\begin{tabular}{llll}
+\toprule
+Regime & Ball & First error sets radius & Median radius/truth distance\\\midrule
+drift & tv & 20/20 & 5.02\\
+drift & w1 & 20/20 & 6.44\\
+emergence & tv & 1/20 & 1.14\\
+emergence & w1 & 1/20 & 1.05\\
+lane\_shift & tv & 20/20 & 3.98\\
+lane\_shift & w1 & 20/20 & 13.16\\
+reversal & tv & 20/20 & 0.98\\
+reversal & w1 & 20/20 & 0.97\\
+seam\_drift & tv & 20/20 & 9.10\\
+seam\_drift & w1 & 20/20 & 4.22\\
+stationary & tv & 6/20 & 1.85\\
+stationary & w1 & 4/20 & 3.01\\
+\bottomrule\end{tabular}\end{center}
+
+These truth-distance ratios are retrospective diagnostics and never select a radius. The first calibration prefix returns pooled history because no weight-validation backtest is usable.
+
+\paragraph{Multi-week AIS (C7)} The proposed July 2020 routing-change study remains blocked by archive access. No raw archive, checksum or multi-week result is reported. Settings and the data dependency are recorded in the repository.

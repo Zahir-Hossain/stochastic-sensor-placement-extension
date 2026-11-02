@@ -1,0 +1,13 @@
+origin,method,policy,detection_rate,paired_gain_pp,scale,n_test,maximum_validation_target,backtest_origins,weight_fit,weight_fit_message,weights
+4,pooled,training_placement_cv,0.8734576627849047,6.038088236149486,0.25,41,3,0,not_applicable,,
+4,recent,training_placement_cv,0.8821952018557279,6.911842143231805,0.25,41,3,0,not_applicable,,
+4,stacked,training_placement_cv,0.8753477400594332,6.227095963602336,0.25,41,3,1,poisson_intensity_stacking,,"{""pooled"": 3.8913350012256703e-16, ""recent"": 0.3933298891987305, ""drift_u"": 0.6066701108012691, ""trend"": 0.0}"
+5,pooled,training_placement_cv,0.8452977437409941,5.300268918276574,0.25,54,4,0,not_applicable,,
+5,recent,training_placement_cv,0.8364709847359834,4.4175930177755,0.25,54,4,0,not_applicable,,
+5,stacked,training_placement_cv,0.8435841083501763,5.1289053791947925,0.25,54,4,2,poisson_intensity_stacking,,"{""pooled"": 0.25160128642137114, ""recent"": 0.2817782741657387, ""drift_u"": 0.4666204394128902, ""trend"": 1.647648488999065e-17}"
+6,pooled,training_placement_cv,0.7502465184858792,5.436341184023097,0.25,20,5,0,not_applicable,,
+6,recent,training_placement_cv,0.8054153096698727,10.953220302422451,0.25,20,5,0,not_applicable,,
+6,stacked,training_placement_cv,0.810652081450448,11.476897480479975,0.25,20,5,3,poisson_intensity_stacking,,"{""pooled"": 0.30923072086623205, ""recent"": 0.3098544494531527, ""drift_u"": 0.3809148296806153, ""trend"": 0.0}"
+7,pooled,training_placement_cv,0.9223648354985128,15.962230637304287,0.25,19,6,0,not_applicable,,
+7,recent,training_placement_cv,0.788006214703624,2.526368557815406,0.25,19,6,0,not_applicable,,
+7,stacked,training_placement_cv,0.7723089515896499,0.9566422464179936,0.25,19,6,3,poisson_intensity_stacking,,"{""pooled"": 0.5930060872947998, ""recent"": 0.08026294282098603, ""drift_u"": 0.2956532784811726, ""trend"": 0.03107769140304163}"

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1290" height="300" viewBox="0 0 1290 300" role="img" aria-label="stochplace pipeline">
+<rect width="1290" height="300" fill="#fcfcfb"/>
+<style>.h{font:700 17px Helvetica,Arial,sans-serif;fill:#0b0b0b}.s{font:13px Helvetica,Arial,sans-serif;fill:#52514e}.k{font:600 11.5px Helvetica,Arial,sans-serif}.ti{font:700 19px Helvetica,Arial,sans-serif;fill:#0b0b0b}.b{fill:#ffffff;stroke:#d8d7d2;stroke-width:1.5}.a{stroke:#8a8984;stroke-width:1.8;fill:none;marker-end:url(#m)}</style>
+<defs><marker id="m" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#8a8984"/></marker></defs>
+<text x="20" y="38" class="ti">Pipeline: from observed trajectories to sensors scored on the future</text>
+<rect x="20" y="70" rx="10" ry="10" width="190" height="150" class="b"/>
+<text x="34" y="100" class="h">Trajectories</text>
+<text x="34" y="132" class="s">AIS tracks or synthetic</text>
+<text x="34" y="156" class="s">lanes, cut into epochs</text>
+<text x="34" y="180" class="s">straight pieces (TLS)</text>
+<rect x="34" y="234" rx="9" ry="9" width="72" height="20" fill="#e6e5e0"/>
+<text x="70.0" y="248" class="k" fill="#52514e" text-anchor="middle">Kim et al.</text>
+<rect x="114" y="234" rx="9" ry="9" width="66" height="20" fill="#cde2fb"/>
+<text x="147.0" y="248" class="k" fill="#184f95" text-anchor="middle">new here</text>
+<path d="M212 145.0 H230" class="a"/>
+<rect x="233" y="70" rx="10" ry="10" width="190" height="150" class="b"/>
+<text x="247" y="100" class="h">Line space</text>
+<text x="247" y="132" class="s">line → (α, p)</text>
+<text x="247" y="156" class="s">Möbius seam handled</text>
+<text x="247" y="180" class="s">d = |x cosα + y sinα − p|</text>
+<rect x="247" y="234" rx="9" ry="9" width="72" height="20" fill="#e6e5e0"/>
+<text x="283.0" y="248" class="k" fill="#52514e" text-anchor="middle">Kim et al.</text>
+<path d="M425 145.0 H443" class="a"/>
+<rect x="446" y="70" rx="10" ry="10" width="190" height="150" class="b"/>
+<text x="460" y="100" class="h">Intensity</text>
+<text x="460" y="132" class="s">KDE, CV bandwidth</text>
+<text x="460" y="156" class="s">LGCP, Laplace approx.</text>
+<text x="460" y="180" class="s">posterior samples</text>
+<rect x="460" y="234" rx="9" ry="9" width="72" height="20" fill="#e6e5e0"/>
+<text x="496.0" y="248" class="k" fill="#52514e" text-anchor="middle">Kim et al.</text>
+<rect x="540" y="234" rx="9" ry="9" width="66" height="20" fill="#cde2fb"/>
+<text x="573.0" y="248" class="k" fill="#184f95" text-anchor="middle">new here</text>
+<path d="M638 145.0 H656" class="a"/>
+<rect x="659" y="70" rx="10" ry="10" width="190" height="150" class="b"/>
+<text x="673" y="100" class="h">Forecast</text>
+<text x="673" y="132" class="s">pooled · recent · drift+U</text>
+<text x="673" y="156" class="s">log-linear trend</text>
+<text x="673" y="180" class="s">stacked by log score</text>
+<rect x="673" y="234" rx="9" ry="9" width="66" height="20" fill="#cde2fb"/>
+<text x="706.0" y="248" class="k" fill="#184f95" text-anchor="middle">new here</text>
+<path d="M851 145.0 H869" class="a"/>
+<rect x="872" y="70" rx="10" ry="10" width="190" height="150" class="b"/>
+<text x="886" y="100" class="h">Placement</text>
+<text x="886" y="132" class="s">void probability</text>
+<text x="886" y="156" class="s">expected / void / CVaR</text>
+<text x="886" y="180" class="s">greedy + L-BFGS refine</text>
+<rect x="886" y="234" rx="9" ry="9" width="72" height="20" fill="#e6e5e0"/>
+<text x="922.0" y="248" class="k" fill="#52514e" text-anchor="middle">Kim et al.</text>
+<rect x="966" y="234" rx="9" ry="9" width="66" height="20" fill="#cde2fb"/>
+<text x="999.0" y="248" class="k" fill="#184f95" text-anchor="middle">new here</text>
+<path d="M1064 145.0 H1082" class="a"/>
+<rect x="1085" y="70" rx="10" ry="10" width="190" height="150" class="b"/>
+<text x="1099" y="100" class="h">Evaluation</text>
+<text x="1099" y="132" class="s">realised future, not history</text>
+<text x="1099" y="156" class="s">gap to oracle, 40 seeds</text>
+<text x="1099" y="180" class="s">regret bound (Prop. 1)</text>
+<rect x="1099" y="234" rx="9" ry="9" width="66" height="20" fill="#cde2fb"/>
+<text x="1132.0" y="248" class="k" fill="#184f95" text-anchor="middle">new here</text>
+<text x="20" y="284" class="s">Grey tags mark ideas from the base paper (arXiv:2505.00825); blue tags mark what this repository adds. Most boxes mix both.</text>
+</svg>

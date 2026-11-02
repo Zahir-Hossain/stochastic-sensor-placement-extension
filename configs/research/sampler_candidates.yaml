@@ -1,0 +1,7 @@
+scenarios: [accelerating, rotating_quadratic, random_walk, random_switch, lane_split]
+seeds: 40
+gate:
+  min_coverage: 0.80
+  min_mean_rank: 0.35
+  max_mean_rank: 0.65
+  max_mean_mismatch: 0.10

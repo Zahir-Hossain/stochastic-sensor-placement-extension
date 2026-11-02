@@ -1,0 +1,16 @@
+PASS results/ais_bandwidth_sensitivity/summary.csv: 30 rows, max absolute difference 0
+PASS results/ais_gothenburg/summary.csv: 13 rows, max absolute difference 0
+PASS results/data_scarcity/summary.csv: 30 rows, max absolute difference 0
+PASS results/drift_sweep/summary.csv: 132 rows, max absolute difference 0
+EXPECTED CHANGE results/robustness/summary.csv: TV rows only; largest difference 0.416947255579
+PASS results/suite_drift/summary.csv: 17 rows, max absolute difference 0
+PASS results/suite_emergence/summary.csv: 17 rows, max absolute difference 0
+PASS results/suite_lane_shift/summary.csv: 17 rows, max absolute difference 0
+PASS results/suite_stationary/summary.csv: 17 rows, max absolute difference 0
+Weight-fit fallbacks suite_lane_shift: 0
+Weight-fit fallbacks data_scarcity: 0
+Weight-fit fallbacks drift_sweep: 0
+Weight-fit fallbacks suite_stationary: 0
+Weight-fit fallbacks suite_emergence: 0
+Weight-fit fallbacks suite_drift: 0
+All 9 saved CSV summaries passed the comparison policy (absolute tolerance 1e-9).

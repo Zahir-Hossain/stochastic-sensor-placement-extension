@@ -1,0 +1,5 @@
+label,reference,n,mean_pp,low_pp,high_pp,source,note
+Designed drift,pooled,40,2.78632583698,2.61821382827,2.97601657416,suite_drift/runs.csv,Matches a forecaster
+Unannounced reversal,pooled,20,-4.50422893669,-4.78290090184,-4.19865003812,"robustness/runs.csv; scenario=reversal, radius=0",History wins
+Lane split,trend,40,-6.82566567858,-7.3036755271,-6.33818274884,holdout_lane_split/runs.csv,Secondary component contrast
+AIS: training-selected bandwidth,pooled,4,-2.23684697651,,,ais_training_bandwidth/runs.csv,Overlapping origins; no population interval

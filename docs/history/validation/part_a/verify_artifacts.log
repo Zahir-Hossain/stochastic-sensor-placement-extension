@@ -1,0 +1,11 @@
+OK ais_bandwidth_sensitivity: 120 runs; default scale matches published AIS
+OK ais_gothenburg: 52 runs
+OK approximation: 100 runs
+OK data_scarcity: 1200 runs
+OK drift_sweep: 5280 runs
+OK robustness: 1440 runs
+OK suite_drift: 680 runs
+OK suite_emergence: 680 runs
+OK suite_lane_shift: 680 runs
+OK suite_stationary: 680 runs
+All 10 result sets match source 71c50eb98ced.

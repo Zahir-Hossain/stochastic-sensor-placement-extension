@@ -1,0 +1,8 @@
+{
+  "eligible_for_further_study": {
+    "weighted_candidate": false,
+    "residual_candidate": false
+  },
+  "adopted": false,
+  "scope": "Latent expected-loss diagnostics only; no full predictive-law calibration claim."
+}

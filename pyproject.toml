@@ -1,0 +1,101 @@
+[build-system]
+requires = ["hatchling>=1.18"]
+build-backend = "hatchling.build"
+
+[project]
+name = "stochplace"
+version = "2.1.0"
+description = "Forecast-aware sensor placement and comparative risk studies for stochastic line trajectories."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "A. S. M. Jahir Hossain" }]
+keywords = [
+  "sensor placement",
+  "barrier coverage",
+  "Cox process",
+  "line process",
+  "distribution shift",
+  "submodular optimization",
+  "AIS",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Mathematics",
+]
+dependencies = [
+  "numpy>=1.24",
+  "scipy>=1.10",
+  "pandas>=2.0",
+  "matplotlib>=3.7",
+  "pyyaml>=6.0",
+  "packaging>=20.0",
+]
+
+[project.optional-dependencies]
+notebook = ["nbformat>=5.9", "nbconvert>=7.10", "ipykernel>=6.25"]
+dev = [
+  "pytest>=7.4",
+  "pytest-cov>=4.1",
+  "hypothesis>=6.80",
+]
+# pinned so formatting and type checks give the same answer everywhere
+lint = [
+  "ruff==0.17.3",
+  "mypy==2.4.1",
+  "pandas-stubs==3.1.0.261029",
+  "types-PyYAML==6.0.12.20261030",
+]
+
+[project.scripts]
+stochplace = "stochplace.cli:main"
+
+[project.urls]
+Repository = "https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension"
+"Base paper" = "https://arxiv.org/abs/2505.00825"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/stochplace"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q --strict-markers"
+markers = [
+  "slow: longer statistical tests",
+  "octave: needs GNU Octave on PATH",
+]
+
+[tool.coverage.run]
+source = ["stochplace"]
+branch = true
+
+[tool.coverage.report]
+skip_empty = true
+show_missing = true
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "NPY", "RUF"]
+ignore = ["E501", "RUF002", "RUF003", "B905"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B018"]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["src/stochplace"]
+ignore_missing_imports = true
+warn_unused_ignores = false
+disallow_untyped_defs = true

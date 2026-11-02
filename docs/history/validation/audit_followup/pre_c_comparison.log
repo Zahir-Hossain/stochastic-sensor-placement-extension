@@ -1,0 +1,31 @@
+PASS results/ais_bandwidth_sensitivity/summary.csv: 30 rows, max absolute difference 0
+PASS results/ais_gothenburg/summary.csv: 13 rows, max absolute difference 0
+PASS results/data_scarcity/summary.csv: 30 rows, max absolute difference 0
+PASS results/drift_sweep/summary.csv: 132 rows, max absolute difference 0
+PASS results/robustness/summary.csv: 72 rows, max absolute difference 0
+PASS results/suite_drift/summary.csv: 17 rows, max absolute difference 0
+PASS results/suite_emergence/summary.csv: 17 rows, max absolute difference 0
+PASS results/suite_lane_shift/summary.csv: 17 rows, max absolute difference 0
+PASS results/suite_stationary/summary.csv: 17 rows, max absolute difference 0
+Main-forecast fallback rows ais_training_bandwidth: 0
+Main-forecast fallback rows data_scarcity: 0
+Main-forecast fallback rows holdout_lane_split: 0
+Main-forecast fallback rows holdout_random_switch: 0
+Main-forecast fallback rows suite_drift: 0
+Main-forecast fallback rows ais_bandwidth_sensitivity: not recorded
+Main-forecast fallback rows suite_emergence: 0
+Main-forecast fallback rows drift_sweep: 0
+Main-forecast fallback rows holdout_rotating_quadratic: 0
+Main-forecast fallback rows holdout_random_walk: 0
+Main-forecast fallback rows suite_stationary: 0
+Main-forecast fallback rows suite_lane_shift: 0
+Main-forecast fallback rows approximation: not recorded
+Main-forecast fallback rows holdout_accelerating: 0
+Main-forecast fallback rows sampler_calibration: 0
+Recorded calibration-prefix fits sampler_calibration: 600; fallbacks 0
+Main-forecast fallback rows transport_geometry: 0
+Recorded calibration-prefix fits transport_geometry: 360; fallbacks 0
+Main-forecast fallback rows ais_gothenburg: not recorded
+Main-forecast fallback rows robustness: 0
+Main-forecast fallback rows ais_policy_ablation: 0
+All 9 saved CSV summaries passed the comparison policy (absolute tolerance 1e-9).

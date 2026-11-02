@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "files_sha256": {
+    "README.md": "d4afdfdcec7714d91dd308508848df64bf031feec08bf903e3cfb50fbca3fd8a",
+    "docs/research_results.md": "6908bbebaca796bafa38d67ffddbb7e18a44c62fda567cade12a72cd7ae51fe4",
+    "paper/extension_results.tex": "daede8252986b6591956722e7b880439f541ed247273ff782efa7cdbbfd2d6d5",
+    "paper/ais_sensitivity_numbers.tex": "fc052fc2a2c37c90f709d64c0de6c2e6e21409b49d146dc0e8b738d63df16ea9",
+    "results/calibration_diagnostics.csv": "27eba0e680087bb0ab3a48dc1ac2eab354aa50e03f90c302d8907ead1202f5fc",
+    "docs/tables/ais.md": "446ab7a2f0fb70f0400ee38861d291d48524ec186cc0afe3f40a6958b35ca5da",
+    "docs/tables/ais_bandwidth_sensitivity.md": "81700931f6cc8df4d679bbdbd62a24986dbd2923d48cbb7baf3c6f9c1d1068a3",
+    "docs/tables/ais_policy_ablation.md": "910bee6f9598234d56a9b42ffee24aee16f86244006bfc07f99a6ff60e6c19d3",
+    "docs/tables/ais_training_bandwidth.md": "138a8030eec0128c962478db18262f3f21e63a9f9cf7965104ce533e635d70a0",
+    "docs/tables/calibration_diagnostics.md": "ec808211044896b2a25b3f2687d9a37ac7e3828ba9dd8a5b4feb4effd025c5be",
+    "docs/tables/headline.md": "af1f76ca56c1880a8d4f2cb5cadcfc7d286fed292bf36f8defc0cbbdbd83e217",
+    "docs/tables/holdout_components.md": "26f1b85a3bef5f232ed89c087dcb37dfd6087295c68929e76721ec6870187e0c",
+    "docs/tables/holdout_scenarios.md": "e7330ca24ceef905fc932b123a8a6a87fa470448ba760d8c58b049de4a0a6726",
+    "docs/tables/robustness.md": "ea94b8122b2e2d6a7d69e9903544bf5eaf22b8e82e17478330db2e9c0abc3696",
+    "docs/tables/sampler_candidates.md": "ebfa79de1a9cf42acbe01b4cf405750c70f3af94724ce58b0f3ab53a676f14d7",
+    "docs/tables/suite.md": "562c9a96137b3c650231c47af0d3a603a21e5049d9abb0b06c1c8449f3ac2ed2",
+    "docs/tables/transport_geometry.md": "c134d95b9cc8ef2f88be323579ee8e7e1f2f1e3b5b8ee0febd5893558ff72347",
+    "docs/tables/tv_before_after.md": "75ec3dd077abcb10203e7dd577d7296122a87265389a1d23daa608c1c183e163",
+    "docs/tables/tv_scope.md": "f899b6fb6148cc07a86240a9f308079a8bdad7e18f4e66e60c7baad7f4d94574",
+    "docs/tables/void_failure.md": "b881121bc7d90a6aa6ffb5f953dd932eee09a433a5b722ce1a6f7211458aa86b"
+  }
+}

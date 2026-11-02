@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it, and cite the base paper it builds on."
+title: "stochplace: sensor placement for stochastic line trajectories under traffic shift"
+type: software
+authors:
+  - family-names: Hossain
+    given-names: "A. S. M. Jahir"
+version: 2.1.0
+license: MIT
+repository-code: "https://github.com/Zahir-Hossain/stochastic-sensor-placement-extension"
+keywords:
+  - sensor placement
+  - barrier coverage
+  - log-Gaussian Cox process
+  - distribution shift
+  - submodular optimization
+references:
+  - type: article
+    title: "Near-optimal Sensor Placement for Detecting Stochastic Target Trajectories in Barrier Coverage Systems"
+    authors:
+      - family-names: Kim
+        given-names: Mingyu
+      - family-names: Stilwell
+        given-names: Daniel J.
+      - family-names: Yetkin
+        given-names: Harun
+      - family-names: Jimenez
+        given-names: Jorge
+    year: 2025
+    identifiers:
+      - type: other
+        value: "arXiv:2505.00825"

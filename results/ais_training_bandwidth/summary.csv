@@ -1,0 +1,4 @@
+method,policy,detection_rate,paired_gain_pp,n
+pooled,training_placement_cv,0.8478416901275727,8.18423224393836,4
+recent,training_placement_cv,0.828021927741302,6.202256005311291,4
+stacked,training_placement_cv,0.8254732203624269,5.947385267423774,4

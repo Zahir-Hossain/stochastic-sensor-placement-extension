@@ -1,0 +1,20 @@
+{
+  "sha256": "023fbdb7f96e1afbab39636f5f33d368ecf38cb77c8fcb80735d9c3df58c9c29",
+  "parts": [
+    {
+      "path": "research-history.bundle.part1",
+      "size": 6291456,
+      "sha256": "24d46a8f757ef8f4c55dfad585b2210a01fad9df1deed12521393cc61183a54a"
+    },
+    {
+      "path": "research-history.bundle.part2",
+      "size": 6291456,
+      "sha256": "02776c239835392902bc00b1606d8db6ef03dc3477896805d9f83d8ef2e10c36"
+    },
+    {
+      "path": "research-history.bundle.part3",
+      "size": 2250911,
+      "sha256": "84f37258f2235d713b1caf6ae8567e4df2620798f7e07bbc51b5cf319e11f388"
+    }
+  ]
+}
